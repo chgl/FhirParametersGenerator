@@ -1,0 +1,14 @@
+name: super-lint
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: github/super-linter@v4.9.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

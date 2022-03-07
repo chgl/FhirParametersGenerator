@@ -1,0 +1,16 @@
+---
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
+ignorePaths:
+  - "**/obj/*"
+  - "**/bin/*"
+  - "**/*.csproj"
+words:
+  - netstandard
+  - FHIR
+  - xunit
+  - chgl
+  - msbuild
+  - LOINC
+  - snupkg
+  - artworkbean
