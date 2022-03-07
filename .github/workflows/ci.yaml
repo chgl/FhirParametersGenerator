@@ -1,6 +1,8 @@
 name: ci
 on:
   push:
+    tags:
+      - "v*"
     branches: [master]
     paths-ignore:
       - "docs/**"
