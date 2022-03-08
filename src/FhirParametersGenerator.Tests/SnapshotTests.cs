@@ -34,4 +34,23 @@ public class TestModel
         // Pass the source code to our helper and snapshot test the output
         return TestHelper.Verify(source);
     }
+
+    [Fact]
+    public Task ModelWithUnsupportedPropertyTypes_ShouldEmitDiagnosticsAndUseToStringDefaultMappingBehavior()
+    {
+        // The source code to test
+        var source = @"
+using FhirParametersGenerator;
+
+namespace FhirParametersGenerator.Tests;
+
+[GenerateFhirParameters]
+public class TestModel
+{
+    public DayOfWeek DayOfWeek { get; init; } = DayOfWeek.Friday;
+}";
+
+        // Pass the source code to our helper and snapshot test the output
+        return TestHelper.Verify(source);
+    }
 }

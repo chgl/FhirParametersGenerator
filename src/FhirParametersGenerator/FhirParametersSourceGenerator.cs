@@ -121,7 +121,7 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         foreach (var classToGenerate in classesToGenerate)
         {
             var generatedSourceFileName = $"{classToGenerate.Name}FhirParametersExtensions.g.cs";
-            var source = GenerateExtensionClass(classToGenerate);
+            var source = GenerateExtensionClass(classToGenerate, context);
             context.AddSource(generatedSourceFileName, SourceText.From(source, Encoding.UTF8));
         }
     }
@@ -164,7 +164,7 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         return classesToGenerate;
     }
 
-    private static string GenerateExtensionClass(INamedTypeSymbol classSymbol)
+    static string GenerateExtensionClass(INamedTypeSymbol classSymbol, SourceProductionContext context)
     {
         var sb = new StringBuilder();
         sb.AppendLine("using Hl7.Fhir.Model;");
@@ -179,7 +179,7 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
             sb.AppendLine($"namespace {containingNamespace.ToDisplayString()};");
         }
 
-        var methodBody = GenerateMappingMethodBody(classSymbol);
+        var methodBody = GenerateMappingMethodBody(classSymbol, context);
 
         var source = $@"
 public static class {classSymbol.Name}FhirParametersExtensions
@@ -195,7 +195,7 @@ public static class {classSymbol.Name}FhirParametersExtensions
         return sb.ToString();
     }
 
-    private static string GenerateMappingMethodBody(INamedTypeSymbol classSymbol)
+    static string GenerateMappingMethodBody(INamedTypeSymbol classSymbol, SourceProductionContext context)
     {
         var indent = new string(' ', 8);
         var sourceBuilder = new StringBuilder();
@@ -223,8 +223,8 @@ public static class {classSymbol.Name}FhirParametersExtensions
                 var isKnownType = ClrTypeToFhirType.TryGetValue(property.Type.Name, out var fhirTypeName);
                 if (!isKnownType)
                 {
-                    sourceBuilder.Append(indent);
-                    sourceBuilder.AppendLine($@"// WARN: Unsupported type '{property.Type.Name}' ({property.Type.ToDisplayString()}). Mapping to 'FhirString' using 'ToString()' as value.");
+                    ReportUnsupportedPropertyTypeDiagnostic(property, context);
+
                     sourceBuilder.Append(indent);
                     sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));");
                 }
@@ -242,9 +242,25 @@ public static class {classSymbol.Name}FhirParametersExtensions
         return sourceBuilder.ToString();
     }
 
+    static void ReportUnsupportedPropertyTypeDiagnostic(IPropertySymbol property, SourceProductionContext context)
+    {
+        var descriptor = new DiagnosticDescriptor(
+            id: "FHIRPARAMS1",
+            title: "Unsupported property type",
+            messageFormat: $"Unable to map property {property.ToDisplayString()} of type {property.Type.ToDisplayString()} to a FHIR representation. Defaulting to FhirString with a value of {property.ToDisplayString()}.ToString().",
+            category: "Design",
+            defaultSeverity: DiagnosticSeverity.Warning,
+            isEnabledByDefault: true);
+
+        var location = property.Locations.FirstOrDefault();
+        var diagnostic = Diagnostic.Create(descriptor, location);
+
+        context.ReportDiagnostic(diagnostic);
+    }
+
     // Code from https://github.com/dotnet/runtime/blob/v6.0.2/src/libraries/System.Text.Json/Common/JsonCamelCaseNamingPolicy.cs
     // licensed under the MIT License
-    private static string ConvertNameToCamelCase(string name)
+    static string ConvertNameToCamelCase(string name)
     {
         if (string.IsNullOrEmpty(name) || !char.IsUpper(name[0]))
         {
@@ -260,7 +276,7 @@ public static class {classSymbol.Name}FhirParametersExtensions
         });
     }
 
-    private static void FixCasing(Span<char> chars)
+    static void FixCasing(Span<char> chars)
     {
         for (int i = 0; i < chars.Length; i++)
         {

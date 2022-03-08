@@ -27,4 +27,5 @@ public class TestModelA
             Console.WriteLine($"Write-only: {value}");
         }
     }
+    public DayOfWeek DayOfWeek { get; init; } = DayOfWeek.Friday;
 }
