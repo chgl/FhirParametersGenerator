@@ -10,3 +10,11 @@ branches = ["master"]
 
 [coverage]
 include_test_assembly = false
+
+[[changelog.autolabeler]]
+label = "feature"
+title = '^feat:'
+
+[[changelog.autolabeler]]
+label = "maintenance"
+title = '^chore:'
