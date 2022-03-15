@@ -267,18 +267,13 @@ public static class {classSymbol.Name}FhirParametersExtensions
             return name;
         }
 
-        // netstandard2.1+:
-        // return string.Create(name.Length, name, (chars, name) =>
-        // {
-        //     name
-        //     .AsSpan()
-        //     .CopyTo(chars);
-        //     FixCasing(chars);
-        // });
-
-        var chars = name.ToCharArray();
-        FixCasing(chars);
-        return new string(chars);
+        return string.Create(name.Length, name, (chars, name) =>
+        {
+            name
+            .AsSpan()
+            .CopyTo(chars);
+            FixCasing(chars);
+        });
     }
 
     static void FixCasing(Span<char> chars)
