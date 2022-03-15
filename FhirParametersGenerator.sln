@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FhirParametersGenerator.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FhirParametersGenerator.Attributes", "src\FhirParametersGenerator.Attributes\FhirParametersGenerator.Attributes.csproj", "{886D73E3-73FE-49B6-A53C-F40EC3E42928}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FhirParametersGenerator.Benchmark", "src\FhirParametersGenerator.Benchmark\FhirParametersGenerator.Benchmark.csproj", "{66CA6131-D91F-422A-9178-9721B57DAD8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,11 +40,16 @@ Global
 		{886D73E3-73FE-49B6-A53C-F40EC3E42928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{886D73E3-73FE-49B6-A53C-F40EC3E42928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{886D73E3-73FE-49B6-A53C-F40EC3E42928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CA6131-D91F-422A-9178-9721B57DAD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CA6131-D91F-422A-9178-9721B57DAD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CA6131-D91F-422A-9178-9721B57DAD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CA6131-D91F-422A-9178-9721B57DAD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0A404604-9CBA-4B8B-A952-AE9F228F36C8} = {6D006896-F214-4420-9743-290055A2CB72}
 		{C9A44C27-F087-4F76-A613-32BD16FBF5DB} = {6D006896-F214-4420-9743-290055A2CB72}
 		{A318841A-7C18-4DA1-ACCE-0154B4B692DC} = {6D006896-F214-4420-9743-290055A2CB72}
 		{886D73E3-73FE-49B6-A53C-F40EC3E42928} = {6D006896-F214-4420-9743-290055A2CB72}
+		{66CA6131-D91F-422A-9178-9721B57DAD8E} = {6D006896-F214-4420-9743-290055A2CB72}
 	EndGlobalSection
 EndGlobal
