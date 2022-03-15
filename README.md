@@ -63,6 +63,12 @@ public class TestModel
 This library is in a very early stage and many edge and not-so-edge cases that are not covered by the generated source.
 The list of open issues is a good starting point to see what isn't yet supported. Contributions are of course always welcome.
 
+## Benchmark
+
+A benchmark project exists which measures the performance of generating the source code for a 1000-property class: <https://github.com/chgl/FhirParametersGenerator/blob/master/src/FhirParametersGenerator.Benchmark/Program.cs>.
+
+Benchmarking results over time are available at <https://chgl.github.io/FhirParametersGenerator/dev/bench/>.
+
 ## Credits
 
 ### Source Code
