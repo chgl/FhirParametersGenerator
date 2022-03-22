@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1647469829553,
+  "lastUpdate": 1647978302621,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -60,6 +60,36 @@ window.BENCHMARK_DATA = {
             "value": 4526902.825,
             "unit": "ns",
             "range": "± 413411.0972344621"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "55a29d2e2a2c271cf6c3e82defd09b7171b8512d",
+          "message": "chore(deps): update dependency verify.sourcegenerators to v1.4.0 (#18)\n\nCo-authored-by: Renovate Bot <bot@renovateapp.com>",
+          "timestamp": "2022-03-22T20:43:31+01:00",
+          "tree_id": "3c928ed3dbd9bfd2158dfa9f45f677acbfa8ce32",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/55a29d2e2a2c271cf6c3e82defd09b7171b8512d"
+        },
+        "date": 1647978302133,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4228445.719791667,
+            "unit": "ns",
+            "range": "± 47409.125967513246"
           }
         ]
       }
