@@ -21,7 +21,7 @@ public class GenerateFhirParametersTests
             Age = 123,
         };
 
-        var asParameters = t.AsFhirParameters();
+        var asParameters = t.ToFhirParameters();
 
         asParameters.GetSingleValue<FhirString>("name").Value.Should().Be(t.Name);
         asParameters.GetSingleValue<FhirDecimal>("age").Value.Should().Be(t.Age);
@@ -43,7 +43,7 @@ public class GenerateFhirParametersTests
             Id = "123",
         };
 
-        var asParameters = t.AsFhirParameters();
+        var asParameters = t.ToFhirParameters();
 
         asParameters.GetSingleValue<FhirString>("aLongPascalCaseProperty").Value.Should().Be(t.ALongPascalCaseProperty);
         asParameters.GetSingleValue<FhirString>("id").Value.Should().Be(t.Id);
@@ -69,7 +69,7 @@ public class GenerateFhirParametersTests
             WriteOnly = "wo",
         };
 
-        var asParameters = m.AsFhirParameters();
+        var asParameters = m.ToFhirParameters();
 
         asParameters.GetSingleValue<FhirString>("name").Value.Should().Be(m.Name);
         asParameters.GetSingleValue<FhirDecimal>("wo").Should().BeNull();

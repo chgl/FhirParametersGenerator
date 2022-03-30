@@ -184,7 +184,13 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         var source = $@"
 public static class {classSymbol.Name}FhirParametersExtensions
 {{
+    [Obsolete(""AsFhirParameters is deprecated, please use ToFhirParameters instead."")]
     public static Parameters AsFhirParameters(this {classSymbol.ToDisplayString()} model)
+    {{
+        return ToFhirParameters(model);
+    }}
+
+    public static Parameters ToFhirParameters(this {classSymbol.ToDisplayString()} model)
     {{
 {methodBody}
     }}
@@ -247,7 +253,8 @@ public static class {classSymbol.Name}FhirParametersExtensions
         var descriptor = new DiagnosticDescriptor(
             id: "FHIRPARAMS1",
             title: "Unsupported property type",
-            messageFormat: $"Unable to map property {property.ToDisplayString()} of type {property.Type.ToDisplayString()} to a FHIR representation. Defaulting to FhirString with a value of {property.ToDisplayString()}.ToString().",
+            messageFormat: $"Unable to map property {property.ToDisplayString()} of type {property.Type.ToDisplayString()} to a FHIR representation. " +
+                $"Defaulting to FhirString with a value of {property.ToDisplayString()}.ToString().",
             category: "Design",
             defaultSeverity: DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
@@ -269,9 +276,8 @@ public static class {classSymbol.Name}FhirParametersExtensions
 
         return string.Create(name.Length, name, (chars, name) =>
         {
-            name
-            .AsSpan()
-            .CopyTo(chars);
+            name.AsSpan().CopyTo(chars);
+
             FixCasing(chars);
         });
     }

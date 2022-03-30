@@ -5,7 +5,13 @@ namespace FhirParametersGenerator.Tests;
 
 public static class TestModelFhirParametersExtensions
 {
+    [Obsolete("AsFhirParameters is deprecated, please use ToFhirParameters instead.")]
     public static Parameters AsFhirParameters(this FhirParametersGenerator.Tests.TestModel model)
+    {
+        return ToFhirParameters(model);
+    }
+
+    public static Parameters ToFhirParameters(this FhirParametersGenerator.Tests.TestModel model)
     {
         var parameters = new Parameters();
         // string (string) FhirParametersGenerator.Tests.TestModel.Name

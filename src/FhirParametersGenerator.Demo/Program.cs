@@ -8,7 +8,7 @@ var t = new TestModelA
     WriteOnly = "something"
 };
 
-var asParameters = t.AsFhirParameters();
+var asParameters = t.ToFhirParameters();
 
 Console.WriteLine(asParameters.ToJson(new() { Pretty = true }));
 

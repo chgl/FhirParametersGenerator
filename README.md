@@ -26,8 +26,8 @@ var t = new TestModel
     Name = "Test"
 };
 
-// this AsFhirParameters() extension method is code-generated
-var asParameters = t.AsFhirParameters();
+// the ToFhirParameters() extension method is code-generated
+var asParameters = t.ToFhirParameters();
 
 Console.WriteLine(asParameters.ToJson(new() { Pretty = true }));
 
