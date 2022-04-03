@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1649006871125,
+  "lastUpdate": 1649006890994,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -300,6 +300,36 @@ window.BENCHMARK_DATA = {
             "value": 4523553.939024391,
             "unit": "ns",
             "range": "± 283275.89729585894"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7bd289006470b41810d815dc34317b271b48e345",
+          "message": "chore(deps): update dependency verify.xunit to v16.5.4 (#24)\n\nCo-authored-by: Renovate Bot <bot@renovateapp.com>",
+          "timestamp": "2022-04-03T19:26:34+02:00",
+          "tree_id": "a7741887aa5ce859105a51de66a216f62dc2d14e",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/7bd289006470b41810d815dc34317b271b48e345"
+        },
+        "date": 1649006890370,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4275094.4625,
+            "unit": "ns",
+            "range": "± 44505.941166486686"
           }
         ]
       }
