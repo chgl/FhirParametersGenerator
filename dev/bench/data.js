@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1648849683708,
+  "lastUpdate": 1649006871125,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -270,6 +270,36 @@ window.BENCHMARK_DATA = {
             "value": 4923827.352941177,
             "unit": "ns",
             "range": "± 226416.38397633322"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "8313a4d464ee052b274bc45f8d2c55b3ff8d05fb",
+          "message": "chore(deps): update dependency fluentassertions to v6.6.0 (#25)\n\nCo-authored-by: Renovate Bot <bot@renovateapp.com>",
+          "timestamp": "2022-04-03T19:26:26+02:00",
+          "tree_id": "9fbe8692d72ccf901fd5e3a87a94bfe315a3aaa2",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/8313a4d464ee052b274bc45f8d2c55b3ff8d05fb"
+        },
+        "date": 1649006870826,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4523553.939024391,
+            "unit": "ns",
+            "range": "± 283275.89729585894"
           }
         ]
       }
