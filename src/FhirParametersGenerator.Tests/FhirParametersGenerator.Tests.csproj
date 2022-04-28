@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hl7.Fhir.R4" Version="3.8.2" />
+    <PackageReference Include="Hl7.Fhir.R4" Version="3.8.3" />
     <PackageReference Include="FluentAssertions" Version="6.6.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Verify.XUnit" Version="16.6.0" />
