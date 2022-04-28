@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1650889330778,
+  "lastUpdate": 1651171422400,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -360,6 +360,36 @@ window.BENCHMARK_DATA = {
             "value": 4329597.451450893,
             "unit": "ns",
             "range": "± 24695.66641219215"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ae85290a10050d5e36a6b27527479fdac62489ff",
+          "message": "chore(deps): update github/codeql-action action to v2 (#28)\n\nCo-authored-by: Renovate Bot <bot@renovateapp.com>",
+          "timestamp": "2022-04-28T20:41:58+02:00",
+          "tree_id": "708b64927cea3668946928eb39080cc32f27b578",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/ae85290a10050d5e36a6b27527479fdac62489ff"
+        },
+        "date": 1651171421831,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4260338.802083333,
+            "unit": "ns",
+            "range": "± 59236.121994809866"
           }
         ]
       }
