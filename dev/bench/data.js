@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652205468068,
+  "lastUpdate": 1652205475649,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -480,6 +480,36 @@ window.BENCHMARK_DATA = {
             "value": 5041460.959183673,
             "unit": "ns",
             "range": "± 824926.5903019831"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9055616b94726d59969d2c5c7e811a56ac4f88f5",
+          "message": "chore(deps): update dependency xunit.runner.visualstudio to v2.4.5 (#31)\n\nCo-authored-by: Renovate Bot <bot@renovateapp.com>",
+          "timestamp": "2022-05-10T19:56:09+02:00",
+          "tree_id": "39798c9863bf0bfdd238bdceb3c718bac011b71d",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/9055616b94726d59969d2c5c7e811a56ac4f88f5"
+        },
+        "date": 1652205475285,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4244440.8984375,
+            "unit": "ns",
+            "range": "± 45033.854462043186"
           }
         ]
       }
