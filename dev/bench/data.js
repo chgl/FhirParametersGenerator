@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652205475649,
+  "lastUpdate": 1652275270275,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -510,6 +510,36 @@ window.BENCHMARK_DATA = {
             "value": 4244440.8984375,
             "unit": "ns",
             "range": "± 45033.854462043186"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a15e52012299ee30e81f2ae8ed7175f38571fa79",
+          "message": "chore(deps): update dependency microsoft.net.test.sdk to v17.2.0 (#33)\n\nCo-authored-by: Renovate Bot <bot@renovateapp.com>",
+          "timestamp": "2022-05-11T15:19:16+02:00",
+          "tree_id": "8e3c69368e99e3e784848573ab1b9b2ea333b61d",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/a15e52012299ee30e81f2ae8ed7175f38571fa79"
+        },
+        "date": 1652275269533,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5710341.242424242,
+            "unit": "ns",
+            "range": "± 694191.6018316364"
           }
         ]
       }
