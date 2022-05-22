@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1653259887279,
+  "lastUpdate": 1653259966590,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -600,6 +600,36 @@ window.BENCHMARK_DATA = {
             "value": 4196325.498958333,
             "unit": "ns",
             "range": "± 26205.81329893249"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7e8fa93b1120c963175428cc99b39ee48e266197",
+          "message": "chore: added `inheritdoc` to cspell wordlist",
+          "timestamp": "2022-05-23T00:51:03+02:00",
+          "tree_id": "58ab2cdbfdf7a5a75f9c5d5e4a4d853a1bb1f136",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/7e8fa93b1120c963175428cc99b39ee48e266197"
+        },
+        "date": 1653259965947,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4180138.8616071427,
+            "unit": "ns",
+            "range": "± 39345.295584763546"
           }
         ]
       }
