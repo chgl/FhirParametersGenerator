@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1653939559955,
+  "lastUpdate": 1653939566529,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -720,6 +720,36 @@ window.BENCHMARK_DATA = {
             "value": 5353056.846153846,
             "unit": "ns",
             "range": "± 217729.46866709142"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4ec0812e7a4abd9f520d6d646dcc2d4c0625c27e",
+          "message": "chore(deps): update github/super-linter action to v4.9.4 (#38)\n\nCo-authored-by: Renovate Bot <bot@renovateapp.com>",
+          "timestamp": "2022-05-30T21:37:30+02:00",
+          "tree_id": "407ea81e268227459e0c0a33f5dbb2c365661a42",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/4ec0812e7a4abd9f520d6d646dcc2d4c0625c27e"
+        },
+        "date": 1653939565721,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5151509.084337349,
+            "unit": "ns",
+            "range": "± 469364.92316289706"
           }
         ]
       }
