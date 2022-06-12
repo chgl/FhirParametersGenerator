@@ -16,3 +16,5 @@ words:
   - artworkbean
   - FHIRPARAMS
   - autolabeler
+  - Codeable
+  - inheritdoc
