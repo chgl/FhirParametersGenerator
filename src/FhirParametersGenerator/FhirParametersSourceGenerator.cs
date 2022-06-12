@@ -108,7 +108,6 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
             return;
         }
 
-        // not sure if this is actually necessary, but `[LoggerMessage]` does it, so seems like a good idea!
         var distinctClasses = classes.Distinct();
 
         // Convert each ClassDeclarationSyntax to their INamedSymbol
@@ -226,18 +225,30 @@ public static class {classSymbol.Name}FhirParametersExtensions
 
                 var camelCasedPropertyName = ConvertNameToCamelCase(property.Name);
 
-                var isKnownType = ClrTypeToFhirType.TryGetValue(property.Type.Name, out var fhirTypeName);
-                if (!isKnownType)
-                {
-                    ReportUnsupportedPropertyTypeDiagnostic(property, context);
+                var propertyType = property.Type;
 
+                // could be improved by using another ITypeSymbol as the searched for type which is statically
+                // fetched from the compilation context via: compilation.GetTypeByMetadataName("Hl7.Fhir.Model.Base");
+                if (propertyType.InheritsFrom("Hl7.Fhir.Model.Base"))
+                {
                     sourceBuilder.Append(indent);
-                    sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));");
+                    sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", model.{property.Name});");
                 }
                 else
                 {
-                    sourceBuilder.Append(indent);
-                    sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new {fhirTypeName}(model.{property.Name}));");
+                    var isKnownType = ClrTypeToFhirType.TryGetValue(property.Type.Name, out var fhirTypeName);
+                    if (isKnownType)
+                    {
+                        sourceBuilder.Append(indent);
+                        sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new {fhirTypeName}(model.{property.Name}));");
+                    }
+                    else
+                    {
+                        ReportUnsupportedPropertyTypeDiagnostic(property, context);
+
+                        sourceBuilder.Append(indent);
+                        sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));");
+                    }
                 }
             }
         }

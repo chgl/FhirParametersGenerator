@@ -18,18 +18,20 @@ This sample code...
 
 ```cs
 using FhirParametersGenerator;
+using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 
 var t = new TestModel
 {
     Age = 123,
-    Name = "Test"
+    Name = "Test",
+    Code = new("http://snomed.info/sct", "386661006", "Fever"),
 };
 
 // the ToFhirParameters() extension method is code-generated
-var asParameters = t.ToFhirParameters();
+var parameters = t.ToFhirParameters();
 
-Console.WriteLine(asParameters.ToJson(new() { Pretty = true }));
+Console.WriteLine(parameters.ToJson(new() { Pretty = true }));
 
 // apply this attribute to the desired model class
 [GenerateFhirParameters]
@@ -37,6 +39,7 @@ public class TestModel
 {
     public string Name { get; init; } = string.Empty;
     public int Age { get; init; } = 0;
+    public CodeableConcept? Code { get; init; }
 }
 ```
 
@@ -53,6 +56,18 @@ public class TestModel
     {
       "name": "age",
       "valueDecimal": 123
+    },
+    {
+      "name": "code",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "386661006"
+          }
+        ],
+        "text": "Fever"
+      }
     }
   ]
 }

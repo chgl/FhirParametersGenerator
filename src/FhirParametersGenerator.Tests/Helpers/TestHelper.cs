@@ -16,7 +16,7 @@ public static class TestHelper
             .Concat(new[]
             {
                 MetadataReference.CreateFromFile(typeof(FhirParametersSourceGenerator).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(GenerateFhirParametersAttribute).Assembly.Location)
+                MetadataReference.CreateFromFile(typeof(GenerateFhirParametersAttribute).Assembly.Location),
             });
 
         // Create a Roslyn compilation for the syntax tree.
