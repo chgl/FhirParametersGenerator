@@ -8,7 +8,7 @@ jobs:
   lint:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: github/super-linter@v4.9.4
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+      - uses: github/super-linter@a320804d310fdeb8d1a46c6c6c1e615d443b10c9 # tag=v4.9.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
