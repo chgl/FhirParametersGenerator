@@ -53,4 +53,31 @@ public class TestModel
         // Pass the source code to our helper and snapshot test the output
         return TestHelper.Verify(source);
     }
+
+    [Fact]
+    public Task ModelWithFhirBaseDerivedType_ShouldBeMappedToParameterAsIs()
+    {
+        // The source code to test
+        var source = @"
+using FhirParametersGenerator;
+// essential that this is part of the compilation unit
+using Hl7.Fhir.Model;
+
+namespace FhirParametersGenerator.Tests;
+
+[GenerateFhirParameters]
+public class ModelWithFhirBaseDerivedType
+{
+    public CodeableConcept Code { get; init; } = new(""http://snomed.info/sct"", ""386661006"", ""Fever"");
+    public Patient Patient { get; init; } = new()
+    {
+        BirthDate = ""2000-01-01"",
+        Deceased = new FhirBoolean(false),
+        Name = new() { new HumanName() { Given = new[] { ""Test"" }, Family = ""User"" } },
+    }
+}";
+
+        // Pass the source code to our helper and snapshot test the output
+        return TestHelper.Verify(source);
+    }
 }

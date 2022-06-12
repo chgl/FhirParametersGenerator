@@ -108,7 +108,6 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
             return;
         }
 
-        // not sure if this is actually necessary, but `[LoggerMessage]` does it, so seems like a good idea!
         var distinctClasses = classes.Distinct();
 
         // Convert each ClassDeclarationSyntax to their INamedSymbol
@@ -184,7 +183,13 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         var source = $@"
 public static class {classSymbol.Name}FhirParametersExtensions
 {{
+    [Obsolete(""AsFhirParameters is deprecated, please use ToFhirParameters instead."")]
     public static Parameters AsFhirParameters(this {classSymbol.ToDisplayString()} model)
+    {{
+        return ToFhirParameters(model);
+    }}
+
+    public static Parameters ToFhirParameters(this {classSymbol.ToDisplayString()} model)
     {{
 {methodBody}
     }}
@@ -220,18 +225,30 @@ public static class {classSymbol.Name}FhirParametersExtensions
 
                 var camelCasedPropertyName = ConvertNameToCamelCase(property.Name);
 
-                var isKnownType = ClrTypeToFhirType.TryGetValue(property.Type.Name, out var fhirTypeName);
-                if (!isKnownType)
-                {
-                    ReportUnsupportedPropertyTypeDiagnostic(property, context);
+                var propertyType = property.Type;
 
+                // could be improved by using another ITypeSymbol as the searched for type which is statically
+                // fetched from the compilation context via: compilation.GetTypeByMetadataName("Hl7.Fhir.Model.Base");
+                if (propertyType.InheritsFrom("Hl7.Fhir.Model.Base"))
+                {
                     sourceBuilder.Append(indent);
-                    sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));");
+                    sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", model.{property.Name});");
                 }
                 else
                 {
-                    sourceBuilder.Append(indent);
-                    sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new {fhirTypeName}(model.{property.Name}));");
+                    var isKnownType = ClrTypeToFhirType.TryGetValue(property.Type.Name, out var fhirTypeName);
+                    if (isKnownType)
+                    {
+                        sourceBuilder.Append(indent);
+                        sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new {fhirTypeName}(model.{property.Name}));");
+                    }
+                    else
+                    {
+                        ReportUnsupportedPropertyTypeDiagnostic(property, context);
+
+                        sourceBuilder.Append(indent);
+                        sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));");
+                    }
                 }
             }
         }
@@ -247,7 +264,8 @@ public static class {classSymbol.Name}FhirParametersExtensions
         var descriptor = new DiagnosticDescriptor(
             id: "FHIRPARAMS1",
             title: "Unsupported property type",
-            messageFormat: $"Unable to map property {property.ToDisplayString()} of type {property.Type.ToDisplayString()} to a FHIR representation. Defaulting to FhirString with a value of {property.ToDisplayString()}.ToString().",
+            messageFormat: $"Unable to map property {property.ToDisplayString()} of type {property.Type.ToDisplayString()} to a FHIR representation. " +
+                $"Defaulting to FhirString with a value of {property.ToDisplayString()}.ToString().",
             category: "Design",
             defaultSeverity: DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
@@ -269,9 +287,8 @@ public static class {classSymbol.Name}FhirParametersExtensions
 
         return string.Create(name.Length, name, (chars, name) =>
         {
-            name
-            .AsSpan()
-            .CopyTo(chars);
+            name.AsSpan().CopyTo(chars);
+
             FixCasing(chars);
         });
     }

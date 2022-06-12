@@ -1,16 +1,24 @@
 ﻿using FhirParametersGenerator;
+using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 
 var t = new TestModelA
 {
     Age = 123,
     Name = "Test",
-    WriteOnly = "something"
+    WriteOnly = "something",
+    Code = new("http://snomed.info/sct", "386661006", "Fever"),
+    Patient = new()
+    {
+        BirthDate = "2000-01-01",
+        Deceased = new FhirBoolean(false),
+        Name = new() { new HumanName() { Given = new[] { "Test" }, Family = "User" } },
+    }
 };
 
-var asParameters = t.AsFhirParameters();
+var parameters = t.ToFhirParameters();
 
-Console.WriteLine(asParameters.ToJson(new() { Pretty = true }));
+Console.WriteLine(parameters.ToJson(new() { Pretty = true }));
 
 [GenerateFhirParameters]
 public class TestModelA
@@ -19,7 +27,6 @@ public class TestModelA
     public int Age { get; init; } = 0;
     public bool IsSomething { get; set; } = false;
     public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.UtcNow;
-    public DateTime Time { get; set; } = DateTime.UtcNow;
     public string WriteOnly
     {
         set
@@ -28,4 +35,6 @@ public class TestModelA
         }
     }
     public DayOfWeek DayOfWeek { get; init; } = DayOfWeek.Friday;
+    public CodeableConcept? Code { get; init; }
+    public Patient? Patient { get; init; }
 }

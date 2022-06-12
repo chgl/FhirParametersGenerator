@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: npx cspell@5.18.5 lint --gitignore "**/*"
+      - run: npx cspell@6.1.2 lint --gitignore "**/*"
