@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1653939566529,
+  "lastUpdate": 1655070282799,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -750,6 +750,36 @@ window.BENCHMARK_DATA = {
             "value": 5151509.084337349,
             "unit": "ns",
             "range": "± 469364.92316289706"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1d087f14255d733ade1eb0c11088938d4c066515",
+          "message": "feat: support for types that are derived from hl7.fhir.model.base (#42)\n\n* refactor: renamed AsFhirParameters to ToFhirParameters\r\n\r\n* feat: properties derived from \"Hl7.Fhir.Model.Base\" are serialized as-is\r\n\r\n* chore: updated spellcheck and configure renovate to digest actions",
+          "timestamp": "2022-06-12T23:42:55+02:00",
+          "tree_id": "fac176e4623949a295f43c7ba488a3167ed9b03a",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/1d087f14255d733ade1eb0c11088938d4c066515"
+        },
+        "date": 1655070282498,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4665198.2484375,
+            "unit": "ns",
+            "range": "± 41738.089532348604"
           }
         ]
       }
