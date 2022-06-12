@@ -16,7 +16,7 @@
     <!-- Local builds should embed PDBs so we never lose them when a subsequent build occurs. -->
     <DebugType Condition=" '$(CI)' != 'true' and '$(TF_BUILD)' != 'true' ">embedded</DebugType>
 
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
     <Company>github.com/chgl</Company>
     <Description>A .NET source generator for mapping model classes to HL7 FHIR® Parameters resources.</Description>
     <Copyright>© chgl. All rights reserved.</Copyright>
