@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
-      - uses: github/super-linter@a320804d310fdeb8d1a46c6c6c1e615d443b10c9 # tag=v4.9.4
+      - uses: github/super-linter@01d3218744765b55c3b5ffbb27e50961e50c33c5 # tag=v4.9.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
