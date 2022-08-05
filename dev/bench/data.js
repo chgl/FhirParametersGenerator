@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1659701359727,
+  "lastUpdate": 1659701378890,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -960,6 +960,36 @@ window.BENCHMARK_DATA = {
             "value": 5174899.441860465,
             "unit": "ns",
             "range": "± 486574.11984557565"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "53460c7251c3b3dfbe785ee2e5cbdd3cdaed9b29",
+          "message": "chore(deps): update dependency xunit to v2.4.2 (#48)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2022-08-05T14:07:33+02:00",
+          "tree_id": "2137cff77ce951ccaf6a589965dc5947def79fb9",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/53460c7251c3b3dfbe785ee2e5cbdd3cdaed9b29"
+        },
+        "date": 1659701378236,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5116303.5787984915,
+            "unit": "ns",
+            "range": "± 221913.15506305793"
           }
         ]
       }
