@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1661032192269,
+  "lastUpdate": 1661865223724,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1080,6 +1080,36 @@ window.BENCHMARK_DATA = {
             "value": 4993153.3838383835,
             "unit": "ns",
             "range": "± 761615.0583916876"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c0b4da224b9dfd82c2ecb6b6894db39dd15f44a9",
+          "message": "chore(deps): update dependency benchmarkdotnet to v0.13.2 (#53)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2022-08-30T15:12:11+02:00",
+          "tree_id": "50894958e85447abf057cbae3537f5c9f01df4ef",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/c0b4da224b9dfd82c2ecb6b6894db39dd15f44a9"
+        },
+        "date": 1661865223246,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4670407.905208333,
+            "unit": "ns",
+            "range": "± 41326.456355070884"
           }
         ]
       }
