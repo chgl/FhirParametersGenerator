@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1663846623424,
+  "lastUpdate": 1663846665205,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1200,6 +1200,36 @@ window.BENCHMARK_DATA = {
             "value": 4692226.865104167,
             "unit": "ns",
             "range": "± 34714.0542385472"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "28da503e6655d25c32bb796bba078aa8d08a95b2",
+          "message": "chore(deps): update dependency microsoft.net.test.sdk to v17.3.1 (#54)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2022-09-22T13:35:39+02:00",
+          "tree_id": "042311e42768881726f9b668ff2ea082700368ab",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/28da503e6655d25c32bb796bba078aa8d08a95b2"
+        },
+        "date": 1663846663797,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5579753.189338235,
+            "unit": "ns",
+            "range": "± 113026.7635221788"
           }
         ]
       }
