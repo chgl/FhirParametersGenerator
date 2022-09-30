@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1664571574876,
+  "lastUpdate": 1664571578352,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1260,6 +1260,36 @@ window.BENCHMARK_DATA = {
             "value": 4406733.940848215,
             "unit": "ns",
             "range": "± 17908.7507936143"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6cd48d5fcde020913a25b0752e14d4f6cf91e19d",
+          "message": "chore(deps): update github/codeql-action digest to e0e5ded (#60)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2022-09-30T22:57:58+02:00",
+          "tree_id": "6198e17f54a03145ddbc048fd3f87db055851725",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/6cd48d5fcde020913a25b0752e14d4f6cf91e19d"
+        },
+        "date": 1664571577848,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4603883.629166666,
+            "unit": "ns",
+            "range": "± 35359.49702785704"
           }
         ]
       }
