@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1664571578352,
+  "lastUpdate": 1664571594030,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1290,6 +1290,36 @@ window.BENCHMARK_DATA = {
             "value": 4603883.629166666,
             "unit": "ns",
             "range": "± 35359.49702785704"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "bdd2425a803207e48f1d7ee0769e7b1327d7a37b",
+          "message": "chore(deps): update dependency microsoft.codeanalysis.csharp to v4.3.1 (#56)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2022-09-30T22:58:23+02:00",
+          "tree_id": "12dbe5b9a7c9b349021e5c50c764847eae56dc6c",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/bdd2425a803207e48f1d7ee0769e7b1327d7a37b"
+        },
+        "date": 1664571593709,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5010846.475,
+            "unit": "ns",
+            "range": "± 21399.381612906403"
           }
         ]
       }
