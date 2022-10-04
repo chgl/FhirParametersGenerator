@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install .NET 6.0
-        uses: actions/setup-dotnet@c7e7147fd3e41056e75a761416c06f5fa781b5fb # tag=v3
+        uses: actions/setup-dotnet@45c9f236cf9a0c09d11298348f6ed06bd81914c0 # tag=v3
         with:
           dotnet-version: "6.0.x"
 
