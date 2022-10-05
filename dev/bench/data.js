@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1664571620637,
+  "lastUpdate": 1664969452077,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1350,6 +1350,36 @@ window.BENCHMARK_DATA = {
             "value": 5727972.873579546,
             "unit": "ns",
             "range": "± 137740.03318423862"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a8cf96d51a916bb85fb2444234ef2ad4d9d7a1fb",
+          "message": "chore(deps): update actions/setup-dotnet digest to 45c9f23 (#59)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2022-10-05T13:28:19+02:00",
+          "tree_id": "bc1c93e943950f3e41a58c020067b3a3583af093",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/a8cf96d51a916bb85fb2444234ef2ad4d9d7a1fb"
+        },
+        "date": 1664969451549,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4535804.21875,
+            "unit": "ns",
+            "range": "± 25870.503024726953"
           }
         ]
       }
