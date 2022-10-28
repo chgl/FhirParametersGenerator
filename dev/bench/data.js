@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1665500956444,
+  "lastUpdate": 1666964789527,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1470,6 +1470,36 @@ window.BENCHMARK_DATA = {
             "value": 5566633.095880682,
             "unit": "ns",
             "range": "± 135345.4141211196"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a7acbaaeb00c7cb4d0dfe9d26225f75b9629979e",
+          "message": "chore(deps): updated deps to latest major (#70)\n\n* chore(deps): update dependency verify.xunit to v17\r\n\r\n* chore(test): updated snapshots\r\n\r\n* chore(deps): updated deps to latest major\r\n\r\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2022-10-28T15:44:50+02:00",
+          "tree_id": "3eb044a82d95c61e7634d7d045091f469c16045b",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/a7acbaaeb00c7cb4d0dfe9d26225f75b9629979e"
+        },
+        "date": 1666964789174,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4662025.115625,
+            "unit": "ns",
+            "range": "± 24090.958846741778"
           }
         ]
       }
