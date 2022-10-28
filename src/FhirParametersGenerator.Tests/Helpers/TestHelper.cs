@@ -35,7 +35,18 @@ public static class TestHelper
         // Run the source generator!
         driver = driver.RunGenerators(compilation);
 
+        Verifier.DerivePathInfo(
+            (_, projectDirectory, type, method) => new(
+                directory: Path.Combine(projectDirectory, "Snapshots"),
+                typeName: TypeNameToAbbreviation(type),
+                methodName: method.Name));
+
         // Use verify to snapshot test the source generator output!
-        return Verifier.Verify(driver).UseDirectory("../snapshots");
+        return Verifier.Verify(driver);
+    }
+
+    private static string TypeNameToAbbreviation(Type type)
+    {
+        return string.Concat(type.Name.Where(c => char.IsUpper(c)));
     }
 }

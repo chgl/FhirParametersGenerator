@@ -10,8 +10,7 @@
       HelpLink: ,
       MessageFormat: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
       Message: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
-      Category: Design,
-      CustomTags: []
+      Category: Design
     }
   ]
 }

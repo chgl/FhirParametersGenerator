@@ -458,3 +458,7 @@ src/**/generated/
 
 # dotnet-releaser
 artifacts-dotnet-releaser/
+
+src/**/*.received.*
+
+megalinter-reports/
