@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1685643018067,
+  "lastUpdate": 1685643033464,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1770,6 +1770,36 @@ window.BENCHMARK_DATA = {
             "value": 5672065.602430556,
             "unit": "ns",
             "range": "± 134948.9471789629"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "dae4100ece29a99c7cdc9c230b342e596641016e",
+          "message": "chore(deps): update dependency coverlet.collector to v6 (#81)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2023-06-01T20:07:55+02:00",
+          "tree_id": "9f47016f8e3ba6926900f77140df1ba9ad7db0de",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/dae4100ece29a99c7cdc9c230b342e596641016e"
+        },
+        "date": 1685643031543,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5222913.229600694,
+            "unit": "ns",
+            "range": "± 109682.53562491095"
           }
         ]
       }
