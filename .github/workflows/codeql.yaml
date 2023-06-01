@@ -8,6 +8,8 @@ on:
     # At 05:35 AM, only on Wednesday
     - cron: "35 5 * * 3"
 
+permissions: read-all
+
 jobs:
   analyze:
     name: Analyze
