@@ -8,6 +8,4 @@ namespace FhirParametersGenerator;
 /// resource mapping extension method should be code-generated.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-public sealed class GenerateFhirParametersAttribute : Attribute
-{
-}
+public sealed class GenerateFhirParametersAttribute : Attribute { }

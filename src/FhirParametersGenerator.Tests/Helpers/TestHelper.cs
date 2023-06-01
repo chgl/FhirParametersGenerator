@@ -10,21 +10,29 @@ public static class TestHelper
         // Parse the provided string into a C# syntax tree
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source);
 
-        var references = AppDomain.CurrentDomain.GetAssemblies()
+        var references = AppDomain.CurrentDomain
+            .GetAssemblies()
             .Where(_ => !_.IsDynamic && !string.IsNullOrWhiteSpace(_.Location))
             .Select(_ => MetadataReference.CreateFromFile(_.Location))
-            .Concat(new[]
-            {
-                MetadataReference.CreateFromFile(typeof(FhirParametersSourceGenerator).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(GenerateFhirParametersAttribute).Assembly.Location),
-            });
+            .Concat(
+                new[]
+                {
+                    MetadataReference.CreateFromFile(
+                        typeof(FhirParametersSourceGenerator).Assembly.Location
+                    ),
+                    MetadataReference.CreateFromFile(
+                        typeof(GenerateFhirParametersAttribute).Assembly.Location
+                    ),
+                }
+            );
 
         // Create a Roslyn compilation for the syntax tree.
         CSharpCompilation compilation = CSharpCompilation.Create(
             assemblyName: "SnapshotTests",
             syntaxTrees: new[] { syntaxTree },
             references: references,
-            options: new(OutputKind.DynamicallyLinkedLibrary));
+            options: new(OutputKind.DynamicallyLinkedLibrary)
+        );
 
         // Create an instance of our FhirParametersSourceGenerator incremental source generator
         var generator = new FhirParametersSourceGenerator();
@@ -36,10 +44,13 @@ public static class TestHelper
         driver = driver.RunGenerators(compilation);
 
         Verifier.DerivePathInfo(
-            (_, projectDirectory, type, method) => new(
-                directory: Path.Combine(projectDirectory, "Snapshots"),
-                typeName: TypeNameToAbbreviation(type),
-                methodName: method.Name));
+            (_, projectDirectory, type, method) =>
+                new(
+                    directory: Path.Combine(projectDirectory, "Snapshots"),
+                    typeName: TypeNameToAbbreviation(type),
+                    methodName: method.Name
+                )
+        );
 
         // Use verify to snapshot test the source generator output!
         return Verifier.Verify(driver);

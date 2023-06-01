@@ -11,7 +11,8 @@ namespace FhirParametersGenerator;
 [Generator]
 public class FhirParametersSourceGenerator : IIncrementalGenerator
 {
-    private const string FhirParametersGeneratorAttributeFullName = "FhirParametersGenerator.GenerateFhirParametersAttribute";
+    private const string FhirParametersGeneratorAttributeFullName =
+        "FhirParametersGenerator.GenerateFhirParametersAttribute";
 
     private static readonly Dictionary<string, string> ClrTypeToFhirType;
 
@@ -34,16 +35,21 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context.SyntaxProvider
             .CreateSyntaxProvider(
                 predicate: static (s, _) => IsSyntaxTargetForGeneration(s),
-                transform: static (ctx, _) => GetSemanticTargetForGeneration(ctx))
+                transform: static (ctx, _) => GetSemanticTargetForGeneration(ctx)
+            )
             .Where(static m => m is not null)!;
 
         // Combine the selected class with the `Compilation`
-        IncrementalValueProvider<(Compilation, ImmutableArray<ClassDeclarationSyntax>)> compilationAndClasses
-            = context.CompilationProvider.Combine(classDeclarations.Collect());
+        IncrementalValueProvider<(
+            Compilation,
+            ImmutableArray<ClassDeclarationSyntax>
+        )> compilationAndClasses = context.CompilationProvider.Combine(classDeclarations.Collect());
 
         // Generate the source using the compilation and enums
-        context.RegisterSourceOutput(compilationAndClasses,
-            static (spc, source) => Execute(source.Item1, source.Item2, spc));
+        context.RegisterSourceOutput(
+            compilationAndClasses,
+            static (spc, source) => Execute(source.Item1, source.Item2, spc)
+        );
     }
 
     static bool IsSyntaxTargetForGeneration(SyntaxNode node)
@@ -100,7 +106,11 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         return null;
     }
 
-    static void Execute(Compilation compilation, ImmutableArray<ClassDeclarationSyntax> classes, SourceProductionContext context)
+    static void Execute(
+        Compilation compilation,
+        ImmutableArray<ClassDeclarationSyntax> classes,
+        SourceProductionContext context
+    )
     {
         if (classes.IsDefaultOrEmpty)
         {
@@ -111,7 +121,11 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         var distinctClasses = classes.Distinct();
 
         // Convert each ClassDeclarationSyntax to their INamedSymbol
-        var classesToGenerate = GetTypesToGenerate(compilation, distinctClasses, context.CancellationToken);
+        var classesToGenerate = GetTypesToGenerate(
+            compilation,
+            distinctClasses,
+            context.CancellationToken
+        );
         if (classesToGenerate.Count == 0)
         {
             return;
@@ -125,13 +139,19 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         }
     }
 
-    static List<INamedTypeSymbol> GetTypesToGenerate(Compilation compilation, IEnumerable<ClassDeclarationSyntax> classes, CancellationToken ct)
+    static List<INamedTypeSymbol> GetTypesToGenerate(
+        Compilation compilation,
+        IEnumerable<ClassDeclarationSyntax> classes,
+        CancellationToken ct
+    )
     {
         // Create a list to hold our output
         var classesToGenerate = new List<INamedTypeSymbol>();
 
         // Get the semantic representation of our marker attribute
-        INamedTypeSymbol? generatorAttribute = compilation.GetTypeByMetadataName(FhirParametersGeneratorAttributeFullName);
+        INamedTypeSymbol? generatorAttribute = compilation.GetTypeByMetadataName(
+            FhirParametersGeneratorAttributeFullName
+        );
 
         if (generatorAttribute == null)
         {
@@ -146,8 +166,13 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
             ct.ThrowIfCancellationRequested();
 
             // Get the semantic representation of the class syntax
-            SemanticModel semanticModel = compilation.GetSemanticModel(classDeclarationSyntax.SyntaxTree);
-            if (semanticModel.GetDeclaredSymbol(classDeclarationSyntax) is not INamedTypeSymbol classSymbol)
+            SemanticModel semanticModel = compilation.GetSemanticModel(
+                classDeclarationSyntax.SyntaxTree
+            );
+            if (
+                semanticModel.GetDeclaredSymbol(classDeclarationSyntax)
+                is not INamedTypeSymbol classSymbol
+            )
             {
                 // something went wrong, bail out
                 continue;
@@ -163,7 +188,10 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         return classesToGenerate;
     }
 
-    static string GenerateExtensionClass(INamedTypeSymbol classSymbol, SourceProductionContext context)
+    static string GenerateExtensionClass(
+        INamedTypeSymbol classSymbol,
+        SourceProductionContext context
+    )
     {
         var sb = new StringBuilder();
         sb.AppendLine("using Hl7.Fhir.Model;");
@@ -180,7 +208,8 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
 
         var methodBody = GenerateMappingMethodBody(classSymbol, context);
 
-        var source = $@"
+        var source =
+            $@"
 public static class {classSymbol.Name}FhirParametersExtensions
 {{
     [Obsolete(""AsFhirParameters is deprecated, please use ToFhirParameters instead."")]
@@ -200,7 +229,10 @@ public static class {classSymbol.Name}FhirParametersExtensions
         return sb.ToString();
     }
 
-    static string GenerateMappingMethodBody(INamedTypeSymbol classSymbol, SourceProductionContext context)
+    static string GenerateMappingMethodBody(
+        INamedTypeSymbol classSymbol,
+        SourceProductionContext context
+    )
     {
         var indent = new string(' ', 8);
         var sourceBuilder = new StringBuilder();
@@ -218,10 +250,18 @@ public static class {classSymbol.Name}FhirParametersExtensions
             // only check properties that are not write-only and can be referenced by their name - because the
             // latter is exactly what we plan on doing
             // we could also check for member-annotations here that exclude a property
-            if (member is IPropertySymbol { IsWriteOnly: false, CanBeReferencedByName: true } property)
+            if (
+                member is IPropertySymbol
+                {
+                    IsWriteOnly: false,
+                    CanBeReferencedByName: true
+                } property
+            )
             {
                 sourceBuilder.Append(indent);
-                sourceBuilder.AppendLine($"// {property.Type} ({property.Type.ToDisplayString()}) {property.ToDisplayString()}");
+                sourceBuilder.AppendLine(
+                    $"// {property.Type} ({property.Type.ToDisplayString()}) {property.ToDisplayString()}"
+                );
 
                 var camelCasedPropertyName = ConvertNameToCamelCase(property.Name);
 
@@ -232,22 +272,31 @@ public static class {classSymbol.Name}FhirParametersExtensions
                 if (propertyType.InheritsFrom("Hl7.Fhir.Model.Base"))
                 {
                     sourceBuilder.Append(indent);
-                    sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", model.{property.Name});");
+                    sourceBuilder.AppendLine(
+                        $@"parameters.Add(""{camelCasedPropertyName}"", model.{property.Name});"
+                    );
                 }
                 else
                 {
-                    var isKnownType = ClrTypeToFhirType.TryGetValue(property.Type.Name, out var fhirTypeName);
+                    var isKnownType = ClrTypeToFhirType.TryGetValue(
+                        property.Type.Name,
+                        out var fhirTypeName
+                    );
                     if (isKnownType)
                     {
                         sourceBuilder.Append(indent);
-                        sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new {fhirTypeName}(model.{property.Name}));");
+                        sourceBuilder.AppendLine(
+                            $@"parameters.Add(""{camelCasedPropertyName}"", new {fhirTypeName}(model.{property.Name}));"
+                        );
                     }
                     else
                     {
                         ReportUnsupportedPropertyTypeDiagnostic(property, context);
 
                         sourceBuilder.Append(indent);
-                        sourceBuilder.AppendLine($@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));");
+                        sourceBuilder.AppendLine(
+                            $@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));"
+                        );
                     }
                 }
             }
@@ -259,16 +308,20 @@ public static class {classSymbol.Name}FhirParametersExtensions
         return sourceBuilder.ToString();
     }
 
-    static void ReportUnsupportedPropertyTypeDiagnostic(IPropertySymbol property, SourceProductionContext context)
+    static void ReportUnsupportedPropertyTypeDiagnostic(
+        IPropertySymbol property,
+        SourceProductionContext context
+    )
     {
         var descriptor = new DiagnosticDescriptor(
             id: "FHIRPARAMS1",
             title: "Unsupported property type",
-            messageFormat: $"Unable to map property {property.ToDisplayString()} of type {property.Type.ToDisplayString()} to a FHIR representation. " +
-                $"Defaulting to FhirString with a value of {property.ToDisplayString()}.ToString().",
+            messageFormat: $"Unable to map property {property.ToDisplayString()} of type {property.Type.ToDisplayString()} to a FHIR representation. "
+                + $"Defaulting to FhirString with a value of {property.ToDisplayString()}.ToString().",
             category: "Design",
             defaultSeverity: DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true
+        );
 
         var location = property.Locations.FirstOrDefault();
         var diagnostic = Diagnostic.Create(descriptor, location);
@@ -285,12 +338,16 @@ public static class {classSymbol.Name}FhirParametersExtensions
             return name;
         }
 
-        return string.Create(name.Length, name, (chars, name) =>
-        {
-            name.AsSpan().CopyTo(chars);
+        return string.Create(
+            name.Length,
+            name,
+            (chars, name) =>
+            {
+                name.AsSpan().CopyTo(chars);
 
-            FixCasing(chars);
-        });
+                FixCasing(chars);
+            }
+        );
     }
 
     static void FixCasing(Span<char> chars)
