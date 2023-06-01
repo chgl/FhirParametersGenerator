@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1675244225591,
+  "lastUpdate": 1685643018067,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1740,6 +1740,36 @@ window.BENCHMARK_DATA = {
             "value": 4665243.909040178,
             "unit": "ns",
             "range": "± 17366.640818905984"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "bf2621c626521671f9061a10d26a255b6cf1b073",
+          "message": "chore(deps): update dependency hl7.fhir.r4 to v5 (#82)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2023-06-01T20:07:48+02:00",
+          "tree_id": "4b318477d5dbe42ecca49b17efea4faa0a70096c",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/bf2621c626521671f9061a10d26a255b6cf1b073"
+        },
+        "date": 1685643017490,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5672065.602430556,
+            "unit": "ns",
+            "range": "± 134948.9471789629"
           }
         ]
       }
