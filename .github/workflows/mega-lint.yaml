@@ -40,7 +40,7 @@ jobs:
         id: ml
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://oxsecurity.github.io/megalinter/flavors/
-        uses: oxsecurity/megalinter@8fd433c675d27ceca5a61ace53177c1bbfbf7f49 # v6
+        uses: oxsecurity/megalinter@fda6ac3a38be0e969820709ac16e442464e5a035 # v7
         env:
           # All available variables are described in documentation
           # https://oxsecurity.github.io/megalinter/configuration/
@@ -51,7 +51,7 @@ jobs:
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
         if: ${{ success() }} || ${{ failure() }}
-        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # tag=v2
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3
         with:
           name: MegaLinter reports
           path: |
