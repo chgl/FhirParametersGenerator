@@ -17,11 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FhirParametersGenerator.Attributes\FhirParametersGenerator.Attributes.csproj" />
+    <ProjectReference
+      Include="..\FhirParametersGenerator.Attributes\FhirParametersGenerator.Attributes.csproj" />
     <ProjectReference Include="..\FhirParametersGenerator\FhirParametersGenerator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FhirParametersGenerator\FhirParametersGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\FhirParametersGenerator\FhirParametersGenerator.csproj"
+      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>
