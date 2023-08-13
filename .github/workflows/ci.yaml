@@ -10,10 +10,14 @@ on:
   pull_request:
     branches: [master]
 
+permissions: read-all
+
 jobs:
   build:
     runs-on: ubuntu-20.04
-
+    permissions:
+      # to create releases
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
