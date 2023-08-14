@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1692036869130,
+  "lastUpdate": 1692036957740,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1950,6 +1950,36 @@ window.BENCHMARK_DATA = {
             "value": 5759335.477430556,
             "unit": "ns",
             "range": "± 175482.6612136323"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "distinct": true,
+          "id": "16a41983047b4bb1ff125d440f765d657e182474",
+          "message": "chore: prepare release 0.6.0",
+          "timestamp": "2023-08-14T20:14:05+02:00",
+          "tree_id": "66b995a6757c99159aba520b8aa55d35ccadbdd3",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/16a41983047b4bb1ff125d440f765d657e182474"
+        },
+        "date": 1692036957048,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4492894.615104167,
+            "unit": "ns",
+            "range": "± 36775.577445212344"
           }
         ]
       }
