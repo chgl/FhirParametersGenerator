@@ -285,12 +285,21 @@ public static class {classSymbol.Name}FhirParametersExtensions
             return name;
         }
 
-        return string.Create(name.Length, name, (chars, name) =>
-        {
-            name.AsSpan().CopyTo(chars);
-
-            FixCasing(chars);
-        });
+#if BUILDING_INBOX_LIBRARY
+            return string.Create(name.Length, name, (chars, name) =>
+            {
+                name
+#if !NET6_0_OR_GREATER
+                .AsSpan()
+#endif
+                .CopyTo(chars);
+                FixCasing(chars);
+            });
+#else
+        char[] chars = name.ToCharArray();
+        FixCasing(chars);
+        return new string(chars);
+#endif
     }
 
     static void FixCasing(Span<char> chars)
