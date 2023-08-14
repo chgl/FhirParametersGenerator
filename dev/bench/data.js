@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1692033206936,
+  "lastUpdate": 1692035000696,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1860,6 +1860,36 @@ window.BENCHMARK_DATA = {
             "value": 4567078.311458333,
             "unit": "ns",
             "range": "± 29198.076725630006"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a240780038853da8c638ec3905a6341d31545ec8",
+          "message": "chore: downgrade to support netstandard 2.0 (#87)",
+          "timestamp": "2023-08-14T19:39:52+02:00",
+          "tree_id": "2a3e1f94e8196e9bb3b0fe8f34f2351f003e6bfe",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/a240780038853da8c638ec3905a6341d31545ec8"
+        },
+        "date": 1692035000358,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 5098651.670390625,
+            "unit": "ns",
+            "range": "± 331823.14446591056"
           }
         ]
       }
