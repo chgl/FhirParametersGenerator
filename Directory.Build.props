@@ -16,7 +16,7 @@
     <!-- Local builds should embed PDBs so we never lose them when a subsequent build occurs. -->
     <DebugType Condition=" '$(CI)' != 'true' and '$(TF_BUILD)' != 'true' ">embedded</DebugType>
 
-    <Version>0.4.0</Version>
+    <Version>0.5.0</Version>
     <Company>github.com/chgl</Company>
     <Description>A .NET source generator for mapping model classes to HL7 FHIR® Parameters resources.</Description>
     <Copyright>© chgl. All rights reserved.</Copyright>
@@ -24,9 +24,9 @@
     <Authors>chgl</Authors>
     <PackageTags>FHIR;source-generator</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>https://github.com/chgl/$(AssemblyName)/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/chgl/FhirParametersGenerator/releases</PackageReleaseNotes>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/chgl/$(AssemblyName)</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/chgl/FhirParametersGenerator</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
 
