@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1692036957740,
+  "lastUpdate": 1692117047237,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -1980,6 +1980,36 @@ window.BENCHMARK_DATA = {
             "value": 4492894.615104167,
             "unit": "ns",
             "range": "± 36775.577445212344"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ab9c49f55f0ef1d967b708174b35c205936465c9",
+          "message": "fix: added XML docs to generated code (#88)",
+          "timestamp": "2023-08-15T18:29:04+02:00",
+          "tree_id": "d84969accb7c4143926eb270ec5ce94493df5000",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/ab9c49f55f0ef1d967b708174b35c205936465c9"
+        },
+        "date": 1692117046918,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4536330.4078125,
+            "unit": "ns",
+            "range": "± 38303.39720803732"
           }
         ]
       }
