@@ -32,8 +32,8 @@ jobs:
       - name: Build, Tests, Cover, Pack and Publish (on push tag)
         shell: bash
         run: |
-          dotnet tool install --global dotnet-releaser
-          dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" dotnet-releaser.toml
+          dotnet tool restore
+          dotnet dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" dotnet-releaser.toml
 
       - name: Run benchmark
         run: dotnet run -c Release --project src/FhirParametersGenerator.Benchmark

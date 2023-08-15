@@ -3,14 +3,27 @@ using Hl7.Fhir.Model;
 // FhirParametersExtensions generated for type 'ModelWithFhirBaseDerivedType'
 namespace FhirParametersGenerator.Tests;
 
+/// <summary>
+/// Code-generated extension methods to convert the model class to a FHIR Parameters resources.
+/// </summary>
 public static class ModelWithFhirBaseDerivedTypeFhirParametersExtensions
 {
+    /// <summary>
+    /// Convert the model class to its FHIR Parameters representation.
+    /// </summary>
+    /// <param name="model">The model class.</param>
+    /// <returns>A FHIR Parameters instance.</returns>
     [Obsolete("AsFhirParameters is deprecated, please use ToFhirParameters instead.")]
     public static Parameters AsFhirParameters(this FhirParametersGenerator.Tests.ModelWithFhirBaseDerivedType model)
     {
         return ToFhirParameters(model);
     }
 
+    /// <summary>
+    /// Convert the model class to its FHIR Parameters representation.
+    /// </summary>
+    /// <param name="model">The model class.</param>
+    /// <returns>A FHIR Parameters instance.</returns>
     public static Parameters ToFhirParameters(this FhirParametersGenerator.Tests.ModelWithFhirBaseDerivedType model)
     {
         var parameters = new Parameters();

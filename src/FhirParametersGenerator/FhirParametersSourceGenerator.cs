@@ -181,14 +181,27 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         var methodBody = GenerateMappingMethodBody(classSymbol, context);
 
         var source = $@"
+/// <summary>
+/// Code-generated extension methods to convert the model class to a FHIR Parameters resources.
+/// </summary>
 public static class {classSymbol.Name}FhirParametersExtensions
 {{
+    /// <summary>
+    /// Convert the model class to its FHIR Parameters representation.
+    /// </summary>
+    /// <param name=""model"">The model class.</param>
+    /// <returns>A FHIR Parameters instance.</returns>
     [Obsolete(""AsFhirParameters is deprecated, please use ToFhirParameters instead."")]
     public static Parameters AsFhirParameters(this {classSymbol.ToDisplayString()} model)
     {{
         return ToFhirParameters(model);
     }}
 
+    /// <summary>
+    /// Convert the model class to its FHIR Parameters representation.
+    /// </summary>
+    /// <param name=""model"">The model class.</param>
+    /// <returns>A FHIR Parameters instance.</returns>
     public static Parameters ToFhirParameters(this {classSymbol.ToDisplayString()} model)
     {{
 {methodBody}

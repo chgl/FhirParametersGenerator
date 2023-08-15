@@ -13,7 +13,7 @@ var t = new TestModelA
         BirthDate = "2000-01-01",
         Deceased = new FhirBoolean(false),
         Name = new() { new HumanName() { Given = new[] { "Test" }, Family = "User" } },
-    }
+    },
 };
 
 var parameters = t.ToFhirParameters();
