@@ -15,11 +15,7 @@ public class GenerateFhirParametersTests
     [Fact]
     public void ModelWithStringAndInt_ShouldBeMappedCorrectly()
     {
-        var t = new SimpleNameAndAgeModel
-        {
-            Name = "Hello",
-            Age = 123,
-        };
+        var t = new SimpleNameAndAgeModel { Name = "Hello", Age = 123, };
 
         var asParameters = t.ToFhirParameters();
 
@@ -37,15 +33,14 @@ public class GenerateFhirParametersTests
     [Fact]
     public void PascalCasePropertyNames_ShouldBeMappedToCamelCase()
     {
-        var t = new PascalCasedModel
-        {
-            ALongPascalCaseProperty = "Hello",
-            Id = "123",
-        };
+        var t = new PascalCasedModel { ALongPascalCaseProperty = "Hello", Id = "123", };
 
         var asParameters = t.ToFhirParameters();
 
-        asParameters.GetSingleValue<FhirString>("aLongPascalCaseProperty").Value.Should().Be(t.ALongPascalCaseProperty);
+        asParameters
+            .GetSingleValue<FhirString>("aLongPascalCaseProperty")
+            .Value.Should()
+            .Be(t.ALongPascalCaseProperty);
         asParameters.GetSingleValue<FhirString>("id").Value.Should().Be(t.Id);
     }
 
@@ -55,19 +50,14 @@ public class GenerateFhirParametersTests
         public string Name { get; init; } = string.Empty;
         public string WriteOnly
         {
-            set
-            { }
+            set { }
         }
     }
 
     [Fact]
     public void WriteOnlyProperties_ShouldBeIgnored()
     {
-        var m = new ModelWithWriteOnlyProperty
-        {
-            Name = "Hello",
-            WriteOnly = "wo",
-        };
+        var m = new ModelWithWriteOnlyProperty { Name = "Hello", WriteOnly = "wo", };
 
         var asParameters = m.ToFhirParameters();
 

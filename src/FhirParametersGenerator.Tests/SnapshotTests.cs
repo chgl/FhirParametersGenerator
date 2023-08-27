@@ -9,7 +9,8 @@ public class FhirParametersGeneratorSnapshotTests
     public Task GeneratesFhirParametersExtensionsCorrectly()
     {
         // The source code to test
-        var source = @"
+        var source =
+            @"
 using FhirParametersGenerator;
 
 namespace FhirParametersGenerator.Tests;
@@ -39,7 +40,8 @@ public class TestModel
     public Task ModelWithUnsupportedPropertyTypes_ShouldEmitDiagnosticsAndUseToStringDefaultMappingBehavior()
     {
         // The source code to test
-        var source = @"
+        var source =
+            @"
 using FhirParametersGenerator;
 
 namespace FhirParametersGenerator.Tests;
@@ -58,7 +60,8 @@ public class TestModel
     public Task ModelWithFhirBaseDerivedType_ShouldBeMappedToParameterAsIs()
     {
         // The source code to test
-        var source = @"
+        var source =
+            @"
 using FhirParametersGenerator;
 // essential that this is part of the compilation unit
 using Hl7.Fhir.Model;
