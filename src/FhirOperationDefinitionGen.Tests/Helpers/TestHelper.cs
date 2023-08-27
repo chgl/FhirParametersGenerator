@@ -1,15 +1,35 @@
+using System.Collections.Immutable;
+using FhirOperationDefinitionGen;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
 
 namespace FhirParametersGenerator.Tests.Helpers;
 
 public static class TestHelper
 {
-    public static Task Verify(string source)
+    public class CustomAdditionalText : AdditionalText
     {
-        // Parse the provided string into a C# syntax tree
-        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source);
+        private readonly string _text;
 
+        public override string Path { get; }
+
+        public CustomAdditionalText(string path)
+        {
+            Path = path;
+            _text = File.ReadAllText(path);
+        }
+
+        public override SourceText GetText(
+            CancellationToken cancellationToken = new CancellationToken()
+        )
+        {
+            return SourceText.From(_text);
+        }
+    }
+
+    public static Task Verify(IEnumerable<string> additionalTextPaths)
+    {
         var references = AppDomain.CurrentDomain
             .GetAssemblies()
             .Where(_ => !_.IsDynamic && !string.IsNullOrWhiteSpace(_.Location))
@@ -18,32 +38,38 @@ public static class TestHelper
                 new[]
                 {
                     MetadataReference.CreateFromFile(
-                        typeof(FhirParametersSourceGenerator).Assembly.Location
-                    ),
-                    MetadataReference.CreateFromFile(
-                        typeof(GenerateFhirParametersAttribute).Assembly.Location
+                        typeof(OperationDefinitionParametersSourceGenerator).Assembly.Location
                     ),
                 }
             );
 
+        List<AdditionalText> additionalTexts = new List<AdditionalText>();
+        foreach (string additionalTextPath in additionalTextPaths)
+        {
+            AdditionalText additionalText = new CustomAdditionalText(additionalTextPath);
+            additionalTexts.Add(additionalText);
+        }
+
         // Create a Roslyn compilation for the syntax tree.
         CSharpCompilation compilation = CSharpCompilation.Create(
             assemblyName: "SnapshotTests",
-            syntaxTrees: new[] { syntaxTree },
+            syntaxTrees: null,
             references: references,
             options: new(OutputKind.DynamicallyLinkedLibrary)
         );
 
-        // Create an instance of our FhirParametersSourceGenerator incremental source generator
-        var generator = new FhirParametersSourceGenerator();
+        // Create an instance of our OperationDefinitionParametersSourceGenerator incremental source generator
+        var generator = new OperationDefinitionParametersSourceGenerator();
 
         // The GeneratorDriver is used to run our generator against a compilation
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generator);
+        GeneratorDriver driver = CSharpGeneratorDriver
+            .Create(generator)
+            .AddAdditionalTexts(ImmutableArray.CreateRange(additionalTexts));
 
         // Run the source generator!
         driver = driver.RunGenerators(compilation);
 
-        Verifier.DerivePathInfo(
+        DerivePathInfo(
             (_, projectDirectory, type, method) =>
                 new(
                     directory: Path.Combine(projectDirectory, "Snapshots"),

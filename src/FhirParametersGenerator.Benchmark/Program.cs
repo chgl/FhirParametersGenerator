@@ -22,28 +22,35 @@ public class Benchmarks
         // Parse the provided string into a C# syntax tree
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source);
 
-        var references = AppDomain.CurrentDomain.GetAssemblies()
+        var references = AppDomain.CurrentDomain
+            .GetAssemblies()
             .Where(_ => !_.IsDynamic && !string.IsNullOrWhiteSpace(_.Location))
             .Select(_ => MetadataReference.CreateFromFile(_.Location))
-            .Concat(new[]
-            {
-                MetadataReference.CreateFromFile(typeof(FhirParametersSourceGenerator).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(GenerateFhirParametersAttribute).Assembly.Location)
-            });
+            .Concat(
+                new[]
+                {
+                    MetadataReference.CreateFromFile(
+                        typeof(FhirParametersSourceGenerator).Assembly.Location
+                    ),
+                    MetadataReference.CreateFromFile(
+                        typeof(GenerateFhirParametersAttribute).Assembly.Location
+                    )
+                }
+            );
 
         // Create a Roslyn compilation for the syntax tree.
         Compilation = CSharpCompilation.Create(
             assemblyName: "Benchmark",
             syntaxTrees: new[] { syntaxTree },
             references: references,
-            options: new(OutputKind.DynamicallyLinkedLibrary));
+            options: new(OutputKind.DynamicallyLinkedLibrary)
+        );
 
         // Create an instance of our FhirParametersSourceGenerator incremental source generator
         var generator = new FhirParametersSourceGenerator();
 
         // The GeneratorDriver is used to run our generator against a compilation
         Driver = CSharpGeneratorDriver.Create(generator);
-
     }
 
     [Benchmark]
@@ -53,7 +60,8 @@ public class Benchmarks
         Driver.RunGenerators(Compilation);
     }
 
-    private readonly string source = @"
+    private readonly string source =
+        @"
 using FhirParametersGenerator;
 
 namespace FhirParametersGenerator.Tests;

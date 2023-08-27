@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FhirParametersGenerator.Att
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FhirParametersGenerator.Benchmark", "src\FhirParametersGenerator.Benchmark\FhirParametersGenerator.Benchmark.csproj", "{66CA6131-D91F-422A-9178-9721B57DAD8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FhirOperationDefinitionGen", "src\FhirOperationDefinitionGen\FhirOperationDefinitionGen.csproj", "{356CC961-CE9A-4E17-A330-3EE544BB4477}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FhirOperationDefinitionGen.Tests", "src\FhirOperationDefinitionGen.Tests\FhirOperationDefinitionGen.Tests.csproj", "{C37C0B5A-DBDE-4DE2-92CE-9EFA362C2CB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{66CA6131-D91F-422A-9178-9721B57DAD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66CA6131-D91F-422A-9178-9721B57DAD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CA6131-D91F-422A-9178-9721B57DAD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356CC961-CE9A-4E17-A330-3EE544BB4477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356CC961-CE9A-4E17-A330-3EE544BB4477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356CC961-CE9A-4E17-A330-3EE544BB4477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356CC961-CE9A-4E17-A330-3EE544BB4477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37C0B5A-DBDE-4DE2-92CE-9EFA362C2CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37C0B5A-DBDE-4DE2-92CE-9EFA362C2CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37C0B5A-DBDE-4DE2-92CE-9EFA362C2CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37C0B5A-DBDE-4DE2-92CE-9EFA362C2CB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0A404604-9CBA-4B8B-A952-AE9F228F36C8} = {6D006896-F214-4420-9743-290055A2CB72}
@@ -51,5 +63,7 @@ Global
 		{A318841A-7C18-4DA1-ACCE-0154B4B692DC} = {6D006896-F214-4420-9743-290055A2CB72}
 		{886D73E3-73FE-49B6-A53C-F40EC3E42928} = {6D006896-F214-4420-9743-290055A2CB72}
 		{66CA6131-D91F-422A-9178-9721B57DAD8E} = {6D006896-F214-4420-9743-290055A2CB72}
+		{356CC961-CE9A-4E17-A330-3EE544BB4477} = {6D006896-F214-4420-9743-290055A2CB72}
+		{C37C0B5A-DBDE-4DE2-92CE-9EFA362C2CB5} = {6D006896-F214-4420-9743-290055A2CB72}
 	EndGlobalSection
 EndGlobal

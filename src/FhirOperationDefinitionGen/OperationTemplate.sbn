@@ -1,0 +1,69 @@
+#nullable enable
+
+/// <summary>
+/// {{ OperationDefinition.Title | string.strip_newlines }}
+/// {{ OperationDefinition.Description | string.strip_newlines }}
+/// </summary>
+public class {{ OperationDefinition.Name | string.capitalize }}Operation
+{
+    /// <summary>
+    /// Name used to invoke the operation.
+    /// </summary>
+    public const string Name = "{{ OperationDefinition.Code }}";
+
+    /// <summary>
+    /// The operation's request parameters.
+    /// </summary>
+    public class Request
+    {
+        {{~ for param in OperationDefinition.Parameter | array.filter @(do; ret $0.Use == "In" && $0.Type != null; end) ~}}
+        /// <summary>
+        /// {{ param.Documentation }}
+        /// </summary>
+        public Hl7.Fhir.Model.{{ param.Type }}{{ (param.Min == null || param.Min == 0) ? "?" : "" }} {{ param.Name | string.capitalize }} { get; set; }
+        {{~ end ~}}
+
+        /// <summary>
+        /// Convert this object to its FHIR Parameters representation.
+        /// </summary>
+        /// <returns>A FHIR Parameters instance.</returns>
+        public Hl7.Fhir.Model.Parameters ToParameters()
+        {
+            var parameters = new Parameters();
+
+            {{~ for param in OperationDefinition.Parameter | array.filter @(do; ret $0.Use == "In" && $0.Type != null; end) ~}}
+            parameters.Add("{{ param.Name }}", this.{{ param.Name | string.capitalize }});
+            {{~ end ~}}
+
+            return parameters;
+        }
+    }
+
+    /// <summary>
+    /// The operation's response parameters.
+    /// </summary>
+    public class Response
+    {
+        {{~ for param in OperationDefinition.Parameter | array.filter @(do; ret $0.Use  == "Out" && $0.Type != null; end) ~}}
+        /// <summary>
+        /// {{ param.Documentation }}
+        /// </summary>
+        public Hl7.Fhir.Model.{{ param.Type }} {{ param.Name | string.capitalize }} { get; set; }
+        {{~ end ~}}
+
+        /// <summary>
+        /// Convert this object to its FHIR Parameters representation.
+        /// </summary>
+        /// <returns>A FHIR Parameters instance.</returns>
+        public Hl7.Fhir.Model.Parameters ToParameters()
+        {
+            var parameters = new Parameters();
+
+            {{~ for param in OperationDefinition.Parameter | array.filter @(do; ret $0.Use == "Out" && $0.Type != null; end) ~}}
+            parameters.Add("{{ param.Name }}", this.{{ param.Name | string.capitalize }});
+            {{~ end ~}}
+
+            return parameters;
+        }
+    }
+}

@@ -12,7 +12,10 @@ var t = new TestModelA
     {
         BirthDate = "2000-01-01",
         Deceased = new FhirBoolean(false),
-        Name = new() { new HumanName() { Given = new[] { "Test" }, Family = "User" } },
+        Name = new()
+        {
+            new HumanName() { Given = new[] { "Test" }, Family = "User" }
+        },
     },
 };
 
@@ -29,10 +32,7 @@ public class TestModelA
     public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.UtcNow;
     public string WriteOnly
     {
-        set
-        {
-            Console.WriteLine($"Write-only: {value}");
-        }
+        set { Console.WriteLine($"Write-only: {value}"); }
     }
     public DayOfWeek DayOfWeek { get; init; } = DayOfWeek.Friday;
     public CodeableConcept? Code { get; init; }
