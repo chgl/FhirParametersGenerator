@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1692117047237,
+  "lastUpdate": 1693167088887,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2010,6 +2010,36 @@ window.BENCHMARK_DATA = {
             "value": 4536330.4078125,
             "unit": "ns",
             "range": "± 38303.39720803732"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d5783ccccd205923f1cb1bc1587f7365331b3990",
+          "message": "feat: added experimental source generator from OperationDefinition resources (#89)",
+          "timestamp": "2023-08-27T22:09:06+02:00",
+          "tree_id": "c52ead561ee785ebc083f72a59bd272c6c7073a6",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/d5783ccccd205923f1cb1bc1587f7365331b3990"
+        },
+        "date": 1693167088195,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 4803575.645833333,
+            "unit": "ns",
+            "range": "± 86390.44140324237"
           }
         ]
       }
