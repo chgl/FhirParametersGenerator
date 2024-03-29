@@ -462,3 +462,5 @@ artifacts-dotnet-releaser/
 src/**/*.received.*
 
 megalinter-reports/
+
+.mono/
