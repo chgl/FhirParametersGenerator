@@ -10,9 +10,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
-    <PackageReference Include="Hl7.Fhir.R4" Version="5.2.0" PrivateAssets="all"
+    <PackageReference Include="Hl7.Fhir.R4" Version="5.7.0" PrivateAssets="all"
       GeneratePathProperty="true" />
-    <PackageReference Include="Hl7.Fhir.Base" Version="5.2.0" PrivateAssets="all"
+    <PackageReference Include="Hl7.Fhir.Base" Version="5.7.0" PrivateAssets="all"
       GeneratePathProperty="true" />
     <PackageReference Include="Scriban" Version="5.7.0" PrivateAssets="all"
       GeneratePathProperty="true" />

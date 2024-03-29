@@ -6,8 +6,6 @@
       Severity: Warning,
       WarningLevel: 1,
       Location: : (8,21)-(8,30),
-      Description: ,
-      HelpLink: ,
       MessageFormat: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
       Message: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
       Category: Design
