@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1711732399909,
+  "lastUpdate": 1711735628162,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2160,6 +2160,36 @@ window.BENCHMARK_DATA = {
             "value": 2891397.1768973214,
             "unit": "ns",
             "range": "± 124180.44638490798"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "aaa227561a145f7c410ecf8450456019e47120fb",
+          "message": "chore(deps): manual dep updates (#99)\n\n* chore(deps): wip on manual updates\r\n\r\n* chore: more manual dep updates",
+          "timestamp": "2024-03-29T19:05:25+01:00",
+          "tree_id": "64025624dc230a66f70d3d676df81eb76a95d9e2",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/aaa227561a145f7c410ecf8450456019e47120fb"
+        },
+        "date": 1711735627892,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2235168.32734375,
+            "unit": "ns",
+            "range": "± 41650.68142038162"
           }
         ]
       }
