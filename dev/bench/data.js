@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1693562410207,
+  "lastUpdate": 1711732166846,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2070,6 +2070,36 @@ window.BENCHMARK_DATA = {
             "value": 5148728.28125,
             "unit": "ns",
             "range": "± 121659.40227565863"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "efcac4716cc4e86c291f66206c401ed667bbdddc",
+          "message": "chore(deps): aggregated deps updates (#97)\n\n* chore(deps): update github-actions\r\n\r\n* chore(deps): updated more deps\r\n\r\n* chore(deps): action updates\r\n\r\n* chore: fix trivy\r\n\r\n---------\r\n\r\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2024-03-29T18:06:46+01:00",
+          "tree_id": "bb701a3a74c2fef3b9d11b32aea1f1b0b373014c",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/efcac4716cc4e86c291f66206c401ed667bbdddc"
+        },
+        "date": 1711732166086,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2772286.400517451,
+            "unit": "ns",
+            "range": "± 141327.32466251805"
           }
         ]
       }
