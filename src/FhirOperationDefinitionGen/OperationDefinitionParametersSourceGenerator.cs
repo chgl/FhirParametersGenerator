@@ -1,10 +1,10 @@
 using System.Collections.Immutable;
+using System.Reflection;
 using System.Text;
-using Microsoft.CodeAnalysis;
+using System.Text.Json;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using System.Text.Json;
-using System.Reflection;
+using Microsoft.CodeAnalysis;
 using Scriban;
 
 namespace FhirOperationDefinitionGen;
@@ -24,8 +24,8 @@ public class OperationDefinitionParametersSourceGenerator : IIncrementalGenerato
     /// <param name="context">The context</param>
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var files = context.AdditionalTextsProvider
-            .Where(a =>
+        var files = context
+            .AdditionalTextsProvider.Where(a =>
             {
                 var fileName = Path.GetFileName(a.Path);
                 return fileName.StartsWith("OperationDefinition") && fileName.EndsWith(".json");

@@ -30,8 +30,8 @@ public static class TestHelper
 
     public static Task Verify(IEnumerable<string> additionalTextPaths)
     {
-        var references = AppDomain.CurrentDomain
-            .GetAssemblies()
+        var references = AppDomain
+            .CurrentDomain.GetAssemblies()
             .Where(_ => !_.IsDynamic && !string.IsNullOrWhiteSpace(_.Location))
             .Select(_ => MetadataReference.CreateFromFile(_.Location))
             .Concat(

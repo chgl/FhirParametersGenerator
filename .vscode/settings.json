@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/megalinter/megalinter/main/megalinter/descriptors/schemas/megalinter-configuration.jsonschema.json": "file:///home/gulch/proj/github/chgl/FhirParametersGenerator/.mega-linter.yaml"
+    }
+}
