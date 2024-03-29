@@ -22,8 +22,8 @@ public class Benchmarks
         // Parse the provided string into a C# syntax tree
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source);
 
-        var references = AppDomain.CurrentDomain
-            .GetAssemblies()
+        var references = AppDomain
+            .CurrentDomain.GetAssemblies()
             .Where(_ => !_.IsDynamic && !string.IsNullOrWhiteSpace(_.Location))
             .Select(_ => MetadataReference.CreateFromFile(_.Location))
             .Concat(
