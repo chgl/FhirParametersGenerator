@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1711732278379,
+  "lastUpdate": 1711732399909,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2130,6 +2130,36 @@ window.BENCHMARK_DATA = {
             "value": 2883073.3565848214,
             "unit": "ns",
             "range": "± 104654.27406367"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "distinct": true,
+          "id": "baccf9d0840b46903b8af6e7d1d2924ae277e277",
+          "message": "chore(deps): update dependency microsoft.sourcelink.github to v8",
+          "timestamp": "2024-03-29T17:11:42Z",
+          "tree_id": "e336664fec7c85856c196c41453ba36434180a3d",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/baccf9d0840b46903b8af6e7d1d2924ae277e277"
+        },
+        "date": 1711732399673,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2891397.1768973214,
+            "unit": "ns",
+            "range": "± 124180.44638490798"
           }
         ]
       }
