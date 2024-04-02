@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1711735628162,
+  "lastUpdate": 1712063861122,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2190,6 +2190,36 @@ window.BENCHMARK_DATA = {
             "value": 2235168.32734375,
             "unit": "ns",
             "range": "± 41650.68142038162"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "distinct": true,
+          "id": "6984547321925aac93034c52d940e17df68754db",
+          "message": "chore(deps): update rhysd/github-action-benchmark action to v1.20.1",
+          "timestamp": "2024-04-02T13:15:28Z",
+          "tree_id": "2ddca01907f960c393e62ec71fe66b0365e5d1de",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/6984547321925aac93034c52d940e17df68754db"
+        },
+        "date": 1712063860737,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2389525.166201637,
+            "unit": "ns",
+            "range": "± 87110.12499011956"
           }
         ]
       }
