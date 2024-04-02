@@ -39,7 +39,7 @@ jobs:
         run: dotnet run -c Release --project src/FhirParametersGenerator.Benchmark
 
       - name: Store benchmark result
-        uses: rhysd/github-action-benchmark@cc9ac13ce81036c9b67fcfe2cb95ca366684b9ea # v1.19.3
+        uses: rhysd/github-action-benchmark@1846227a307d8c0149b960b986d46f8f4c95db0c # v1.20.1
         with:
           name: Benchmark.Net Benchmark
           tool: "benchmarkdotnet"
