@@ -3,7 +3,7 @@
   "isRoot": true,
   "tools": {
     "dotnet-releaser": {
-      "version": "0.8.5",
+      "version": "0.9.0",
       "commands": ["dotnet-releaser"]
     }
   }
