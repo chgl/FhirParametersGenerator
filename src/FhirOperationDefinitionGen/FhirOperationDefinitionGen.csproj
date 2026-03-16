@@ -14,7 +14,7 @@
       GeneratePathProperty="true" />
     <PackageReference Include="Hl7.Fhir.Base" Version="5.7.0" PrivateAssets="all"
       GeneratePathProperty="true" />
-    <PackageReference Include="Scriban" Version="5.9.1" PrivateAssets="all"
+    <PackageReference Include="Scriban" Version="6.5.8" PrivateAssets="all"
       GeneratePathProperty="true" />
   </ItemGroup>
 
