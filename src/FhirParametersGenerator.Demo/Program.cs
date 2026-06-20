@@ -21,7 +21,7 @@ var t = new TestModelA
 
 var parameters = t.ToFhirParameters();
 
-Console.WriteLine(parameters.ToJson(new() { Pretty = true }));
+Console.WriteLine(parameters.ToJson(pretty: true));
 
 [GenerateFhirParameters]
 public class TestModelA
