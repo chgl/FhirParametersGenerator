@@ -14,7 +14,7 @@ var t = new TestModelA
         Deceased = new FhirBoolean(false),
         Name = new()
         {
-            new HumanName() { Given = new[] { "Test" }, Family = "User" }
+            new HumanName() { Given = new[] { "Test" }, Family = "User" },
         },
     },
 };

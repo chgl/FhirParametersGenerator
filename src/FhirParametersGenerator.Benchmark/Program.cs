@@ -34,7 +34,7 @@ public class Benchmarks
                     ),
                     MetadataReference.CreateFromFile(
                         typeof(GenerateFhirParametersAttribute).Assembly.Location
-                    )
+                    ),
                 }
             );
 

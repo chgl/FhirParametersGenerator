@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
@@ -9,7 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.Analyzers"
+      Version="3.3.4"
+      PrivateAssets="all"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,18 +22,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs"
-      Visible="false" />
-    <None Include="$(OutputPath)\FhirParametersGenerator.Attributes.dll" Pack="true"
-      PackagePath="analyzers/dotnet/cs" Visible="false" />
-    <None Include="$(OutputPath)\FhirParametersGenerator.Attributes.dll" Pack="true"
-      PackagePath="lib\$(TargetFramework)" Visible="true" />
+    <None
+      Include="$(OutputPath)\$(AssemblyName).dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false"
+    />
+    <None
+      Include="$(OutputPath)\FhirParametersGenerator.Attributes.dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false"
+    />
+    <None
+      Include="$(OutputPath)\FhirParametersGenerator.Attributes.dll"
+      Pack="true"
+      PackagePath="lib\$(TargetFramework)"
+      Visible="true"
+    />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference
       Include="..\FhirParametersGenerator.Attributes\FhirParametersGenerator.Attributes.csproj"
-      PrivateAssets="All" />
+      PrivateAssets="All"
+    />
   </ItemGroup>
-
 </Project>

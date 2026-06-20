@@ -4,7 +4,24 @@
   "tools": {
     "dotnet-releaser": {
       "version": "0.8.5",
-      "commands": ["dotnet-releaser"]
+      "commands": [
+        "dotnet-releaser"
+      ],
+      "rollForward": false
+    },
+    "dotnet-outdated-tool": {
+      "version": "4.8.1",
+      "commands": [
+        "dotnet-outdated"
+      ],
+      "rollForward": false
+    },
+    "csharpier": {
+      "version": "1.3.0",
+      "commands": [
+        "csharpier"
+      ],
+      "rollForward": false
     }
   }
 }
