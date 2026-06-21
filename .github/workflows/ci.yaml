@@ -33,10 +33,11 @@ jobs:
         shell: bash
         run: |
           dotnet tool restore
+          dotnet restore --use-lock-file
           dotnet dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" dotnet-releaser.toml
 
       - name: Run benchmark
-        run: dotnet run -c Release --project src/FhirParametersGenerator.Benchmark
+        run: dotnet run --no-restore -c Release --project src/FhirParametersGenerator.Benchmark
 
       - name: Store benchmark result
         uses: rhysd/github-action-benchmark@1846227a307d8c0149b960b986d46f8f4c95db0c # v1.20.1
