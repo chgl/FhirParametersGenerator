@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1782067856431,
+  "lastUpdate": 1782067871481,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2310,6 +2310,36 @@ window.BENCHMARK_DATA = {
             "value": 2148635.1026041666,
             "unit": "ns",
             "range": "± 17200.327382695443"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "distinct": true,
+          "id": "1c5a12693046cd2984834776eafd0066ba9a7686",
+          "message": "chore(deps): update github-actions",
+          "timestamp": "2026-06-21T18:49:03Z",
+          "tree_id": "549fc96118b7f455534979057046e0f371408514",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/1c5a12693046cd2984834776eafd0066ba9a7686"
+        },
+        "date": 1782067870760,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2072670.548046875,
+            "unit": "ns",
+            "range": "± 33089.852398117764"
           }
         ]
       }
