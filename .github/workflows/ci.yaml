@@ -3,12 +3,17 @@ on:
   push:
     tags:
       - "v*"
-    branches: [master]
+    branches:
+      - master
     paths-ignore:
       - "docs/**"
       - "README.md"
   pull_request:
-    branches: [master]
+    branches:
+      - master
+  merge_group:
+    types:
+      - checks_requested
 
 permissions:
   contents: read

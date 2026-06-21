@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hl7.Fhir.R4" Version="6.2.0" />
+    <PackageReference Include="Hl7.Fhir.R4" Version="5.13.4" />
     <ProjectReference Include="..\FhirParametersGenerator.Attributes\FhirParametersGenerator.Attributes.csproj" />
   </ItemGroup>
 
