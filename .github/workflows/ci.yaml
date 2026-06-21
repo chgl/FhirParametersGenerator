@@ -33,12 +33,15 @@ jobs:
         shell: bash
         run: |
           dotnet tool restore
-          dotnet restore --use-lock-file
+          dotnet restore --locked-mode
           dotnet dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" dotnet-releaser.toml
 
       - name: Run benchmark
         run: |
           dotnet run --no-restore -c Release --project src/FhirParametersGenerator.Benchmark
+
+      - name: Discard build-time working tree changes
+        run: git checkout -- .
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@52576c92bccf6ac60c8223ec7eb2565637cae9ba # v1.22.1
