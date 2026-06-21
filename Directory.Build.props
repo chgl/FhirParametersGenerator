@@ -37,10 +37,6 @@
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    <!-- Fail restore instead of silently rewriting packages.lock.json when it drifts from what's committed.
-         dotnet-releaser triggers its own internal restores, which don't go through our CLI flags, so this
-         must be set here to apply to every restore in the pipeline. -->
-    <RestoreLockedMode>true</RestoreLockedMode>
   </PropertyGroup>
 
   <ItemGroup>
