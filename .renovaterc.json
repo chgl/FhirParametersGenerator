@@ -1,22 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    "group:allNonMajor",
-    ":disableRateLimiting",
-    "schedule:monthly"
-  ],
-  "packageRules": [
-    {
-      "matchManagers": ["github-actions"],
-      "groupName": "github-actions"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "matchPackageNames": ["slsa-framework/slsa-github-generator"],
-      "pinDigests": false
-    }
-  ],
-  "autoApprove": true,
-  "automerge": true
+  "extends": ["github>chgl/.github//renovate/default"]
 }
