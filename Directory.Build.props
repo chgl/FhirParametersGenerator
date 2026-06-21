@@ -9,7 +9,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
 
-    <!-- https://github.com/dotnet/msbuild/blob/main/documentation/ProjectReference-Protocol.md#setplatform-negotiation -->
+    <!--
+    https://github.com/dotnet/msbuild/blob/main/documentation/ProjectReference-Protocol.md#setplatform-negotiation -->
     <EnableDynamicPlatformResolution>true</EnableDynamicPlatformResolution>
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
 
@@ -18,7 +19,8 @@
 
     <Version>0.6.0</Version>
     <Company>github.com/chgl</Company>
-    <Description>A .NET source generator for mapping model classes to HL7 FHIR® Parameters resources.</Description>
+    <Description>A .NET source generator for mapping model classes to HL7 FHIR® Parameters
+      resources.</Description>
     <Copyright>© chgl. All rights reserved.</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>chgl</Authors>
@@ -32,7 +34,6 @@
 
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols Condition=" '$(DebugType)' != 'embedded' ">true</IncludeSymbols>
-    <!-- <SymbolPackageFormat>snupkg</SymbolPackageFormat> -->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
