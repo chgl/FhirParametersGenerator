@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1714524018349,
+  "lastUpdate": 1782067636767,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2250,6 +2250,36 @@ window.BENCHMARK_DATA = {
             "value": 2425669.2002232145,
             "unit": "ns",
             "range": "± 116771.44373881417"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1559deae70fd9edb597dea6b7398d27701701f59",
+          "message": "chore: upgrade deps and fixed build errors (#121)\n\n* fmt and refactor\n\n* chore: upgrade deps and fixed build errors\n\n* net 10\n\n* bump\n\n* bump\n\n* test\n\n* mtp\n\n* disable grype in favor of trivy\n\n* lockfile\n\n* drop benchmark support\n\n* bump\n\n* lock\n\n* lock\n\n* fmt\n\n* downgrade\n\n---------\n\nCo-authored-by: chgl <5307555+chgl@users.noreply.github.com>",
+          "timestamp": "2026-06-21T20:45:08+02:00",
+          "tree_id": "74f5f029e5c5e7dec3a87646ef4003613d25b762",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/1559deae70fd9edb597dea6b7398d27701701f59"
+        },
+        "date": 1782067636367,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 1935708.0966222426,
+            "unit": "ns",
+            "range": "± 37202.057067820155"
           }
         ]
       }
