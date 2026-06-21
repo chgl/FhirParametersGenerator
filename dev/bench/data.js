@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1782068193420,
+  "lastUpdate": 1782075851850,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2370,6 +2370,36 @@ window.BENCHMARK_DATA = {
             "value": 1831414.056919643,
             "unit": "ns",
             "range": "± 29545.33541881984"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0313caf765278b52a3e4d02a63407d2d374e0a15",
+          "message": "fix: ci lints (#124)\n\n* lint\n\n* ci\n\n* bump\n\n* name\n\n---------\n\nCo-authored-by: chgl <5307555+chgl@users.noreply.github.com>",
+          "timestamp": "2026-06-21T23:01:57+02:00",
+          "tree_id": "b461caeea6fd28fb04d92cee25d4a55ec9260940",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/0313caf765278b52a3e4d02a63407d2d374e0a15"
+        },
+        "date": 1782075851488,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 1529304.7040234376,
+            "unit": "ns",
+            "range": "± 60950.6146974004"
           }
         ]
       }
