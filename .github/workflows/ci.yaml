@@ -35,3 +35,21 @@ jobs:
           dotnet tool restore
           dotnet restore --use-lock-file
           dotnet dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" dotnet-releaser.toml
+
+      - name: Run benchmark
+        run: |
+          dotnet run --no-restore -c Release --project src/FhirParametersGenerator.Benchmark
+
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@52576c92bccf6ac60c8223ec7eb2565637cae9ba # v1.22.1
+        with:
+          name: Benchmark.Net Benchmark
+          tool: "benchmarkdotnet"
+          output-file-path: BenchmarkDotNet.Artifacts/results/Benchmarks-report-full-compressed.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: ${{github.event_name != 'pull_request'}}
+          # Show alert with commit comment on detecting possible performance regression
+          alert-threshold: "200%"
+          comment-on-alert: true
+          fail-on-alert: true
+          alert-comment-cc-users: "@chgl"
