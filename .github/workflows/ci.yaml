@@ -10,7 +10,8 @@ on:
   pull_request:
     branches: [master]
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -56,3 +57,20 @@ jobs:
           comment-on-alert: true
           fail-on-alert: true
           alert-comment-cc-users: "@chgl"
+
+  lint:
+    uses: miracum/.github/.github/workflows/standard-lint.yaml@8bd8986d6b656c71b5570f91b5ad96bf606955b4 # v1.20.7
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      security-events: write
+      actions: read
+    with:
+      enable-validate-gradle-wrapper: false
+      codeql-languages: '["csharp"]'
+      enable-codeql: true
+      enable-verify-base-image-signature: false
+      dotnet-version: "10.0.x"
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
