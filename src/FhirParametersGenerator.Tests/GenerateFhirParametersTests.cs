@@ -15,7 +15,7 @@ public class GenerateFhirParametersTests
     [Fact]
     public void ModelWithStringAndInt_ShouldBeMappedCorrectly()
     {
-        var t = new SimpleNameAndAgeModel { Name = "Hello", Age = 123, };
+        var t = new SimpleNameAndAgeModel { Name = "Hello", Age = 123 };
 
         var asParameters = t.ToFhirParameters();
 
@@ -33,7 +33,7 @@ public class GenerateFhirParametersTests
     [Fact]
     public void PascalCasePropertyNames_ShouldBeMappedToCamelCase()
     {
-        var t = new PascalCasedModel { ALongPascalCaseProperty = "Hello", Id = "123", };
+        var t = new PascalCasedModel { ALongPascalCaseProperty = "Hello", Id = "123" };
 
         var asParameters = t.ToFhirParameters();
 
@@ -57,7 +57,7 @@ public class GenerateFhirParametersTests
     [Fact]
     public void WriteOnlyProperties_ShouldBeIgnored()
     {
-        var m = new ModelWithWriteOnlyProperty { Name = "Hello", WriteOnly = "wo", };
+        var m = new ModelWithWriteOnlyProperty { Name = "Hello", WriteOnly = "wo" };
 
         var asParameters = m.ToFhirParameters();
 

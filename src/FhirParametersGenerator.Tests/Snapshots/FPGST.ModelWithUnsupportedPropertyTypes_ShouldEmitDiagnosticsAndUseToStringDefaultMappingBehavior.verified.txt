@@ -1,14 +1,24 @@
 ﻿{
   Diagnostics: [
     {
-      Id: FHIRPARAMS1,
-      Title: Unsupported property type,
+      Location: /*
+{
+    public DayOfWeek DayOfWeek { get; init; } = DayOfWeek.Friday;
+                     ^^^^^^^^^
+}
+*/
+ : (8,21)-(8,30),
+      Message: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
       Severity: Warning,
       WarningLevel: 1,
-      Location: : (8,21)-(8,30),
-      MessageFormat: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
-      Message: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
-      Category: Design
+      Descriptor: {
+        Id: FHIRPARAMS1,
+        Title: Unsupported property type,
+        MessageFormat: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek to a FHIR representation. Defaulting to FhirString with a value of FhirParametersGenerator.Tests.TestModel.DayOfWeek.ToString().,
+        Category: Design,
+        DefaultSeverity: Warning,
+        IsEnabledByDefault: true
+      }
     }
   ]
 }

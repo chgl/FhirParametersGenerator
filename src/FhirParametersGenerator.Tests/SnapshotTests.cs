@@ -2,7 +2,6 @@ using FhirParametersGenerator.Tests.Helpers;
 
 namespace FhirParametersGenerator.Tests;
 
-[UsesVerify]
 public class FhirParametersGeneratorSnapshotTests
 {
     [Fact]

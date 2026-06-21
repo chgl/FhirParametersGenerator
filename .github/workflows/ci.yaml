@@ -27,19 +27,24 @@ jobs:
       - name: Install .NET
         uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "10.0.x"
 
       - name: Build, Tests, Cover, Pack and Publish (on push tag)
         shell: bash
         run: |
           dotnet tool restore
+          dotnet restore --locked-mode
           dotnet dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" dotnet-releaser.toml
 
       - name: Run benchmark
-        run: dotnet run -c Release --project src/FhirParametersGenerator.Benchmark
+        run: |
+          dotnet run --no-restore -c Release --project src/FhirParametersGenerator.Benchmark
+
+      - name: Discard build-time working tree changes
+        run: git checkout -- .
 
       - name: Store benchmark result
-        uses: rhysd/github-action-benchmark@1846227a307d8c0149b960b986d46f8f4c95db0c # v1.20.1
+        uses: benchmark-action/github-action-benchmark@52576c92bccf6ac60c8223ec7eb2565637cae9ba # v1.22.1
         with:
           name: Benchmark.Net Benchmark
           tool: "benchmarkdotnet"
