@@ -10,7 +10,8 @@ on:
   pull_request:
     branches: [master]
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -18,11 +19,13 @@ jobs:
     permissions:
       # to create releases
       contents: write
+    name: Build, Test, Cover, Pack and Publish
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Install .NET
         uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
@@ -31,10 +34,13 @@ jobs:
 
       - name: Build, Tests, Cover, Pack and Publish (on push tag)
         shell: bash
+        env:
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           dotnet tool restore
           dotnet restore --locked-mode
-          dotnet dotnet-releaser run --nuget-token "${{secrets.NUGET_TOKEN}}" --github-token "${{secrets.GITHUB_TOKEN}}" dotnet-releaser.toml
+          dotnet dotnet-releaser run --nuget-token "${NUGET_TOKEN}" --github-token "${GITHUB_TOKEN}" dotnet-releaser.toml
 
       - name: Run benchmark
         run: |
@@ -56,3 +62,20 @@ jobs:
           comment-on-alert: true
           fail-on-alert: true
           alert-comment-cc-users: "@chgl"
+
+  lint:
+    uses: miracum/.github/.github/workflows/standard-lint.yaml@602a4dd955cee8ab1e7e9c70761b5b4c9d678a95 # v1.21.4
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      security-events: write
+      actions: read
+    with:
+      enable-validate-gradle-wrapper: false
+      codeql-languages: '["csharp"]'
+      enable-codeql: true
+      enable-verify-base-image-signature: false
+      dotnet-version: "10.0.x"
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
