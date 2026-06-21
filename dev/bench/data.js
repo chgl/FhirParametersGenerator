@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1782075851850,
+  "lastUpdate": 1782076661005,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2400,6 +2400,36 @@ window.BENCHMARK_DATA = {
             "value": 1529304.7040234376,
             "unit": "ns",
             "range": "± 60950.6146974004"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c8e021a737b05837e4e1bc7172cb9fd1626b323f",
+          "message": "chore: downgraded fhir package (#125)\n\n* bumped\n\n* ci\n\n* fmt\n\n---------\n\nCo-authored-by: chgl <5307555+chgl@users.noreply.github.com>",
+          "timestamp": "2026-06-21T23:15:53+02:00",
+          "tree_id": "749067f6c2de8a68e66ea8bee59663b18cd7415a",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/c8e021a737b05837e4e1bc7172cb9fd1626b323f"
+        },
+        "date": 1782076660799,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2075704.6240808824,
+            "unit": "ns",
+            "range": "± 66720.36807860926"
           }
         ]
       }
