@@ -27,8 +27,19 @@ public static class TestModelFhirParametersExtensions
     public static Parameters ToFhirParameters(this FhirParametersGenerator.Tests.TestModel model)
     {
         var parameters = new Parameters();
-        // DayOfWeek (DayOfWeek) FhirParametersGenerator.Tests.TestModel.DayOfWeek
-        parameters.Add("dayOfWeek", new FhirString(model.DayOfWeek?.ToString()));
+        // System.Collections.Generic.List<FhirParametersGenerator.Tests.RuleConfig> (System.Collections.Generic.List<FhirParametersGenerator.Tests.RuleConfig>) FhirParametersGenerator.Tests.TestModel.Rules
+        if (model.Rules != null)
+        {
+            foreach (var item in model.Rules)
+            {
+                var rulesComponent = new Parameters.ParameterComponent { Name = "rules" };
+                // string (string) FhirParametersGenerator.Tests.RuleConfig.Path
+                rulesComponent.Part.Add(new Parameters.ParameterComponent { Name = "path", Value = new FhirString(item.Path) });
+                // string (string) FhirParametersGenerator.Tests.RuleConfig.Method
+                rulesComponent.Part.Add(new Parameters.ParameterComponent { Name = "method", Value = new FhirString(item.Method) });
+                parameters.Parameter.Add(rulesComponent);
+            }
+        }
         return parameters;
 
     }
