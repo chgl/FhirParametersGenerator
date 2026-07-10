@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FhirOperationDefinitionGen.Tests/FhirOperationDefinitionGen.Tests.csproj" />
+    <Project Path="src/FhirOperationDefinitionGen/FhirOperationDefinitionGen.csproj" />
+    <Project Path="src/FhirParametersGenerator.Attributes/FhirParametersGenerator.Attributes.csproj" />
+    <Project Path="src/FhirParametersGenerator.Benchmark/FhirParametersGenerator.Benchmark.csproj" />
+    <Project Path="src/FhirParametersGenerator.Demo/FhirParametersGenerator.Demo.csproj" />
+    <Project Path="src/FhirParametersGenerator.Tests/FhirParametersGenerator.Tests.csproj" />
+    <Project Path="src/FhirParametersGenerator/FhirParametersGenerator.csproj" />
+  </Folder>
+</Solution>

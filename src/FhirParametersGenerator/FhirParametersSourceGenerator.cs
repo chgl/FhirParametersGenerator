@@ -59,16 +59,6 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
             return true;
         }
 
-        // if (node is StructDeclarationSyntax sds && sds.AttributeLists.Count > 0)
-        // {
-        //     return true;
-        // }
-
-        // if (node is RecordDeclarationSyntax rds && rds.AttributeLists.Count > 0)
-        // {
-        //     return true;
-        // }
-
         return false;
     }
 
@@ -178,10 +168,6 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
                 continue;
             }
 
-            // Get the full type name of the class
-            // or OuterClass<T>.InnerClass if it was nested in a generic type (for example)
-            string className = classSymbol.ToString();
-
             classesToGenerate.Add(classSymbol);
         }
 
@@ -253,72 +239,425 @@ public static class {classSymbol.Name}FhirParametersExtensions
         sourceBuilder.Append(indent);
         sourceBuilder.AppendLine("var parameters = new Parameters();");
 
-        // TODO: for each property/field (maybe unless annotated as ignored) call Parameters::Add(field.inCamelCase, new FhirString(field.Value) or if type==int, new FhirInt...)
-        // Get all the members in the class
-        var classMembers = classSymbol.GetMembers();
-
-        // Get all the fields from the class
-        foreach (var member in classMembers)
+        var visitedTypes = new HashSet<string>(StringComparer.Ordinal)
         {
-            // only check properties that are not write-only and can be referenced by their name - because the
-            // latter is exactly what we plan on doing
-            // we could also check for member-annotations here that exclude a property
-            if (
-                member is IPropertySymbol
-                {
-                    IsWriteOnly: false,
-                    CanBeReferencedByName: true
-                } property
-            )
-            {
-                sourceBuilder.Append(indent);
-                sourceBuilder.AppendLine(
-                    $"// {property.Type} ({property.Type.ToDisplayString()}) {property.ToDisplayString()}"
-                );
+            classSymbol.ToDisplayString()
+        };
 
-                var camelCasedPropertyName = ConvertNameToCamelCase(property.Name);
-
-                var propertyType = property.Type;
-
-                // could be improved by using another ITypeSymbol as the searched for type which is statically
-                // fetched from the compilation context via: compilation.GetTypeByMetadataName("Hl7.Fhir.Model.Base");
-                if (propertyType.InheritsFrom("Hl7.Fhir.Model.Base"))
-                {
-                    sourceBuilder.Append(indent);
-                    sourceBuilder.AppendLine(
-                        $@"parameters.Add(""{camelCasedPropertyName}"", model.{property.Name});"
-                    );
-                }
-                else
-                {
-                    var isKnownType = ClrTypeToFhirType.TryGetValue(
-                        property.Type.Name,
-                        out var fhirTypeName
-                    );
-                    if (isKnownType)
-                    {
-                        sourceBuilder.Append(indent);
-                        sourceBuilder.AppendLine(
-                            $@"parameters.Add(""{camelCasedPropertyName}"", new {fhirTypeName}(model.{property.Name}));"
-                        );
-                    }
-                    else
-                    {
-                        ReportUnsupportedPropertyTypeDiagnostic(property, context);
-
-                        sourceBuilder.Append(indent);
-                        sourceBuilder.AppendLine(
-                            $@"parameters.Add(""{camelCasedPropertyName}"", new FhirString(model.{property.Name}.ToString()));"
-                        );
-                    }
-                }
-            }
+        foreach (var property in GetAllReadableProperties(classSymbol))
+        {
+            sourceBuilder.Append(indent);
+            sourceBuilder.AppendLine(
+                $"// {property.Type} ({property.Type.ToDisplayString()}) {property.ToDisplayString()}"
+            );
+            GenerateTopLevelPropertyCode(property, "model", indent, sourceBuilder, context, visitedTypes);
         }
 
         sourceBuilder.Append(indent);
         sourceBuilder.AppendLine("return parameters;");
 
         return sourceBuilder.ToString();
+    }
+
+    static void GenerateTopLevelPropertyCode(
+        IPropertySymbol property,
+        string modelPath,
+        string indent,
+        StringBuilder sb,
+        SourceProductionContext context,
+        HashSet<string> visitedTypes
+    )
+    {
+        var camelCasedName = ConvertNameToCamelCase(property.Name);
+        var propAccess = $"{modelPath}.{property.Name}";
+        var propType = UnwrapNullable(property.Type);
+
+        if (propType.InheritsFrom("Hl7.Fhir.Model.Base"))
+        {
+            sb.Append(indent);
+            sb.AppendLine($@"parameters.Add(""{camelCasedName}"", {propAccess});");
+            return;
+        }
+
+        var fhirExpr = GetFhirValueExpression(propType, propAccess);
+        if (fhirExpr != null)
+        {
+            sb.Append(indent);
+            sb.AppendLine($@"parameters.Add(""{camelCasedName}"", {fhirExpr});");
+            return;
+        }
+
+        if (TryGetEnumerableElementType(propType, out var elementType))
+        {
+            var itemExpr = GetFhirValueExpression(elementType, "item");
+            if (itemExpr != null)
+            {
+                sb.Append(indent);
+                sb.AppendLine($"if ({propAccess} != null)");
+                sb.Append(indent);
+                sb.AppendLine("{");
+                var inner = indent + "    ";
+                sb.Append(inner);
+                sb.AppendLine($"foreach (var item in {propAccess})");
+                sb.Append(inner);
+                sb.AppendLine("{");
+                sb.Append(inner + "    ");
+                sb.AppendLine($@"parameters.Add(""{camelCasedName}"", {itemExpr});");
+                sb.Append(inner);
+                sb.AppendLine("}");
+                sb.Append(indent);
+                sb.AppendLine("}");
+            }
+            else if (
+                IsUserDefinedClass(elementType)
+                && elementType is INamedTypeSymbol elementClassType
+                && !visitedTypes.Contains(elementClassType.ToDisplayString())
+            )
+            {
+                visitedTypes.Add(elementClassType.ToDisplayString());
+                var compVar = $"{camelCasedName}Component";
+                sb.Append(indent);
+                sb.AppendLine($"if ({propAccess} != null)");
+                sb.Append(indent);
+                sb.AppendLine("{");
+                var inner = indent + "    ";
+                sb.Append(inner);
+                sb.AppendLine($"foreach (var item in {propAccess})");
+                sb.Append(inner);
+                sb.AppendLine("{");
+                var innerInner = inner + "    ";
+                sb.Append(innerInner);
+                sb.AppendLine(
+                    $@"var {compVar} = new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"" }};"
+                );
+                GenerateNestedParts(
+                    elementClassType,
+                    "item",
+                    compVar,
+                    innerInner,
+                    sb,
+                    context,
+                    visitedTypes
+                );
+                sb.Append(innerInner);
+                sb.AppendLine($"parameters.Parameter.Add({compVar});");
+                sb.Append(inner);
+                sb.AppendLine("}");
+                sb.Append(indent);
+                sb.AppendLine("}");
+                visitedTypes.Remove(elementClassType.ToDisplayString());
+            }
+            else
+            {
+                ReportUnsupportedPropertyTypeDiagnostic(property, context);
+                sb.Append(indent);
+                sb.AppendLine(
+                    $@"parameters.Add(""{camelCasedName}"", new FhirString({propAccess}?.ToString()));"
+                );
+            }
+            return;
+        }
+
+        if (IsUserDefinedClass(propType) && propType is INamedTypeSymbol nestedType)
+        {
+            var fullName = nestedType.ToDisplayString();
+            if (!visitedTypes.Contains(fullName))
+            {
+                visitedTypes.Add(fullName);
+                var compVar =
+                    $"{char.ToLowerInvariant(property.Name[0])}{property.Name.Substring(1)}Component";
+                sb.Append(indent);
+                sb.AppendLine($"if ({propAccess} != null)");
+                sb.Append(indent);
+                sb.AppendLine("{");
+                var inner = indent + "    ";
+                sb.Append(inner);
+                sb.AppendLine(
+                    $@"var {compVar} = new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"" }};"
+                );
+                GenerateNestedParts(nestedType, propAccess, compVar, inner, sb, context, visitedTypes);
+                sb.Append(inner);
+                sb.AppendLine($"parameters.Parameter.Add({compVar});");
+                sb.Append(indent);
+                sb.AppendLine("}");
+                visitedTypes.Remove(fullName);
+            }
+            return;
+        }
+
+        ReportUnsupportedPropertyTypeDiagnostic(property, context);
+        sb.Append(indent);
+        sb.AppendLine(
+            $@"parameters.Add(""{camelCasedName}"", new FhirString({propAccess}?.ToString()));"
+        );
+    }
+
+    static void GenerateNestedParts(
+        INamedTypeSymbol classSymbol,
+        string modelPath,
+        string compVar,
+        string indent,
+        StringBuilder sb,
+        SourceProductionContext context,
+        HashSet<string> visitedTypes
+    )
+    {
+        foreach (var property in GetAllReadableProperties(classSymbol))
+        {
+            sb.Append(indent);
+            sb.AppendLine(
+                $"// {property.Type} ({property.Type.ToDisplayString()}) {property.ToDisplayString()}"
+            );
+
+            var camelCasedName = ConvertNameToCamelCase(property.Name);
+            var propAccess = $"{modelPath}.{property.Name}";
+            var propType = UnwrapNullable(property.Type);
+
+            if (propType.InheritsFrom("Hl7.Fhir.Model.Base"))
+            {
+                if (propType.InheritsFrom("Hl7.Fhir.Model.Resource"))
+                {
+                    sb.Append(indent);
+                    sb.AppendLine(
+                        $@"if ({propAccess} != null) {compVar}.Part.Add(new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"", Resource = {propAccess} }});"
+                    );
+                }
+                else
+                {
+                    sb.Append(indent);
+                    sb.AppendLine(
+                        $@"if ({propAccess} != null) {compVar}.Part.Add(new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"", Value = {propAccess} }});"
+                    );
+                }
+                continue;
+            }
+
+            var fhirExpr = GetFhirValueExpression(propType, propAccess);
+            if (fhirExpr != null)
+            {
+                sb.Append(indent);
+                sb.AppendLine(
+                    $@"{compVar}.Part.Add(new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"", Value = {fhirExpr} }});"
+                );
+                continue;
+            }
+
+            if (TryGetEnumerableElementType(propType, out var elementType))
+            {
+                var itemExpr = GetFhirValueExpression(elementType, "item");
+                if (itemExpr != null)
+                {
+                    sb.Append(indent);
+                    sb.AppendLine($"if ({propAccess} != null)");
+                    sb.Append(indent);
+                    sb.AppendLine("{");
+                    var inner = indent + "    ";
+                    sb.Append(inner);
+                    sb.AppendLine($"foreach (var item in {propAccess})");
+                    sb.Append(inner);
+                    sb.AppendLine("{");
+                    sb.Append(inner + "    ");
+                    sb.AppendLine(
+                        $@"{compVar}.Part.Add(new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"", Value = {itemExpr} }});"
+                    );
+                    sb.Append(inner);
+                    sb.AppendLine("}");
+                    sb.Append(indent);
+                    sb.AppendLine("}");
+                }
+                else if (
+                    IsUserDefinedClass(elementType)
+                    && elementType is INamedTypeSymbol elementClassType
+                    && !visitedTypes.Contains(elementClassType.ToDisplayString())
+                )
+                {
+                    visitedTypes.Add(elementClassType.ToDisplayString());
+                    var innerCompVar = $"{camelCasedName}Component";
+                    sb.Append(indent);
+                    sb.AppendLine($"if ({propAccess} != null)");
+                    sb.Append(indent);
+                    sb.AppendLine("{");
+                    var inner = indent + "    ";
+                    sb.Append(inner);
+                    sb.AppendLine($"foreach (var item in {propAccess})");
+                    sb.Append(inner);
+                    sb.AppendLine("{");
+                    var innerInner = inner + "    ";
+                    sb.Append(innerInner);
+                    sb.AppendLine(
+                        $@"var {innerCompVar} = new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"" }};"
+                    );
+                    GenerateNestedParts(
+                        elementClassType,
+                        "item",
+                        innerCompVar,
+                        innerInner,
+                        sb,
+                        context,
+                        visitedTypes
+                    );
+                    sb.Append(innerInner);
+                    sb.AppendLine($"{compVar}.Part.Add({innerCompVar});");
+                    sb.Append(inner);
+                    sb.AppendLine("}");
+                    sb.Append(indent);
+                    sb.AppendLine("}");
+                    visitedTypes.Remove(elementClassType.ToDisplayString());
+                }
+                else
+                {
+                    ReportUnsupportedPropertyTypeDiagnostic(property, context);
+                    sb.Append(indent);
+                    sb.AppendLine(
+                        $@"if ({propAccess} != null) {compVar}.Part.Add(new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"", Value = new FhirString({propAccess}.ToString()) }});"
+                    );
+                }
+                continue;
+            }
+
+            if (IsUserDefinedClass(propType) && propType is INamedTypeSymbol nestedType)
+            {
+                var fullName = nestedType.ToDisplayString();
+                if (!visitedTypes.Contains(fullName))
+                {
+                    visitedTypes.Add(fullName);
+                    var innerCompVar =
+                        $"{char.ToLowerInvariant(property.Name[0])}{property.Name.Substring(1)}Component";
+                    sb.Append(indent);
+                    sb.AppendLine($"if ({propAccess} != null)");
+                    sb.Append(indent);
+                    sb.AppendLine("{");
+                    var inner = indent + "    ";
+                    sb.Append(inner);
+                    sb.AppendLine(
+                        $@"var {innerCompVar} = new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"" }};"
+                    );
+                    GenerateNestedParts(
+                        nestedType,
+                        propAccess,
+                        innerCompVar,
+                        inner,
+                        sb,
+                        context,
+                        visitedTypes
+                    );
+                    sb.Append(inner);
+                    sb.AppendLine($"{compVar}.Part.Add({innerCompVar});");
+                    sb.Append(indent);
+                    sb.AppendLine("}");
+                    visitedTypes.Remove(fullName);
+                }
+                continue;
+            }
+
+            ReportUnsupportedPropertyTypeDiagnostic(property, context);
+            sb.Append(indent);
+            sb.AppendLine(
+                $@"if ({propAccess} != null) {compVar}.Part.Add(new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"", Value = new FhirString({propAccess}.ToString()) }});"
+            );
+        }
+    }
+
+    // Returns a FHIR constructor expression for the given CLR type and value expression,
+    // or null if the type requires a different mapping strategy.
+    static string? GetFhirValueExpression(ITypeSymbol type, string valueExpr)
+    {
+        if (ClrTypeToFhirType.TryGetValue(type.Name, out var fhirTypeName))
+            return $"new {fhirTypeName}({valueExpr})";
+
+        if (type.TypeKind == TypeKind.Enum)
+            return $"new FhirString({valueExpr}.ToString())";
+
+        return null;
+    }
+
+    // Unwraps Nullable<T> to T so we can inspect the underlying type.
+    static ITypeSymbol UnwrapNullable(ITypeSymbol type)
+    {
+        if (
+            type is INamedTypeSymbol namedType
+            && namedType.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T
+        )
+            return namedType.TypeArguments[0];
+        return type;
+    }
+
+    // Returns true when the type is an IEnumerable<T> (but not string), setting elementType to T.
+    static bool TryGetEnumerableElementType(ITypeSymbol type, out ITypeSymbol elementType)
+    {
+        elementType = null!;
+
+        // string implements IEnumerable<char> but we don't want to treat it as a char collection
+        if (type.SpecialType == SpecialType.System_String)
+            return false;
+
+        if (type is IArrayTypeSymbol arrayType)
+        {
+            elementType = arrayType.ElementType;
+            return true;
+        }
+
+        if (type is INamedTypeSymbol namedType && namedType.IsGenericType)
+        {
+            // IEnumerable<T> itself
+            if (
+                namedType.OriginalDefinition.SpecialType
+                == SpecialType.System_Collections_Generic_IEnumerable_T
+            )
+            {
+                elementType = namedType.TypeArguments[0];
+                return true;
+            }
+
+            // Types that implement IEnumerable<T> (List<T>, HashSet<T>, etc.)
+            var enumerableIface = namedType.AllInterfaces.FirstOrDefault(
+                i =>
+                    i.OriginalDefinition.SpecialType
+                    == SpecialType.System_Collections_Generic_IEnumerable_T
+            );
+            if (enumerableIface != null)
+            {
+                elementType = enumerableIface.TypeArguments[0];
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Returns true for non-generic, non-special classes that should be recursively mapped as
+    // nested ParameterComponents. Excludes string, object, and generic collection types.
+    static bool IsUserDefinedClass(ITypeSymbol type) =>
+        type.TypeKind == TypeKind.Class
+        && type.SpecialType == SpecialType.None
+        && type is INamedTypeSymbol { IsGenericType: false };
+
+    // Returns all readable, named properties declared on the class and its base types,
+    // stopping before System.Object.
+    static IEnumerable<IPropertySymbol> GetAllReadableProperties(INamedTypeSymbol classSymbol)
+    {
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        INamedTypeSymbol? current = classSymbol;
+        while (current != null && current.SpecialType != SpecialType.System_Object)
+        {
+            foreach (var member in current.GetMembers())
+            {
+                if (
+                    member
+                    is IPropertySymbol
+                    {
+                        IsWriteOnly: false,
+                        CanBeReferencedByName: true
+                    } prop
+                )
+                {
+                    // derived class properties shadow base class properties of the same name
+                    if (seen.Add(prop.Name))
+                        yield return prop;
+                }
+            }
+            current = current.BaseType;
+        }
     }
 
     static void ReportUnsupportedPropertyTypeDiagnostic(
@@ -351,25 +690,9 @@ public static class {classSymbol.Name}FhirParametersExtensions
             return name;
         }
 
-#if BUILDING_INBOX_LIBRARY
-        return string.Create(
-            name.Length,
-            name,
-            (chars, name) =>
-            {
-                name
-#if !NET6_0_OR_GREATER
-                .AsSpan()
-#endif
-                .CopyTo(chars);
-                FixCasing(chars);
-            }
-        );
-#else
         char[] chars = name.ToCharArray();
         FixCasing(chars);
         return new string(chars);
-#endif
     }
 
     static void FixCasing(Span<char> chars)

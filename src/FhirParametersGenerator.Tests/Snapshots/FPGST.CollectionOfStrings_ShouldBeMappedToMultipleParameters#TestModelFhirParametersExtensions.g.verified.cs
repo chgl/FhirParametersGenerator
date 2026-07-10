@@ -27,8 +27,14 @@ public static class TestModelFhirParametersExtensions
     public static Parameters ToFhirParameters(this FhirParametersGenerator.Tests.TestModel model)
     {
         var parameters = new Parameters();
-        // DayOfWeek (DayOfWeek) FhirParametersGenerator.Tests.TestModel.DayOfWeek
-        parameters.Add("dayOfWeek", new FhirString(model.DayOfWeek?.ToString()));
+        // System.Collections.Generic.List<string> (System.Collections.Generic.List<string>) FhirParametersGenerator.Tests.TestModel.Tags
+        if (model.Tags != null)
+        {
+            foreach (var item in model.Tags)
+            {
+                parameters.Add("tags", new FhirString(item));
+            }
+        }
         return parameters;
 
     }
