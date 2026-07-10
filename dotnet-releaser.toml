@@ -1,6 +1,6 @@
 # configuration file for dotnet-releaser
 [msbuild]
-project = "FhirParametersGenerator.sln"
+project = "FhirParametersGenerator.slnx"
 
 [github]
 user = "chgl"
