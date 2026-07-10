@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783258241878,
+  "lastUpdate": 1783690606846,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2490,6 +2490,36 @@ window.BENCHMARK_DATA = {
             "value": 2021229.7329963236,
             "unit": "ns",
             "range": "± 40223.453568708435"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1ee581cff4bf15df55d2944f971867564e5cf080",
+          "message": "feat: support nested, complex classes (#132)\n\n* feat: support nested, complex classes\n\n* slnx\n\n---------\n\nCo-authored-by: chgl <5307555+chgl@users.noreply.github.com>",
+          "timestamp": "2026-07-10T15:35:06+02:00",
+          "tree_id": "d6eb72c8cdf7c5b37f6b9a1d9374850650f6298b",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/1ee581cff4bf15df55d2944f971867564e5cf080"
+        },
+        "date": 1783690606644,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2188079.2756347656,
+            "unit": "ns",
+            "range": "± 41178.57778604795"
           }
         ]
       }
