@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783978472658,
+  "lastUpdate": 1784042428170,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2580,6 +2580,36 @@ window.BENCHMARK_DATA = {
             "value": 2036660.77109375,
             "unit": "ns",
             "range": "± 44327.90154783569"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "c44afdbb913c312a401fc517d1435f589f3ab09e",
+          "message": "chore(deps): update github-actions (#130)\n\n* chore(deps): update github-actions\n\n* fix: add GITHUB_TOKEN to zizmor env variables in MegaLinter config\n\n---------\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>",
+          "timestamp": "2026-07-14T17:18:41+02:00",
+          "tree_id": "668bde6604560c54229a342415252a9aff30ce45",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/c44afdbb913c312a401fc517d1435f589f3ab09e"
+        },
+        "date": 1784042427950,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2310824.772986779,
+            "unit": "ns",
+            "range": "± 17811.772616039605"
           }
         ]
       }
