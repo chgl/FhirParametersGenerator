@@ -86,7 +86,7 @@ public class GenerateFhirParametersTests
         var m = new ModelWithNested
         {
             Name = "test",
-            Data = new NestedData { Key = "mykey", Flag = true }
+            Data = new NestedData { Key = "mykey", Flag = true },
         };
 
         var parameters = m.ToFhirParameters();
@@ -119,7 +119,10 @@ public class GenerateFhirParametersTests
     [Fact]
     public void ListOfStrings_ShouldBeMappedToMultipleParameters()
     {
-        var m = new ModelWithStringList { Tags = new List<string> { "tag1", "tag2", "tag3" } };
+        var m = new ModelWithStringList
+        {
+            Tags = new List<string> { "tag1", "tag2", "tag3" },
+        };
 
         var parameters = m.ToFhirParameters();
 
@@ -162,7 +165,7 @@ public class GenerateFhirParametersTests
             {
                 new() { Path = "Patient.name", Method = "redact" },
                 new() { Path = "Patient.birthDate", Method = "dateShift" },
-            }
+            },
         };
 
         var parameters = m.ToFhirParameters();
@@ -170,12 +173,18 @@ public class GenerateFhirParametersTests
         parameters.Parameter.Where(p => p.Name == "rules").Should().HaveCount(2);
 
         var first = parameters.Parameter.First(p => p.Name == "rules");
-        ((FhirString)first.Part.First(p => p.Name == "path").Value).Value.Should().Be("Patient.name");
+        ((FhirString)first.Part.First(p => p.Name == "path").Value)
+            .Value.Should()
+            .Be("Patient.name");
         ((FhirString)first.Part.First(p => p.Name == "method").Value).Value.Should().Be("redact");
 
         var second = parameters.Parameter.Last(p => p.Name == "rules");
-        ((FhirString)second.Part.First(p => p.Name == "path").Value).Value.Should().Be("Patient.birthDate");
-        ((FhirString)second.Part.First(p => p.Name == "method").Value).Value.Should().Be("dateShift");
+        ((FhirString)second.Part.First(p => p.Name == "path").Value)
+            .Value.Should()
+            .Be("Patient.birthDate");
+        ((FhirString)second.Part.First(p => p.Name == "method").Value)
+            .Value.Should()
+            .Be("dateShift");
     }
 
     [Fact]

@@ -46,7 +46,21 @@ var nested = new AnonymizerStyleConfig
         DateShiftKey = "my-secret-key",
         CryptoHashKey = "hash-key",
         EnablePartialDatesForRedact = true,
-        RestrictedAreas = new List<string> { "036", "692", "878", "059", "790", "879", "063", "821", "884", "102", "823", "890" },
+        RestrictedAreas = new List<string>
+        {
+            "036",
+            "692",
+            "878",
+            "059",
+            "790",
+            "879",
+            "063",
+            "821",
+            "884",
+            "102",
+            "823",
+            "890",
+        },
     },
 };
 
