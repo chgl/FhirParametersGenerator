@@ -32,6 +32,8 @@ jobs:
     permissions:
       # to upload nupkgs as release assets
       contents: write
+      # to request the OIDC token used for NuGet Trusted Publishing
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -53,16 +55,23 @@ jobs:
       - name: Pack
         run: dotnet pack --no-restore -c Release -o artifacts
 
+      - name: NuGet login (OIDC -> temporary API key)
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        id: nuget-login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Push to NuGet
         env:
-          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
         run: |
           dotnet nuget push "artifacts/*.nupkg" \
-            --api-key "${NUGET_TOKEN}" \
+            --api-key "${NUGET_API_KEY}" \
             --source https://api.nuget.org/v3/index.json \
             --skip-duplicate
 
       - name: Upload release assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload "${{ needs.release-please.outputs.tag_name }}" artifacts/*.nupkg
+          TAG_NAME: ${{ needs.release-please.outputs.tag_name }}
+        run: gh release upload "$TAG_NAME" artifacts/*.nupkg
