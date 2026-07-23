@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1784845504421,
+  "lastUpdate": 1784845547911,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2730,6 +2730,36 @@ window.BENCHMARK_DATA = {
             "value": 2296901.310677083,
             "unit": "ns",
             "range": "± 31437.223407276542"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e35c8c3d5b3bf570ef3ab64c06e2c0695344905c",
+          "message": "chore(deps): update actions/checkout action to v7.0.1 (#137)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2026-07-24T00:23:30+02:00",
+          "tree_id": "0d1ed4c829da043a896287e17dfd6756b3607d24",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/e35c8c3d5b3bf570ef3ab64c06e2c0695344905c"
+        },
+        "date": 1784845547213,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2477833.024334882,
+            "unit": "ns",
+            "range": "± 82033.41376508815"
           }
         ]
       }
