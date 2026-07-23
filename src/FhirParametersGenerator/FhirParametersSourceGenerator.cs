@@ -241,7 +241,7 @@ public static class {classSymbol.Name}FhirParametersExtensions
 
         var visitedTypes = new HashSet<string>(StringComparer.Ordinal)
         {
-            classSymbol.ToDisplayString()
+            classSymbol.ToDisplayString(),
         };
 
         foreach (var property in GetAllReadableProperties(classSymbol))
@@ -250,7 +250,14 @@ public static class {classSymbol.Name}FhirParametersExtensions
             sourceBuilder.AppendLine(
                 $"// {property.Type} ({property.Type.ToDisplayString()}) {property.ToDisplayString()}"
             );
-            GenerateTopLevelPropertyCode(property, "model", indent, sourceBuilder, context, visitedTypes);
+            GenerateTopLevelPropertyCode(
+                property,
+                "model",
+                indent,
+                sourceBuilder,
+                context,
+                visitedTypes
+            );
         }
 
         sourceBuilder.Append(indent);
@@ -375,7 +382,15 @@ public static class {classSymbol.Name}FhirParametersExtensions
                 sb.AppendLine(
                     $@"var {compVar} = new Parameters.ParameterComponent {{ Name = ""{camelCasedName}"" }};"
                 );
-                GenerateNestedParts(nestedType, propAccess, compVar, inner, sb, context, visitedTypes);
+                GenerateNestedParts(
+                    nestedType,
+                    propAccess,
+                    compVar,
+                    inner,
+                    sb,
+                    context,
+                    visitedTypes
+                );
                 sb.Append(inner);
                 sb.AppendLine($"parameters.Parameter.Add({compVar});");
                 sb.Append(indent);
@@ -610,10 +625,9 @@ public static class {classSymbol.Name}FhirParametersExtensions
             }
 
             // Types that implement IEnumerable<T> (List<T>, HashSet<T>, etc.)
-            var enumerableIface = namedType.AllInterfaces.FirstOrDefault(
-                i =>
-                    i.OriginalDefinition.SpecialType
-                    == SpecialType.System_Collections_Generic_IEnumerable_T
+            var enumerableIface = namedType.AllInterfaces.FirstOrDefault(i =>
+                i.OriginalDefinition.SpecialType
+                == SpecialType.System_Collections_Generic_IEnumerable_T
             );
             if (enumerableIface != null)
             {
@@ -643,8 +657,7 @@ public static class {classSymbol.Name}FhirParametersExtensions
             foreach (var member in current.GetMembers())
             {
                 if (
-                    member
-                    is IPropertySymbol
+                    member is IPropertySymbol
                     {
                         IsWriteOnly: false,
                         CanBeReferencedByName: true

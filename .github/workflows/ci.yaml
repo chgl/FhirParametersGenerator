@@ -1,8 +1,6 @@
 name: ci
 on:
   push:
-    tags:
-      - "v*"
     branches:
       - master
     paths-ignore:
@@ -22,9 +20,9 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     permissions:
-      # to create releases
+      # to store benchmark results on the gh-pages branch
       contents: write
-    name: Build, Test, Cover, Pack and Publish
+    name: Build, Test and Pack
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -37,15 +35,14 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
-      - name: Build, Tests, Cover, Pack and Publish (on push tag)
-        shell: bash
-        env:
-          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          dotnet tool restore
-          dotnet restore --locked-mode
-          dotnet dotnet-releaser run --nuget-token "${NUGET_TOKEN}" --github-token "${GITHUB_TOKEN}" dotnet-releaser.toml
+      - name: Restore
+        run: dotnet restore --locked-mode
+
+      - name: Build and test
+        run: dotnet test --no-restore -c Release
+
+      - name: Pack
+        run: dotnet pack --no-restore -c Release -o artifacts
 
       - name: Run benchmark
         run: |

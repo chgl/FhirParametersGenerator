@@ -2,25 +2,14 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "dotnet-releaser": {
-      "version": "0.24.0",
-      "commands": [
-        "dotnet-releaser"
-      ],
-      "rollForward": false
-    },
     "dotnet-outdated-tool": {
       "version": "4.8.1",
-      "commands": [
-        "dotnet-outdated"
-      ],
+      "commands": ["dotnet-outdated"],
       "rollForward": false
     },
     "csharpier": {
       "version": "1.3.0",
-      "commands": [
-        "csharpier"
-      ],
+      "commands": ["csharpier"],
       "rollForward": false
     }
   }
