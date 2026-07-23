@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1784846742277,
+  "lastUpdate": 1784846979581,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2790,6 +2790,36 @@ window.BENCHMARK_DATA = {
             "value": 2172495.049609375,
             "unit": "ns",
             "range": "± 25427.427621694682"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "distinct": true,
+          "id": "c57f951cbe58768602df9c3d76cdebf59eb347ab",
+          "message": "chore: temporarily disable NuGet publishing for FhirOperationDefinitionGen\n\nThe nuget.org API key used in CI isn't scoped to this package id, so\npublishing has never succeeded. Disabling packing for now while we\ndecide whether to fix the key scope or fold this generator into the\nmain FhirParametersGenerator package.",
+          "timestamp": "2026-07-24T00:41:05+02:00",
+          "tree_id": "7f931b0fd088cc3058aa482b730f726d2a53bbda",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/c57f951cbe58768602df9c3d76cdebf59eb347ab"
+        },
+        "date": 1784846979347,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2267726.228298611,
+            "unit": "ns",
+            "range": "± 73512.42696765938"
           }
         ]
       }
