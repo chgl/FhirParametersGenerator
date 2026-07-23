@@ -16,7 +16,7 @@
     />
     <PackageReference
       Include="Hl7.Fhir.R4"
-      Version="5.13.4"
+      Version="6.3.0"
       PrivateAssets="all"
       GeneratePathProperty="true"
     />
