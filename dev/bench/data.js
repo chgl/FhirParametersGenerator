@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785269886834,
+  "lastUpdate": 1785269904157,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2910,6 +2910,36 @@ window.BENCHMARK_DATA = {
             "value": 2252572.8674665177,
             "unit": "ns",
             "range": "± 24885.446729737956"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f784faa15fb7903da750165f978e90c60346add1",
+          "message": "chore(deps): lock file maintenance (#141)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2026-07-28T22:17:13+02:00",
+          "tree_id": "53d29516bd072922e60bb275acc2b57683a62ad0",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/f784faa15fb7903da750165f978e90c60346add1"
+        },
+        "date": 1785269903427,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2319481.0096153845,
+            "unit": "ns",
+            "range": "± 25428.772099499223"
           }
         ]
       }
