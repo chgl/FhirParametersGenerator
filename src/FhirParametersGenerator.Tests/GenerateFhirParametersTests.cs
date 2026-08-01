@@ -24,6 +24,17 @@ public class GenerateFhirParametersTests
         asParameters.GetSingleValue<FhirDecimal>("age").Value.Should().Be(t.Age);
     }
 
+    [Fact]
+    public void ModelWithStringAndInt_ShouldRoundTripFromParameters()
+    {
+        var t = new SimpleNameAndAgeModel { Name = "Hello", Age = 123 };
+
+        var roundTripped = t.ToFhirParameters().ToSimpleNameAndAgeModel();
+
+        roundTripped.Name.Should().Be(t.Name);
+        roundTripped.Age.Should().Be(t.Age);
+    }
+
     [GenerateFhirParameters]
     public class PascalCasedModel
     {
@@ -43,6 +54,17 @@ public class GenerateFhirParametersTests
             .Value.Should()
             .Be(t.ALongPascalCaseProperty);
         asParameters.GetSingleValue<FhirString>("id").Value.Should().Be(t.Id);
+    }
+
+    [Fact]
+    public void PascalCasePropertyNames_ShouldRoundTripFromParameters()
+    {
+        var t = new PascalCasedModel { ALongPascalCaseProperty = "Hello", Id = "123" };
+
+        var roundTripped = t.ToFhirParameters().ToPascalCasedModel();
+
+        roundTripped.ALongPascalCaseProperty.Should().Be(t.ALongPascalCaseProperty);
+        roundTripped.Id.Should().Be(t.Id);
     }
 
     [GenerateFhirParameters]
@@ -110,6 +132,33 @@ public class GenerateFhirParametersTests
         parameters.Parameter.Should().NotContain(p => p.Name == "data");
     }
 
+    [Fact]
+    public void NestedComplexType_ShouldRoundTripFromParameters()
+    {
+        var m = new ModelWithNested
+        {
+            Name = "test",
+            Data = new NestedData { Key = "mykey", Flag = true },
+        };
+
+        var roundTripped = m.ToFhirParameters().ToModelWithNested();
+
+        roundTripped.Name.Should().Be("test");
+        roundTripped.Data.Should().NotBeNull();
+        roundTripped.Data!.Key.Should().Be("mykey");
+        roundTripped.Data.Flag.Should().BeTrue();
+    }
+
+    [Fact]
+    public void NestedComplexType_WhenAbsentFromParameters_ShouldBeNull()
+    {
+        var m = new ModelWithNested { Name = "test", Data = null };
+
+        var roundTripped = m.ToFhirParameters().ToModelWithNested();
+
+        roundTripped.Data.Should().BeNull();
+    }
+
     [GenerateFhirParameters]
     public class ModelWithStringList
     {
@@ -142,6 +191,19 @@ public class GenerateFhirParametersTests
         var parameters = m.ToFhirParameters();
 
         parameters.Parameter.Should().NotContain(p => p.Name == "tags");
+    }
+
+    [Fact]
+    public void ListOfStrings_ShouldRoundTripFromParameters()
+    {
+        var m = new ModelWithStringList
+        {
+            Tags = new List<string> { "tag1", "tag2", "tag3" },
+        };
+
+        var roundTripped = m.ToFhirParameters().ToModelWithStringList();
+
+        roundTripped.Tags.Should().BeEquivalentTo(m.Tags);
     }
 
     public class RuleConfig
@@ -195,5 +257,68 @@ public class GenerateFhirParametersTests
         var parameters = m.ToFhirParameters();
 
         parameters.Parameter.Should().NotContain(p => p.Name == "rules");
+    }
+
+    [Fact]
+    public void ListOfComplexTypes_ShouldRoundTripFromParameters()
+    {
+        var m = new ModelWithComplexList
+        {
+            Rules = new List<RuleConfig>
+            {
+                new() { Path = "Patient.name", Method = "redact" },
+                new() { Path = "Patient.birthDate", Method = "dateShift" },
+            },
+        };
+
+        var roundTripped = m.ToFhirParameters().ToModelWithComplexList();
+
+        roundTripped.Rules.Should().HaveCount(2);
+        roundTripped.Rules[0].Path.Should().Be("Patient.name");
+        roundTripped.Rules[0].Method.Should().Be("redact");
+        roundTripped.Rules[1].Path.Should().Be("Patient.birthDate");
+        roundTripped.Rules[1].Method.Should().Be("dateShift");
+    }
+
+    [GenerateFhirParameters]
+    public class ModelWithEnum
+    {
+        public DayOfWeek Day { get; init; } = DayOfWeek.Monday;
+    }
+
+    [Fact]
+    public void EnumProperty_ShouldRoundTripFromParameters()
+    {
+        var m = new ModelWithEnum { Day = DayOfWeek.Saturday };
+
+        var roundTripped = m.ToFhirParameters().ToModelWithEnum();
+
+        roundTripped.Day.Should().Be(DayOfWeek.Saturday);
+    }
+
+    [GenerateFhirParameters]
+    public class ModelWithFhirTypes
+    {
+        public CodeableConcept? Code { get; init; }
+        public Patient? Patient { get; init; }
+    }
+
+    [Fact]
+    public void FhirBaseAndResourceDerivedProperties_ShouldRoundTripFromParameters()
+    {
+        var m = new ModelWithFhirTypes
+        {
+            Code = new CodeableConcept("http://snomed.info/sct", "386661006", "Fever"),
+            Patient = new Patient { BirthDate = "2000-01-01" },
+        };
+
+        var roundTripped = m.ToFhirParameters().ToModelWithFhirTypes();
+
+        roundTripped.Code.Should().NotBeNull();
+        roundTripped
+            .Code!.Coding.Should()
+            .ContainSingle(c => c.System == "http://snomed.info/sct" && c.Code == "386661006");
+        roundTripped.Patient.Should().NotBeNull();
+        roundTripped.Patient!.BirthDate.Should().Be("2000-01-01");
     }
 }

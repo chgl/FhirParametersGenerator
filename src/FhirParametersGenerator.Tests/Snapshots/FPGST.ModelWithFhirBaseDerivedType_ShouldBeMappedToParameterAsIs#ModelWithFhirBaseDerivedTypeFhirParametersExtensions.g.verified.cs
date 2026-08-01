@@ -1,10 +1,12 @@
 ﻿//HintName: ModelWithFhirBaseDerivedTypeFhirParametersExtensions.g.cs
 using Hl7.Fhir.Model;
+using System;
+using System.Linq;
 // FhirParametersExtensions generated for type 'ModelWithFhirBaseDerivedType'
 namespace FhirParametersGenerator.Tests;
 
 /// <summary>
-/// Code-generated extension methods to convert the model class to a FHIR Parameters resources.
+/// Code-generated extension methods to convert the model class to/from a FHIR Parameters resource.
 /// </summary>
 public static class ModelWithFhirBaseDerivedTypeFhirParametersExtensions
 {
@@ -32,6 +34,21 @@ public static class ModelWithFhirBaseDerivedTypeFhirParametersExtensions
         // Hl7.Fhir.Model.Patient (Hl7.Fhir.Model.Patient) FhirParametersGenerator.Tests.ModelWithFhirBaseDerivedType.Patient
         parameters.Add("patient", model.Patient);
         return parameters;
+
+    }
+
+    /// <summary>
+    /// Convert a FHIR Parameters resource back to an instance of <see cref="ModelWithFhirBaseDerivedType"/>.
+    /// </summary>
+    /// <param name="parameters">The FHIR Parameters instance.</param>
+    /// <returns>A new instance of <see cref="ModelWithFhirBaseDerivedType"/> populated from the given parameters.</returns>
+    public static FhirParametersGenerator.Tests.ModelWithFhirBaseDerivedType ToModelWithFhirBaseDerivedType(this Parameters parameters)
+    {
+        return new FhirParametersGenerator.Tests.ModelWithFhirBaseDerivedType
+        {
+            Code = parameters.GetSingle("code")?.Value as Hl7.Fhir.Model.CodeableConcept ?? default!,
+            Patient = parameters.GetSingle("patient")?.Resource as Hl7.Fhir.Model.Patient ?? default!,
+        };
 
     }
 }

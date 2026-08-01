@@ -19,6 +19,26 @@
         DefaultSeverity: Warning,
         IsEnabledByDefault: true
       }
+    },
+    {
+      Location: /*
+{
+    public DayOfWeek DayOfWeek { get; init; } = DayOfWeek.Friday;
+                     ^^^^^^^^^
+}
+*/
+ : (8,21)-(8,30),
+      Message: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek back from its FHIR Parameters representation. It will be left at its default value.,
+      Severity: Warning,
+      WarningLevel: 1,
+      Descriptor: {
+        Id: FHIRPARAMS3,
+        Title: Unsupported property type when parsing from FHIR Parameters,
+        MessageFormat: Unable to map property FhirParametersGenerator.Tests.TestModel.DayOfWeek of type DayOfWeek back from its FHIR Parameters representation. It will be left at its default value.,
+        Category: Design,
+        DefaultSeverity: Warning,
+        IsEnabledByDefault: true
+      }
     }
   ]
 }

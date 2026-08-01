@@ -33,6 +33,9 @@ var parameters = t.ToFhirParameters();
 
 Console.WriteLine(parameters.ToJson(new() { Pretty = true }));
 
+// the reverse direction is also code-generated, as a To{ClassName}() extension method on Parameters
+var roundTripped = parameters.ToTestModel();
+
 // apply this attribute to the desired model class
 [GenerateFhirParameters]
 public class TestModel

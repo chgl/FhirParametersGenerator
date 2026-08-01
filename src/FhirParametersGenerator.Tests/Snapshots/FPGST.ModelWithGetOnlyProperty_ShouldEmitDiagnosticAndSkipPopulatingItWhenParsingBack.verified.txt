@@ -1,0 +1,24 @@
+﻿{
+  Diagnostics: [
+    {
+      Location: /*
+    public string Name { get; init; } = string.Empty;
+    public string Computed => Name + "!";
+                  ^^^^^^^^
+}
+*/
+ : (9,18)-(9,26),
+      Message: Property FhirParametersGenerator.Tests.TestModel.Computed has no accessible setter and will not be populated when parsing a FHIR Parameters resource back into this type.,
+      Severity: Warning,
+      WarningLevel: 1,
+      Descriptor: {
+        Id: FHIRPARAMS2,
+        Title: Property has no accessible setter,
+        MessageFormat: Property FhirParametersGenerator.Tests.TestModel.Computed has no accessible setter and will not be populated when parsing a FHIR Parameters resource back into this type.,
+        Category: Design,
+        DefaultSeverity: Warning,
+        IsEnabledByDefault: true
+      }
+    }
+  ]
+}
