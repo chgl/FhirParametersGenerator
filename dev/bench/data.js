@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785625244447,
+  "lastUpdate": 1785627354430,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -3060,6 +3060,36 @@ window.BENCHMARK_DATA = {
             "value": 3570763.353966346,
             "unit": "ns",
             "range": "± 145420.39032619644"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "652558c9aca82c6fd06cf6de13d02002033ae936",
+          "message": "feat: switched name to FromFhirParameters (#147)",
+          "timestamp": "2026-08-02T01:34:47+02:00",
+          "tree_id": "ae288efe3938b635bfb2da8fcd141a8e278e982a",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/652558c9aca82c6fd06cf6de13d02002033ae936"
+        },
+        "date": 1785627354228,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2403386.531119792,
+            "unit": "ns",
+            "range": "± 29474.193777826968"
           }
         ]
       }
