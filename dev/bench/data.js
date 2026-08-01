@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785269904157,
+  "lastUpdate": 1785624541795,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -2940,6 +2940,36 @@ window.BENCHMARK_DATA = {
             "value": 2319481.0096153845,
             "unit": "ns",
             "range": "± 25428.772099499223"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0f40df81acc34088d60f51ae4c9acc9d101ebab0",
+          "message": "feat: added support for parsing Parameters as POCO (#146)",
+          "timestamp": "2026-08-02T00:47:58+02:00",
+          "tree_id": "e2f03a4028d2739a697c7649b9bb57b2d0acf368",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/0f40df81acc34088d60f51ae4c9acc9d101ebab0"
+        },
+        "date": 1785624541295,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 3370158.819754464,
+            "unit": "ns",
+            "range": "± 58634.07131158038"
           }
         ]
       }
