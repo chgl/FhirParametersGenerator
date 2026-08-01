@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.7.3](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.2...v0.7.3) (2026-08-01)
+
+
+### Features
+
+* added support for parsing Parameters as POCO ([#146](https://github.com/chgl/FhirParametersGenerator/issues/146)) ([0f40df8](https://github.com/chgl/FhirParametersGenerator/commit/0f40df81acc34088d60f51ae4c9acc9d101ebab0))
+
+
+### Miscellaneous Chores
+
+* **deps:** lock file maintenance ([#141](https://github.com/chgl/FhirParametersGenerator/issues/141)) ([f784faa](https://github.com/chgl/FhirParametersGenerator/commit/f784faa15fb7903da750165f978e90c60346add1))
+* **deps:** update all non-major dependencies ([#144](https://github.com/chgl/FhirParametersGenerator/issues/144)) ([e6d5fbc](https://github.com/chgl/FhirParametersGenerator/commit/e6d5fbc110d306897ee5a78402cd458eaca419df))
+* **deps:** update miracum/.github action to v1.22.7 ([#142](https://github.com/chgl/FhirParametersGenerator/issues/142)) ([91ddb31](https://github.com/chgl/FhirParametersGenerator/commit/91ddb31f81b7a3554656c6a58b79b7026d188795))
+* **deps:** update miracum/.github action to v1.22.8 ([#145](https://github.com/chgl/FhirParametersGenerator/issues/145)) ([3f5c506](https://github.com/chgl/FhirParametersGenerator/commit/3f5c506a4ffe37a1a063f25184ea6702ce221a7b))
+
 ## [0.7.2](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.1...v0.7.2) (2026-07-23)
 
 
