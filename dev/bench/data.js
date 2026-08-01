@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785624918939,
+  "lastUpdate": 1785625244447,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -3030,6 +3030,36 @@ window.BENCHMARK_DATA = {
             "value": 3736460.95,
             "unit": "ns",
             "range": "± 185742.24398302706"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "41898282+github-actions[bot]@users.noreply.github.com",
+            "name": "github-actions[bot]",
+            "username": "github-actions[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e3bc767f1d19e5065f1a191a33966a7d690d9087",
+          "message": "chore(master): release 0.7.3 (#143)\n\nCo-authored-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>",
+          "timestamp": "2026-08-01T22:59:23Z",
+          "tree_id": "cad30f172fb778cc0f1727cb12e07791fce43ec0",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/e3bc767f1d19e5065f1a191a33966a7d690d9087"
+        },
+        "date": 1785625244258,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 3570763.353966346,
+            "unit": "ns",
+            "range": "± 145420.39032619644"
           }
         ]
       }
