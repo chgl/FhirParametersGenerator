@@ -31,16 +31,8 @@ public static class TestModelFhirParametersExtensions
         var parameters = new Parameters();
         // string (string) FhirParametersGenerator.Tests.TestModel.Name
         parameters.Add("name", new FhirString(model.Name));
-        // FhirParametersGenerator.Tests.NestedConfig (FhirParametersGenerator.Tests.NestedConfig) FhirParametersGenerator.Tests.TestModel.Config
-        if (model.Config != null)
-        {
-            var configComponent = new Parameters.ParameterComponent { Name = "config" };
-            // string (string) FhirParametersGenerator.Tests.NestedConfig.Key
-            configComponent.Part.Add(new Parameters.ParameterComponent { Name = "key", Value = new FhirString(model.Config.Key) });
-            // bool (bool) FhirParametersGenerator.Tests.NestedConfig.Enabled
-            configComponent.Part.Add(new Parameters.ParameterComponent { Name = "enabled", Value = new FhirBoolean(model.Config.Enabled) });
-            parameters.Parameter.Add(configComponent);
-        }
+        // string (string) FhirParametersGenerator.Tests.TestModel.Computed
+        parameters.Add("computed", new FhirString(model.Computed));
         return parameters;
 
     }
@@ -55,16 +47,7 @@ public static class TestModelFhirParametersExtensions
         return new FhirParametersGenerator.Tests.TestModel
         {
             Name = (parameters.GetSingle("name")?.Value as FhirString)?.Value ?? string.Empty,
-            Config = parameters.GetSingle("config") is { } configComponent ? BuildNestedConfig(configComponent) : default!,
         };
-        static FhirParametersGenerator.Tests.NestedConfig BuildNestedConfig(Parameters.ParameterComponent component)
-        {
-            return new FhirParametersGenerator.Tests.NestedConfig
-            {
-                Key = (component.Part.FirstOrDefault(p => p.Name == "key")?.Value as FhirString)?.Value ?? string.Empty,
-                Enabled = (component.Part.FirstOrDefault(p => p.Name == "enabled")?.Value as FhirBoolean)?.Value ?? default,
-            };
-        }
 
     }
 }

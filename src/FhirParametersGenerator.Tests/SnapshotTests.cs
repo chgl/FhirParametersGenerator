@@ -151,4 +151,23 @@ public class ModelWithFhirBaseDerivedType
         // Pass the source code to our helper and snapshot test the output
         return TestHelper.Verify(source);
     }
+
+    [Fact]
+    public Task ModelWithGetOnlyProperty_ShouldEmitDiagnosticAndSkipPopulatingItWhenParsingBack()
+    {
+        var source =
+            @"
+using FhirParametersGenerator;
+
+namespace FhirParametersGenerator.Tests;
+
+[GenerateFhirParameters]
+public class TestModel
+{
+    public string Name { get; init; } = string.Empty;
+    public string Computed => Name + ""!"";
+}";
+
+        return TestHelper.Verify(source);
+    }
 }

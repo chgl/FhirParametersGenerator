@@ -22,7 +22,12 @@ var flat = new TestModelA
 };
 
 Console.WriteLine("=== Flat model ===");
-Console.WriteLine(flat.ToFhirParameters().ToJson(new() { Pretty = true }));
+var flatParameters = flat.ToFhirParameters();
+Console.WriteLine(flatParameters.ToJson(new() { Pretty = true }));
+
+Console.WriteLine("\n=== Flat model (round-tripped back from Parameters) ===");
+var flatRoundTripped = flatParameters.ToTestModelA();
+Console.WriteLine(flatRoundTripped.ToFhirParameters().ToJson(new() { Pretty = true }));
 
 // ── Example 2: list of complex objects ──────────────────────────────────────
 var withRules = new ModelWithRules
@@ -35,7 +40,12 @@ var withRules = new ModelWithRules
 };
 
 Console.WriteLine("\n=== List of complex objects ===");
-Console.WriteLine(withRules.ToFhirParameters().ToJson(new() { Pretty = true }));
+var withRulesParameters = withRules.ToFhirParameters();
+Console.WriteLine(withRulesParameters.ToJson(new() { Pretty = true }));
+
+Console.WriteLine("\n=== List of complex objects (round-tripped back from Parameters) ===");
+var withRulesRoundTripped = withRulesParameters.ToModelWithRules();
+Console.WriteLine(withRulesRoundTripped.ToFhirParameters().ToJson(new() { Pretty = true }));
 
 // ── Example 3: nested model (AnonymizerConfiguration-style) ─────────────────
 var nested = new AnonymizerStyleConfig
@@ -65,7 +75,12 @@ var nested = new AnonymizerStyleConfig
 };
 
 Console.WriteLine("\n=== Nested model ===");
-Console.WriteLine(nested.ToFhirParameters().ToJson(new() { Pretty = true }));
+var nestedParameters = nested.ToFhirParameters();
+Console.WriteLine(nestedParameters.ToJson(new() { Pretty = true }));
+
+Console.WriteLine("\n=== Nested model (round-tripped back from Parameters) ===");
+var nestedRoundTripped = nestedParameters.ToAnonymizerStyleConfig();
+Console.WriteLine(nestedRoundTripped.ToFhirParameters().ToJson(new() { Pretty = true }));
 
 [GenerateFhirParameters]
 public class TestModelA

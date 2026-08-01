@@ -1,10 +1,12 @@
 ﻿//HintName: TestModelFhirParametersExtensions.g.cs
 using Hl7.Fhir.Model;
+using System;
+using System.Linq;
 // FhirParametersExtensions generated for type 'TestModel'
 namespace FhirParametersGenerator.Tests;
 
 /// <summary>
-/// Code-generated extension methods to convert the model class to a FHIR Parameters resources.
+/// Code-generated extension methods to convert the model class to/from a FHIR Parameters resource.
 /// </summary>
 public static class TestModelFhirParametersExtensions
 {
@@ -36,6 +38,20 @@ public static class TestModelFhirParametersExtensions
             }
         }
         return parameters;
+
+    }
+
+    /// <summary>
+    /// Convert a FHIR Parameters resource back to an instance of <see cref="TestModel"/>.
+    /// </summary>
+    /// <param name="parameters">The FHIR Parameters instance.</param>
+    /// <returns>A new instance of <see cref="TestModel"/> populated from the given parameters.</returns>
+    public static FhirParametersGenerator.Tests.TestModel ToTestModel(this Parameters parameters)
+    {
+        return new FhirParametersGenerator.Tests.TestModel
+        {
+            Tags = parameters.Get("tags").Select(p => (p.Value as FhirString)?.Value ?? string.Empty).ToList(),
+        };
 
     }
 }
