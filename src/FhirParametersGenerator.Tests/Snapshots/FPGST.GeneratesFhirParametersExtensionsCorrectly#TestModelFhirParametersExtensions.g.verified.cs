@@ -6,7 +6,7 @@ using System.Linq;
 namespace FhirParametersGenerator.Tests;
 
 /// <summary>
-/// Code-generated extension methods to convert the model class to/from a FHIR Parameters resource.
+/// Code-generated extension methods to convert the model class to a FHIR Parameters resource.
 /// </summary>
 public static class TestModelFhirParametersExtensions
 {
@@ -42,13 +42,15 @@ public static class TestModelFhirParametersExtensions
         return parameters;
 
     }
-
+}
+partial class TestModel
+{
     /// <summary>
     /// Convert a FHIR Parameters resource back to an instance of <see cref="TestModel"/>.
     /// </summary>
     /// <param name="parameters">The FHIR Parameters instance.</param>
     /// <returns>A new instance of <see cref="TestModel"/> populated from the given parameters.</returns>
-    public static FhirParametersGenerator.Tests.TestModel ToTestModel(this Parameters parameters)
+    public static FhirParametersGenerator.Tests.TestModel FromFhirParameters(Parameters parameters)
     {
         return new FhirParametersGenerator.Tests.TestModel
         {
@@ -58,6 +60,6 @@ public static class TestModelFhirParametersExtensions
             Timestamp = (parameters.GetSingle("timestamp")?.Value as FhirDateTime)?.ToDateTimeOffset(TimeSpan.Zero) ?? default!,
             Time = (parameters.GetSingle("time")?.Value as FhirDateTime)?.ToDateTimeOffset(TimeSpan.Zero).DateTime ?? default!,
         };
-
     }
 }
+

@@ -26,7 +26,7 @@ var flatParameters = flat.ToFhirParameters();
 Console.WriteLine(flatParameters.ToJson(new() { Pretty = true }));
 
 Console.WriteLine("\n=== Flat model (round-tripped back from Parameters) ===");
-var flatRoundTripped = flatParameters.ToTestModelA();
+var flatRoundTripped = TestModelA.FromFhirParameters(flatParameters);
 Console.WriteLine(flatRoundTripped.ToFhirParameters().ToJson(new() { Pretty = true }));
 
 // ── Example 2: list of complex objects ──────────────────────────────────────
@@ -44,7 +44,7 @@ var withRulesParameters = withRules.ToFhirParameters();
 Console.WriteLine(withRulesParameters.ToJson(new() { Pretty = true }));
 
 Console.WriteLine("\n=== List of complex objects (round-tripped back from Parameters) ===");
-var withRulesRoundTripped = withRulesParameters.ToModelWithRules();
+var withRulesRoundTripped = ModelWithRules.FromFhirParameters(withRulesParameters);
 Console.WriteLine(withRulesRoundTripped.ToFhirParameters().ToJson(new() { Pretty = true }));
 
 // ── Example 3: nested model (AnonymizerConfiguration-style) ─────────────────
@@ -79,11 +79,11 @@ var nestedParameters = nested.ToFhirParameters();
 Console.WriteLine(nestedParameters.ToJson(new() { Pretty = true }));
 
 Console.WriteLine("\n=== Nested model (round-tripped back from Parameters) ===");
-var nestedRoundTripped = nestedParameters.ToAnonymizerStyleConfig();
+var nestedRoundTripped = AnonymizerStyleConfig.FromFhirParameters(nestedParameters);
 Console.WriteLine(nestedRoundTripped.ToFhirParameters().ToJson(new() { Pretty = true }));
 
 [GenerateFhirParameters]
-public class TestModelA
+public partial class TestModelA
 {
     public string Name { get; init; } = string.Empty;
     public int Age { get; init; } = 0;
@@ -99,7 +99,7 @@ public class TestModelA
 }
 
 [GenerateFhirParameters]
-public class ModelWithRules
+public partial class ModelWithRules
 {
     public List<FhirPathRule> Rules { get; init; } = new();
 }
@@ -111,7 +111,7 @@ public class FhirPathRule
 }
 
 [GenerateFhirParameters]
-public class AnonymizerStyleConfig
+public partial class AnonymizerStyleConfig
 {
     public string FhirVersion { get; init; } = string.Empty;
     public AnonymizerSettings? Settings { get; init; }

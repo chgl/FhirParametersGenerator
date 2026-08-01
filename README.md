@@ -33,12 +33,14 @@ var parameters = t.ToFhirParameters();
 
 Console.WriteLine(parameters.ToJson(new() { Pretty = true }));
 
-// the reverse direction is also code-generated, as a To{ClassName}() extension method on Parameters
-var roundTripped = parameters.ToTestModel();
+// the reverse direction is also code-generated, as a static FromFhirParameters() factory method
+var roundTripped = TestModel.FromFhirParameters(parameters);
 
 // apply this attribute to the desired model class
+// the class must be declared `partial` (and so must any enclosing type) so the generator
+// can add the FromFhirParameters() method to it
 [GenerateFhirParameters]
-public class TestModel
+public partial class TestModel
 {
     public string Name { get; init; } = string.Empty;
     public int Age { get; init; } = 0;

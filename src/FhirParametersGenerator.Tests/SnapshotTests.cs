@@ -15,7 +15,7 @@ using FhirParametersGenerator;
 namespace FhirParametersGenerator.Tests;
 
 [GenerateFhirParameters]
-public class TestModel
+public partial class TestModel
 {
     public string Name { get; init; } = string.Empty;
     public int Age { get; init; } = 0;
@@ -46,7 +46,7 @@ using FhirParametersGenerator;
 namespace FhirParametersGenerator.Tests;
 
 [GenerateFhirParameters]
-public class TestModel
+public partial class TestModel
 {
     public DayOfWeek DayOfWeek { get; init; } = DayOfWeek.Friday;
 }";
@@ -71,7 +71,7 @@ public class NestedConfig
 }
 
 [GenerateFhirParameters]
-public class TestModel
+public partial class TestModel
 {
     public string Name { get; init; } = string.Empty;
     public NestedConfig Config { get; init; } = new();
@@ -91,7 +91,7 @@ using System.Collections.Generic;
 namespace FhirParametersGenerator.Tests;
 
 [GenerateFhirParameters]
-public class TestModel
+public partial class TestModel
 {
     public System.Collections.Generic.List<string> Tags { get; init; } = new();
 }";
@@ -116,7 +116,7 @@ public class RuleConfig
 }
 
 [GenerateFhirParameters]
-public class TestModel
+public partial class TestModel
 {
     public System.Collections.Generic.List<RuleConfig> Rules { get; init; } = new();
 }";
@@ -137,7 +137,7 @@ using Hl7.Fhir.Model;
 namespace FhirParametersGenerator.Tests;
 
 [GenerateFhirParameters]
-public class ModelWithFhirBaseDerivedType
+public partial class ModelWithFhirBaseDerivedType
 {
     public CodeableConcept Code { get; init; } = new(""http://snomed.info/sct"", ""386661006"", ""Fever"");
     public Patient Patient { get; init; } = new()
@@ -162,7 +162,7 @@ using FhirParametersGenerator;
 namespace FhirParametersGenerator.Tests;
 
 [GenerateFhirParameters]
-public class TestModel
+public partial class TestModel
 {
     public string Name { get; init; } = string.Empty;
     public string Computed => Name + ""!"";
