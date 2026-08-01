@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.4](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.3...v0.7.4) (2026-08-01)
+
+
+### Features
+
+* switched name to FromFhirParameters ([#147](https://github.com/chgl/FhirParametersGenerator/issues/147)) ([652558c](https://github.com/chgl/FhirParametersGenerator/commit/652558c9aca82c6fd06cf6de13d02002033ae936))
+
 ## [0.7.3](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.2...v0.7.3) (2026-08-01)
 
 
