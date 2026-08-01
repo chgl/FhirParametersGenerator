@@ -20,4 +20,15 @@ internal static class FhirParametersSourceGeneratorExtensions
 
         return false;
     }
+
+    // `InheritsFrom` deliberately only walks strict ancestors. Callers that need an "is-a" check
+    // (does this type belong to the given family, including exactly being it) — e.g. deciding
+    // whether a property typed exactly `Resource` or `Base` needs the Resource/DataType handling —
+    // should use this instead, or they'll incorrectly treat the exact base type as unrelated.
+    // Compares with the nullable annotation stripped: a property declared `Resource?` must still
+    // match "Hl7.Fhir.Model.Resource", not "Hl7.Fhir.Model.Resource?".
+    public static bool IsOrInheritsFrom(this ITypeSymbol symbol, string typeDisplayName) =>
+        symbol.WithNullableAnnotation(NullableAnnotation.NotAnnotated).ToDisplayString()
+            == typeDisplayName
+        || symbol.InheritsFrom(typeDisplayName);
 }

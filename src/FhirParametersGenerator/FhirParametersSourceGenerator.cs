@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
@@ -195,12 +196,11 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
         }
 
         var methodBody = GenerateMappingMethodBody(classSymbol, context);
-        var parseMethodBody = GenerateFromParametersMethodBody(classSymbol, context);
 
         var source =
             $@"
 /// <summary>
-/// Code-generated extension methods to convert the model class to/from a FHIR Parameters resource.
+/// Code-generated extension methods to convert the model class to a FHIR Parameters resource.
 /// </summary>
 public static class {classSymbol.Name}FhirParametersExtensions
 {{
@@ -224,19 +224,116 @@ public static class {classSymbol.Name}FhirParametersExtensions
     {{
 {methodBody}
     }}
-
-    /// <summary>
-    /// Convert a FHIR Parameters resource back to an instance of <see cref=""{classSymbol.Name}""/>.
-    /// </summary>
-    /// <param name=""parameters"">The FHIR Parameters instance.</param>
-    /// <returns>A new instance of <see cref=""{classSymbol.Name}""/> populated from the given parameters.</returns>
-    public static {classSymbol.ToDisplayString()} To{classSymbol.Name}(this Parameters parameters)
-    {{
-{parseMethodBody}
-    }}
 }}";
 
         sb.AppendLine(source);
+
+        // The reverse direction (FromFhirParameters) is generated as a real static method on the
+        // class itself rather than an extension method, which requires the class - and every
+        // enclosing type, since a generator can only add members via a partial declaration - to
+        // be declared `partial`. Skip it (with a diagnostic) rather than emit a class declaration
+        // that would conflict with the user's non-partial one.
+        var missingPartialType = FindFirstNonPartialTypeInChain(classSymbol);
+        if (missingPartialType is null)
+        {
+            sb.AppendLine(GenerateFromFhirParametersPartialClass(classSymbol, context));
+        }
+        else
+        {
+            ReportTypeMustBePartialDiagnostic(classSymbol, missingPartialType, context);
+        }
+
+        return sb.ToString();
+    }
+
+    // Walks a type and its containing types (outermost first) looking for the first one that
+    // isn't declared `partial`. Returns null if the whole chain already supports adding a new
+    // partial declaration.
+    static INamedTypeSymbol? FindFirstNonPartialTypeInChain(INamedTypeSymbol classSymbol)
+    {
+        for (var current = classSymbol; current != null; current = current.ContainingType)
+        {
+            if (!IsDeclaredPartial(current))
+            {
+                return current;
+            }
+        }
+
+        return null;
+    }
+
+    static bool IsDeclaredPartial(INamedTypeSymbol type) =>
+        type.DeclaringSyntaxReferences.Any(syntaxRef =>
+            syntaxRef.GetSyntax() is TypeDeclarationSyntax { Modifiers: var modifiers }
+            && modifiers.Any(SyntaxKind.PartialKeyword)
+        );
+
+    // Re-opens `classSymbol` (and every containing type) as `partial` and adds the
+    // `FromFhirParameters` static factory method to the innermost one.
+    static string GenerateFromFhirParametersPartialClass(
+        INamedTypeSymbol classSymbol,
+        SourceProductionContext context
+    )
+    {
+        List<INamedTypeSymbol> chain = [];
+        for (var current = classSymbol; current != null; current = current.ContainingType)
+        {
+            chain.Insert(0, current);
+        }
+
+        var sb = new StringBuilder();
+        var indent = "";
+
+        foreach (var type in chain)
+        {
+            var typeParameters =
+                type.TypeParameters.Length > 0
+                    ? $"<{string.Join(", ", type.TypeParameters.Select(tp => tp.Name))}>"
+                    : "";
+
+            sb.Append(indent);
+            sb.AppendLine($"partial class {type.Name}{typeParameters}");
+            sb.Append(indent);
+            sb.AppendLine("{");
+            indent += "    ";
+        }
+
+        var parseMethodBody = GenerateFromFhirParametersMethodBody(
+            classSymbol,
+            indent + "    ",
+            context
+        );
+
+        sb.Append(indent);
+        sb.AppendLine("/// <summary>");
+        sb.Append(indent);
+        sb.AppendLine(
+            $@"/// Convert a FHIR Parameters resource back to an instance of <see cref=""{classSymbol.Name}""/>."
+        );
+        sb.Append(indent);
+        sb.AppendLine("/// </summary>");
+        sb.Append(indent);
+        sb.AppendLine(@"/// <param name=""parameters"">The FHIR Parameters instance.</param>");
+        sb.Append(indent);
+        sb.AppendLine(
+            $@"/// <returns>A new instance of <see cref=""{classSymbol.Name}""/> populated from the given parameters.</returns>"
+        );
+        sb.Append(indent);
+        sb.AppendLine(
+            $"public static {DisplayTypeName(classSymbol)} FromFhirParameters(Parameters parameters)"
+        );
+        sb.Append(indent);
+        sb.AppendLine("{");
+        sb.Append(parseMethodBody);
+        sb.Append(indent);
+        sb.AppendLine("}");
+
+        for (var i = chain.Count - 1; i >= 0; i--)
+        {
+            indent = indent[..^4];
+            sb.Append(indent);
+            sb.AppendLine("}");
+        }
 
         return sb.ToString();
     }
@@ -292,7 +389,7 @@ public static class {classSymbol.Name}FhirParametersExtensions
         var propAccess = $"{modelPath}.{property.Name}";
         var propType = UnwrapNullable(property.Type);
 
-        if (propType.InheritsFrom("Hl7.Fhir.Model.Base"))
+        if (propType.IsOrInheritsFrom("Hl7.Fhir.Model.Base"))
         {
             sb.Append(indent);
             sb.AppendLine($@"parameters.Add(""{camelCasedName}"", {propAccess});");
@@ -441,9 +538,9 @@ public static class {classSymbol.Name}FhirParametersExtensions
             var propAccess = $"{modelPath}.{property.Name}";
             var propType = UnwrapNullable(property.Type);
 
-            if (propType.InheritsFrom("Hl7.Fhir.Model.Base"))
+            if (propType.IsOrInheritsFrom("Hl7.Fhir.Model.Base"))
             {
-                if (propType.InheritsFrom("Hl7.Fhir.Model.Resource"))
+                if (propType.IsOrInheritsFrom("Hl7.Fhir.Model.Resource"))
                 {
                     sb.Append(indent);
                     sb.AppendLine(
@@ -589,12 +686,12 @@ public static class {classSymbol.Name}FhirParametersExtensions
     // Generates the body of the `To{ClassName}(this Parameters parameters)` method: a single
     // object-initializer expression (so `init`-only properties work) plus, appended afterwards,
     // any `Build{Type}` local functions needed to reconstruct nested user-defined types.
-    static string GenerateFromParametersMethodBody(
+    static string GenerateFromFhirParametersMethodBody(
         INamedTypeSymbol classSymbol,
+        string indent,
         SourceProductionContext context
     )
     {
-        var indent = new string(' ', 8);
         var sb = new StringBuilder();
         var pendingBuilders = new Queue<INamedTypeSymbol>();
         var queuedOrEmitted = new HashSet<string>(StringComparer.Ordinal);
@@ -769,9 +866,11 @@ public static class {classSymbol.Name}FhirParametersExtensions
         var isNullableTarget = IsNullableTarget(property);
         var single = singleComponentExpr(camelCasedName);
 
-        if (propType.InheritsFrom("Hl7.Fhir.Model.Base"))
+        if (propType.IsOrInheritsFrom("Hl7.Fhir.Model.Base"))
         {
-            var accessor = propType.InheritsFrom("Hl7.Fhir.Model.Resource") ? "Resource" : "Value";
+            var accessor = propType.IsOrInheritsFrom("Hl7.Fhir.Model.Resource")
+                ? "Resource"
+                : "Value";
             var expr = $@"{single}?.{accessor} as {DisplayTypeName(propType)}";
             return isNullableTarget
                 ? expr
@@ -957,6 +1056,31 @@ public static class {classSymbol.Name}FhirParametersExtensions
         }
 
         return propType.IsValueType ? "default" : "default!";
+    }
+
+    static void ReportTypeMustBePartialDiagnostic(
+        INamedTypeSymbol classSymbol,
+        INamedTypeSymbol missingPartialType,
+        SourceProductionContext context
+    )
+    {
+        var message = SymbolEqualityComparer.Default.Equals(classSymbol, missingPartialType)
+            ? $"Type {missingPartialType.ToDisplayString()} must be declared 'partial' to generate its FromFhirParameters(Parameters) method."
+            : $"Type {missingPartialType.ToDisplayString()} must be declared 'partial' so that its nested type {classSymbol.ToDisplayString()} can generate a FromFhirParameters(Parameters) method.";
+
+        var descriptor = new DiagnosticDescriptor(
+            id: "FHIRPARAMS4",
+            title: "Type must be declared 'partial'",
+            messageFormat: message,
+            category: "Design",
+            defaultSeverity: DiagnosticSeverity.Warning,
+            isEnabledByDefault: true
+        );
+
+        var location = missingPartialType.Locations.FirstOrDefault();
+        var diagnostic = Diagnostic.Create(descriptor, location);
+
+        context.ReportDiagnostic(diagnostic);
     }
 
     static void ReportPropertyHasNoSetterDiagnostic(

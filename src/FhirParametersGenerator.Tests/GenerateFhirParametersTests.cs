@@ -4,10 +4,10 @@ using Hl7.Fhir.Model;
 
 namespace FhirParametersGenerator.Tests;
 
-public class GenerateFhirParametersTests
+public partial class GenerateFhirParametersTests
 {
     [GenerateFhirParameters]
-    public class SimpleNameAndAgeModel
+    public partial class SimpleNameAndAgeModel
     {
         public string Name { get; init; } = string.Empty;
         public int Age { get; init; } = 0;
@@ -29,14 +29,14 @@ public class GenerateFhirParametersTests
     {
         var t = new SimpleNameAndAgeModel { Name = "Hello", Age = 123 };
 
-        var roundTripped = t.ToFhirParameters().ToSimpleNameAndAgeModel();
+        var roundTripped = SimpleNameAndAgeModel.FromFhirParameters(t.ToFhirParameters());
 
         roundTripped.Name.Should().Be(t.Name);
         roundTripped.Age.Should().Be(t.Age);
     }
 
     [GenerateFhirParameters]
-    public class PascalCasedModel
+    public partial class PascalCasedModel
     {
         public string ALongPascalCaseProperty { get; init; } = string.Empty;
         public string Id { get; init; } = string.Empty;
@@ -61,14 +61,14 @@ public class GenerateFhirParametersTests
     {
         var t = new PascalCasedModel { ALongPascalCaseProperty = "Hello", Id = "123" };
 
-        var roundTripped = t.ToFhirParameters().ToPascalCasedModel();
+        var roundTripped = PascalCasedModel.FromFhirParameters(t.ToFhirParameters());
 
         roundTripped.ALongPascalCaseProperty.Should().Be(t.ALongPascalCaseProperty);
         roundTripped.Id.Should().Be(t.Id);
     }
 
     [GenerateFhirParameters]
-    public class ModelWithWriteOnlyProperty
+    public partial class ModelWithWriteOnlyProperty
     {
         public string Name { get; init; } = string.Empty;
         public string WriteOnly
@@ -96,7 +96,7 @@ public class GenerateFhirParametersTests
     }
 
     [GenerateFhirParameters]
-    public class ModelWithNested
+    public partial class ModelWithNested
     {
         public string Name { get; init; } = string.Empty;
         public NestedData? Data { get; init; }
@@ -141,7 +141,7 @@ public class GenerateFhirParametersTests
             Data = new NestedData { Key = "mykey", Flag = true },
         };
 
-        var roundTripped = m.ToFhirParameters().ToModelWithNested();
+        var roundTripped = ModelWithNested.FromFhirParameters(m.ToFhirParameters());
 
         roundTripped.Name.Should().Be("test");
         roundTripped.Data.Should().NotBeNull();
@@ -154,13 +154,13 @@ public class GenerateFhirParametersTests
     {
         var m = new ModelWithNested { Name = "test", Data = null };
 
-        var roundTripped = m.ToFhirParameters().ToModelWithNested();
+        var roundTripped = ModelWithNested.FromFhirParameters(m.ToFhirParameters());
 
         roundTripped.Data.Should().BeNull();
     }
 
     [GenerateFhirParameters]
-    public class ModelWithStringList
+    public partial class ModelWithStringList
     {
         public List<string> Tags { get; init; } = new();
     }
@@ -201,7 +201,7 @@ public class GenerateFhirParametersTests
             Tags = new List<string> { "tag1", "tag2", "tag3" },
         };
 
-        var roundTripped = m.ToFhirParameters().ToModelWithStringList();
+        var roundTripped = ModelWithStringList.FromFhirParameters(m.ToFhirParameters());
 
         roundTripped.Tags.Should().BeEquivalentTo(m.Tags);
     }
@@ -213,7 +213,7 @@ public class GenerateFhirParametersTests
     }
 
     [GenerateFhirParameters]
-    public class ModelWithComplexList
+    public partial class ModelWithComplexList
     {
         public List<RuleConfig> Rules { get; init; } = new();
     }
@@ -271,7 +271,7 @@ public class GenerateFhirParametersTests
             },
         };
 
-        var roundTripped = m.ToFhirParameters().ToModelWithComplexList();
+        var roundTripped = ModelWithComplexList.FromFhirParameters(m.ToFhirParameters());
 
         roundTripped.Rules.Should().HaveCount(2);
         roundTripped.Rules[0].Path.Should().Be("Patient.name");
@@ -281,7 +281,7 @@ public class GenerateFhirParametersTests
     }
 
     [GenerateFhirParameters]
-    public class ModelWithEnum
+    public partial class ModelWithEnum
     {
         public DayOfWeek Day { get; init; } = DayOfWeek.Monday;
     }
@@ -291,13 +291,13 @@ public class GenerateFhirParametersTests
     {
         var m = new ModelWithEnum { Day = DayOfWeek.Saturday };
 
-        var roundTripped = m.ToFhirParameters().ToModelWithEnum();
+        var roundTripped = ModelWithEnum.FromFhirParameters(m.ToFhirParameters());
 
         roundTripped.Day.Should().Be(DayOfWeek.Saturday);
     }
 
     [GenerateFhirParameters]
-    public class ModelWithFhirTypes
+    public partial class ModelWithFhirTypes
     {
         public CodeableConcept? Code { get; init; }
         public Patient? Patient { get; init; }
@@ -312,7 +312,7 @@ public class GenerateFhirParametersTests
             Patient = new Patient { BirthDate = "2000-01-01" },
         };
 
-        var roundTripped = m.ToFhirParameters().ToModelWithFhirTypes();
+        var roundTripped = ModelWithFhirTypes.FromFhirParameters(m.ToFhirParameters());
 
         roundTripped.Code.Should().NotBeNull();
         roundTripped
@@ -320,5 +320,30 @@ public class GenerateFhirParametersTests
             .ContainSingle(c => c.System == "http://snomed.info/sct" && c.Code == "386661006");
         roundTripped.Patient.Should().NotBeNull();
         roundTripped.Patient!.BirthDate.Should().Be("2000-01-01");
+    }
+
+    // Regression test: a property typed exactly `Resource` (not a concrete subtype like Patient)
+    // used to fail to compile. `InheritsFrom` only walks strict base types, so
+    // `Resource.InheritsFrom("Hl7.Fhir.Model.Resource")` came back false, which made the generator
+    // read the value via `.Value as Resource` instead of `.Resource as Resource` - and since
+    // `Value` is typed `DataType` (unrelated to `Resource`), that's a compile error (CS0039).
+    [GenerateFhirParameters]
+    public partial class ModelWithExactResourceType
+    {
+        public Resource? AnyResource { get; init; }
+    }
+
+    [Fact]
+    public void ExactlyResourceTypedProperty_ShouldRoundTripFromParameters()
+    {
+        var m = new ModelWithExactResourceType
+        {
+            AnyResource = new Patient { BirthDate = "2000-01-01" },
+        };
+
+        var roundTripped = ModelWithExactResourceType.FromFhirParameters(m.ToFhirParameters());
+
+        roundTripped.AnyResource.Should().BeOfType<Patient>();
+        ((Patient)roundTripped.AnyResource!).BirthDate.Should().Be("2000-01-01");
     }
 }
