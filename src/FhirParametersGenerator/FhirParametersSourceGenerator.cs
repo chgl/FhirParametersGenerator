@@ -21,7 +21,9 @@ public class FhirParametersSourceGenerator : IIncrementalGenerator
     {
         ClrTypeToFhirType = new Dictionary<string, string>()
         {
-            ["Int32"] = "FhirDecimal",
+            ["Int32"] = "Integer",
+            ["Int64"] = "Integer64",
+            ["Decimal"] = "FhirDecimal",
             ["String"] = "FhirString",
             ["Boolean"] = "FhirBoolean",
             ["DateTime"] = "FhirDateTime",
@@ -995,8 +997,14 @@ public static class {classSymbol.Name}FhirParametersExtensions
                 case "FhirString":
                     expr = $"({dataTypeExpr} as FhirString)?.Value";
                     break;
+                case "Integer":
+                    expr = $"({dataTypeExpr} as Integer)?.Value";
+                    break;
+                case "Integer64":
+                    expr = $"({dataTypeExpr} as Integer64)?.Value";
+                    break;
                 case "FhirDecimal":
-                    expr = $"(int?)({dataTypeExpr} as FhirDecimal)?.Value";
+                    expr = $"({dataTypeExpr} as FhirDecimal)?.Value";
                     break;
                 case "FhirBoolean":
                     expr = $"({dataTypeExpr} as FhirBoolean)?.Value";

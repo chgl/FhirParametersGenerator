@@ -6,7 +6,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/src/FhirParametersGenerator.Demo/bin/Debug/net6.0/FhirParametersGenerator.Demo.dll",
+      "program": "${workspaceFolder}/src/FhirParametersGenerator.Demo/bin/Debug/net10.0/FhirParametersGenerator.Demo.dll",
       "args": [],
       "cwd": "${workspaceFolder}/src/FhirParametersGenerator.Demo",
       "console": "internalConsole",
