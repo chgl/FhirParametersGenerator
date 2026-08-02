@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.5](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.4...v0.7.5) (2026-08-02)
+
+
+### Bug Fixes
+
+* updated fhir to clr type map ([#149](https://github.com/chgl/FhirParametersGenerator/issues/149)) ([05351b3](https://github.com/chgl/FhirParametersGenerator/commit/05351b3df4999d26ce7d06292619873a66bce5cc))
+
 ## [0.7.4](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.3...v0.7.4) (2026-08-01)
 
 
