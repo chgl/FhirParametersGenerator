@@ -32,7 +32,7 @@ public static class TestModelFhirParametersExtensions
         // string (string) FhirParametersGenerator.Tests.TestModel.Name
         parameters.Add("name", new FhirString(model.Name));
         // int (int) FhirParametersGenerator.Tests.TestModel.Age
-        parameters.Add("age", new FhirDecimal(model.Age));
+        parameters.Add("age", new Integer(model.Age));
         // bool (bool) FhirParametersGenerator.Tests.TestModel.IsSomething
         parameters.Add("isSomething", new FhirBoolean(model.IsSomething));
         // DateTimeOffset (DateTimeOffset) FhirParametersGenerator.Tests.TestModel.Timestamp
@@ -55,7 +55,7 @@ partial class TestModel
         return new FhirParametersGenerator.Tests.TestModel
         {
             Name = (parameters.GetSingle("name")?.Value as FhirString)?.Value ?? string.Empty,
-            Age = (int?)(parameters.GetSingle("age")?.Value as FhirDecimal)?.Value ?? default,
+            Age = (parameters.GetSingle("age")?.Value as Integer)?.Value ?? default,
             IsSomething = (parameters.GetSingle("isSomething")?.Value as FhirBoolean)?.Value ?? default,
             Timestamp = (parameters.GetSingle("timestamp")?.Value as FhirDateTime)?.ToDateTimeOffset(TimeSpan.Zero) ?? default!,
             Time = (parameters.GetSingle("time")?.Value as FhirDateTime)?.ToDateTimeOffset(TimeSpan.Zero).DateTime ?? default!,

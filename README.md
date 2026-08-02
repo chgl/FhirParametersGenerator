@@ -60,7 +60,7 @@ public partial class TestModel
     },
     {
       "name": "age",
-      "valueDecimal": 123
+      "valueInteger": 123
     },
     {
       "name": "code",

@@ -21,7 +21,7 @@ public partial class GenerateFhirParametersTests
         var asParameters = t.ToFhirParameters();
 
         asParameters.GetSingleValue<FhirString>("name").Value.Should().Be(t.Name);
-        asParameters.GetSingleValue<FhirDecimal>("age").Value.Should().Be(t.Age);
+        asParameters.GetSingleValue<Integer>("age").Value.Should().Be(t.Age);
     }
 
     [Fact]
@@ -278,6 +278,50 @@ public partial class GenerateFhirParametersTests
         roundTripped.Rules[0].Method.Should().Be("redact");
         roundTripped.Rules[1].Path.Should().Be("Patient.birthDate");
         roundTripped.Rules[1].Method.Should().Be("dateShift");
+    }
+
+    [GenerateFhirParameters]
+    public partial class ModelWithNumericTypes
+    {
+        public int Age { get; init; }
+        public long BigNumber { get; init; }
+        public decimal Price { get; init; }
+    }
+
+    [Fact]
+    public void NumericProperties_ShouldBeMappedToDistinctFhirTypes()
+    {
+        var m = new ModelWithNumericTypes
+        {
+            Age = 42,
+            BigNumber = 9_000_000_000L,
+            Price = 19.99m,
+        };
+
+        var parameters = m.ToFhirParameters();
+
+        // int maps to FHIR `integer`, not `decimal` - they're different wire types.
+        parameters.GetSingleValue<Integer>("age").Value.Should().Be(42);
+        parameters.GetSingleValue<FhirDecimal>("age").Should().BeNull();
+        parameters.GetSingleValue<Integer64>("bigNumber").Value.Should().Be(9_000_000_000L);
+        parameters.GetSingleValue<FhirDecimal>("price").Value.Should().Be(19.99m);
+    }
+
+    [Fact]
+    public void NumericProperties_ShouldRoundTripFromParameters()
+    {
+        var m = new ModelWithNumericTypes
+        {
+            Age = 42,
+            BigNumber = 9_000_000_000L,
+            Price = 19.99m,
+        };
+
+        var roundTripped = ModelWithNumericTypes.FromFhirParameters(m.ToFhirParameters());
+
+        roundTripped.Age.Should().Be(42);
+        roundTripped.BigNumber.Should().Be(9_000_000_000L);
+        roundTripped.Price.Should().Be(19.99m);
     }
 
     [GenerateFhirParameters]
