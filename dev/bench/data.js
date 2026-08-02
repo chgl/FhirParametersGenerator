@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1785627490462,
+  "lastUpdate": 1785668215092,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -3120,6 +3120,36 @@ window.BENCHMARK_DATA = {
             "value": 2408218.7366071427,
             "unit": "ns",
             "range": "± 32348.915070663086"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chgl@users.noreply.github.com",
+            "name": "chgl",
+            "username": "chgl"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "05351b3df4999d26ce7d06292619873a66bce5cc",
+          "message": "fix: updated fhir to clr type map (#149)\n\n* fix: completed fhir to clr map\n\n* build: fix config",
+          "timestamp": "2026-08-02T12:55:49+02:00",
+          "tree_id": "f5b44b2dad43d8f78f169819a6c3959f4565ce5e",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/05351b3df4999d26ce7d06292619873a66bce5cc"
+        },
+        "date": 1785668214495,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2376425.6002604165,
+            "unit": "ns",
+            "range": "± 40578.11203064192"
           }
         ]
       }
