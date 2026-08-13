@@ -45,7 +45,7 @@
   <ItemGroup>
     <PackageReference
       Include="Microsoft.SourceLink.GitHub"
-      Version="10.0.301"
+      Version="10.0.400"
       PrivateAssets="all"
     />
   </ItemGroup>
