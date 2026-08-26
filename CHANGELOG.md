@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.7](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.6...v0.7.7) (2026-08-26)
+
+
+### Miscellaneous Chores
+
+* **deps:** update miracum/.github action to v1.26.0 ([#154](https://github.com/chgl/FhirParametersGenerator/issues/154)) ([92ce6ea](https://github.com/chgl/FhirParametersGenerator/commit/92ce6ea5718c0475fbef592264e15b40acffc508))
+
 ## [0.7.6](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.5...v0.7.6) (2026-08-26)
 
 
