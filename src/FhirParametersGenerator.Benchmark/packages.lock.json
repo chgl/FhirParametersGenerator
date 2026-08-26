@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "dependencies": {
     "net10.0": {
       "BenchmarkDotNet": {
@@ -75,16 +75,6 @@
         "type": "Transitive",
         "resolved": "2.3.0",
         "contentHash": "2ap/rYmjtzCOT8hxrnEW/QeiOt+paD8iRrIcdKX0cxVwWLFa1e+JDBNeECakmccXrSFeBQuu5AV8SNkipFMMMw=="
-      },
-      "Hl7.Fhir.Base": {
-        "type": "Transitive",
-        "resolved": "5.13.4",
-        "contentHash": "UXeWvf7gQdpViZZm21yfqI5e+Xt04BX78qZRPQsqTh55H2DrvQCnhjGRZUTvOVBcIWjA4EGZ14uyr4h5/FKtZg==",
-        "dependencies": {
-          "Fhir.Metrics": "1.3.1",
-          "Newtonsoft.Json": "13.0.4",
-          "System.ComponentModel.Annotations": "5.0.0"
-        }
       },
       "Hl7.Fhir.Conformance": {
         "type": "Transitive",
@@ -244,6 +234,17 @@
       },
       "fhirparametersgenerator.attributes": {
         "type": "Project"
+      },
+      "Hl7.Fhir.Base": {
+        "type": "CentralTransitive",
+        "requested": "[5.13.4, )",
+        "resolved": "5.13.4",
+        "contentHash": "UXeWvf7gQdpViZZm21yfqI5e+Xt04BX78qZRPQsqTh55H2DrvQCnhjGRZUTvOVBcIWjA4EGZ14uyr4h5/FKtZg==",
+        "dependencies": {
+          "Fhir.Metrics": "1.3.1",
+          "Newtonsoft.Json": "13.0.4",
+          "System.ComponentModel.Annotations": "5.0.0"
+        }
       }
     }
   }
