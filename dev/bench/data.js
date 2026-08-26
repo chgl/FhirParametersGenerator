@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1787776533434,
+  "lastUpdate": 1787777005358,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -3270,6 +3270,36 @@ window.BENCHMARK_DATA = {
             "value": 2336087.138671875,
             "unit": "ns",
             "range": "± 27321.33476667926"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "92ce6ea5718c0475fbef592264e15b40acffc508",
+          "message": "chore(deps): update miracum/.github action to v1.26.0 (#154)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2026-08-26T22:42:00+02:00",
+          "tree_id": "78a958d31f852a61a747c6539ee607ddc243b38a",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/92ce6ea5718c0475fbef592264e15b40acffc508"
+        },
+        "date": 1787777004284,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2508471.2528545675,
+            "unit": "ns",
+            "range": "± 68384.32451990535"
           }
         ]
       }
