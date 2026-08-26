@@ -332,7 +332,7 @@ public static class {classSymbol.Name}FhirParametersExtensions
 
         for (var i = chain.Count - 1; i >= 0; i--)
         {
-            indent = indent[..^4];
+            indent = indent.Substring(0, indent.Length - 4);
             sb.Append(indent);
             sb.AppendLine("}");
         }
