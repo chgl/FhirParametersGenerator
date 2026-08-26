@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.7.6](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.5...v0.7.6) (2026-08-26)
+
+
+### Miscellaneous Chores
+
+* **deps:** update all non-major dependencies to 10.0.400 ([#152](https://github.com/chgl/FhirParametersGenerator/issues/152)) ([541e714](https://github.com/chgl/FhirParametersGenerator/commit/541e714869c5b591435453f377d3e1c603d6c8b9))
+
+
+### Build
+
+* downgrade to netstandard2.0 ([#158](https://github.com/chgl/FhirParametersGenerator/issues/158)) ([6ead1b8](https://github.com/chgl/FhirParametersGenerator/commit/6ead1b8172476ecb70b8e4df64a7eca709ca324c))
+
 ## [0.7.5](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.4...v0.7.5) (2026-08-02)
 
 
