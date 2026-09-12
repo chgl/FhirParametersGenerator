@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.7.7](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.6...v0.7.7) (2026-09-12)
+
+
+### Miscellaneous Chores
+
+* **deps:** update all non-major dependencies ([#162](https://github.com/chgl/FhirParametersGenerator/issues/162)) ([9ad669a](https://github.com/chgl/FhirParametersGenerator/commit/9ad669ae61bdabcf2f2f538c48b37feace51702e))
+* **deps:** update dependency scriban to 7.4.0 ([#160](https://github.com/chgl/FhirParametersGenerator/issues/160)) ([6b9b76d](https://github.com/chgl/FhirParametersGenerator/commit/6b9b76d0e908785d674699980ef3bec2671212f6))
+* **deps:** update miracum/.github action to v1.26.0 ([#154](https://github.com/chgl/FhirParametersGenerator/issues/154)) ([92ce6ea](https://github.com/chgl/FhirParametersGenerator/commit/92ce6ea5718c0475fbef592264e15b40acffc508))
+
 ## [0.7.6](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.5...v0.7.6) (2026-08-26)
 
 
