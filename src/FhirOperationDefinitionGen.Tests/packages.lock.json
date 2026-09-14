@@ -77,16 +77,16 @@
       },
       "Verify.XunitV3": {
         "type": "Direct",
-        "requested": "[32.0.1, )",
-        "resolved": "32.0.1",
-        "contentHash": "ojM+cgJgD8AT4GBlfl2+18LX4LiJkWrq5BPnmIleZqoG2pwV2wpGkxmfm8czwHcIpjUBDKHQhLk3w8AefaZ6AA==",
+        "requested": "[33.0.2, )",
+        "resolved": "33.0.2",
+        "contentHash": "W3iEHse1DwZZPGde5zMiOXHc0napz31O8xdv2/IElkigHo7MSW6ZcTRWtk4N7ogIKL2xllbWhpU2iPyN81QeUA==",
         "dependencies": {
           "Argon": "0.37.0",
           "DiffEngine": "20.3.1",
           "Microsoft.Bcl.AsyncInterfaces": "10.0.12",
           "SimpleInfoName": "3.2.0",
-          "Verify": "32.0.1",
-          "xunit.v3.extensibility.core": "3.2.2"
+          "Verify": "33.0.2",
+          "xunit.v3.extensibility.core": "4.0.1"
         }
       },
       "xunit.v3.mtp-v2": {
@@ -242,8 +242,8 @@
       },
       "Verify": {
         "type": "Transitive",
-        "resolved": "32.0.1",
-        "contentHash": "PtoSaDlGnqDfWXAJktsVWkE9xnVgBh7d6Mgpync1zJBswmnp8lHBZBSS6CwdgmWJAZAEXS0bdutEFSesDlqE2g==",
+        "resolved": "33.0.2",
+        "contentHash": "YKk+tLZ1G9OEW6WZGA7ScCPrtmCbtUbYj6C2Dp8GxvyWssL48G86qkW/nEIcFJYC6teYD5zW42zQn76UUfsGCg==",
         "dependencies": {
           "Argon": "0.37.0",
           "DiffEngine": "20.3.1",
@@ -262,8 +262,8 @@
       },
       "xunit.v3.common": {
         "type": "Transitive",
-        "resolved": "4.0.0",
-        "contentHash": "cjaNGmOVA5QJxcp6uuSsDhbt0lNmxezFo226mbYOuXm9E9Owq8bYTKxa9wnAMZRnbvyCmCYhAvc/+UAzf0M2vA==",
+        "resolved": "4.0.1",
+        "contentHash": "Qf25TVdadDQYf9zVxSd7L9RNQhuP0jCUHmo96XTmIKLxGefylIEV63jRbXBPFzdXmV09TCdcurk+AQ9LiWS2Hg==",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "6.0.0"
         }
@@ -283,10 +283,10 @@
       },
       "xunit.v3.extensibility.core": {
         "type": "Transitive",
-        "resolved": "4.0.0",
-        "contentHash": "+tTe9VX2vwrUHGI48FE4ly956Ry084wPH4I/7g5D36AkAMGjQRZZDVz8eH2GwX/CLS9PDQRSca534WyrAYsyzw==",
+        "resolved": "4.0.1",
+        "contentHash": "J0d5OfFcp920nZxCRIvU14+TZhiSPQR0wvqEMZ3MRiJLPu1VmYlcRNkmcSW0i1DwkB81gAHc+fHUQf/cU64MYg==",
         "dependencies": {
-          "xunit.v3.common": "[4.0.0]"
+          "xunit.v3.common": "[4.0.1]"
         }
       },
       "xunit.v3.runner.common": {
