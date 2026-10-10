@@ -75,9 +75,6 @@ jobs:
       actions: read
     with:
       enable-validate-gradle-wrapper: false
-      codeql-languages: '["csharp"]'
+      codeql-languages: '["actions", "csharp"]'
       enable-codeql: true
-      enable-verify-base-image-signature: false
       dotnet-version: "10.0.x"
-    secrets:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
