@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792268266062,
+  "lastUpdate": 1792268285694,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -3420,6 +3420,36 @@ window.BENCHMARK_DATA = {
             "value": 2607503.903125,
             "unit": "ns",
             "range": "± 49454.015953594615"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e59f9a948407278093d2c4fe48b0221df34db995",
+          "message": "chore(deps): update github-actions (#161)\n\n* chore(deps): update github-actions\n\n* fix(ci): align lint workflow inputs with upstream\n\nCo-authored-by: chgl <5307555+chgl@users.noreply.github.com>\n\n---------\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>\nCo-authored-by: chgl <5307555+chgl@users.noreply.github.com>",
+          "timestamp": "2026-10-17T22:16:45+02:00",
+          "tree_id": "cff1a7b38197a9b988b6129e8e814b27c915dcf1",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/e59f9a948407278093d2c4fe48b0221df34db995"
+        },
+        "date": 1792268285208,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2489452.7907366073,
+            "unit": "ns",
+            "range": "± 58445.17114934634"
           }
         ]
       }
