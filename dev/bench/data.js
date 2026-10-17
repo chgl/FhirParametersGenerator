@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791623216954,
+  "lastUpdate": 1792268266062,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -3390,6 +3390,36 @@ window.BENCHMARK_DATA = {
             "value": 2563360.3585379464,
             "unit": "ns",
             "range": "± 30857.82645165382"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0a5f5ece13dada4ced7d74be168d1de66cecb1d2",
+          "message": "chore(deps): update all non-major dependencies (#166)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-17T22:16:27+02:00",
+          "tree_id": "5ee66ff74383b0441f260e0163063dbf90b4fbc1",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/0a5f5ece13dada4ced7d74be168d1de66cecb1d2"
+        },
+        "date": 1792268265719,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 2607503.903125,
+            "unit": "ns",
+            "range": "± 49454.015953594615"
           }
         ]
       }
