@@ -13,7 +13,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.402" />
-    <PackageVersion Include="Scriban" Version="7.5.1" />
+    <PackageVersion Include="Scriban" Version="7.5.2" />
     <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
     <PackageVersion Include="Verify.XUnitV3" Version="32.0.1" />
     <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.2" />
