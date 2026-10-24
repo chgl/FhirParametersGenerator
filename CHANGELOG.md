@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.7](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.6...v0.7.7) (2026-10-24)
+
+
+### Miscellaneous Chores
+
+* **deps:** update all non-major dependencies ([#162](https://github.com/chgl/FhirParametersGenerator/issues/162)) ([9ad669a](https://github.com/chgl/FhirParametersGenerator/commit/9ad669ae61bdabcf2f2f538c48b37feace51702e))
+* **deps:** update all non-major dependencies ([#164](https://github.com/chgl/FhirParametersGenerator/issues/164)) ([9893a62](https://github.com/chgl/FhirParametersGenerator/commit/9893a623c862c0cd8be5f5bbe300759ddd11240e))
+* **deps:** update all non-major dependencies ([#166](https://github.com/chgl/FhirParametersGenerator/issues/166)) ([0a5f5ec](https://github.com/chgl/FhirParametersGenerator/commit/0a5f5ece13dada4ced7d74be168d1de66cecb1d2))
+* **deps:** update dependency scriban to 7.4.0 ([#160](https://github.com/chgl/FhirParametersGenerator/issues/160)) ([6b9b76d](https://github.com/chgl/FhirParametersGenerator/commit/6b9b76d0e908785d674699980ef3bec2671212f6))
+* **deps:** update dependency scriban to 7.5.2 ([#168](https://github.com/chgl/FhirParametersGenerator/issues/168)) ([1c53114](https://github.com/chgl/FhirParametersGenerator/commit/1c5311471bf88475af7dc46bc208d58f0cf5e103))
+* **deps:** update github-actions ([#161](https://github.com/chgl/FhirParametersGenerator/issues/161)) ([e59f9a9](https://github.com/chgl/FhirParametersGenerator/commit/e59f9a948407278093d2c4fe48b0221df34db995))
+* **deps:** update miracum/.github action to v1.26.0 ([#154](https://github.com/chgl/FhirParametersGenerator/issues/154)) ([92ce6ea](https://github.com/chgl/FhirParametersGenerator/commit/92ce6ea5718c0475fbef592264e15b40acffc508))
+* **deps:** update miracum/.github action to v1.31.2 ([#167](https://github.com/chgl/FhirParametersGenerator/issues/167)) ([ade8e6a](https://github.com/chgl/FhirParametersGenerator/commit/ade8e6aa061b39974f8512c6a3d511d6f3965cd7))
+
 ## [0.7.6](https://github.com/chgl/FhirParametersGenerator/compare/v0.7.5...v0.7.6) (2026-08-26)
 
 
