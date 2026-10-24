@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792268285694,
+  "lastUpdate": 1792840914371,
   "repoUrl": "https://github.com/chgl/FhirParametersGenerator",
   "entries": {
     "Benchmark.Net Benchmark": [
@@ -3450,6 +3450,36 @@ window.BENCHMARK_DATA = {
             "value": 2489452.7907366073,
             "unit": "ns",
             "range": "± 58445.17114934634"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "29139614+renovate[bot]@users.noreply.github.com",
+            "name": "renovate[bot]",
+            "username": "renovate[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1c5311471bf88475af7dc46bc208d58f0cf5e103",
+          "message": "chore(deps): update dependency scriban to 7.5.2 (#168)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-24T13:20:56+02:00",
+          "tree_id": "a7bb439702e74f2d4d388c45ce7bf86fbbcc168b",
+          "url": "https://github.com/chgl/FhirParametersGenerator/commit/1c5311471bf88475af7dc46bc208d58f0cf5e103"
+        },
+        "date": 1792840914165,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "Benchmarks.GenerateSourceCode",
+            "value": 1972334.146763393,
+            "unit": "ns",
+            "range": "± 33788.291046921775"
           }
         ]
       }
