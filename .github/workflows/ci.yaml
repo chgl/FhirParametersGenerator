@@ -66,7 +66,7 @@ jobs:
           alert-comment-cc-users: "@chgl"
 
   lint:
-    uses: miracum/.github/.github/workflows/standard-lint.yaml@d9d87af182ffe0ef4958e61dd1e697c7fd83c52f # v1.31.2
+    uses: miracum/.github/.github/workflows/standard-lint.yaml@cca0bcc51093bb9292344cdefd5eeff9cf41c973 # v1.32.1
     permissions:
       contents: read
       pull-requests: write
