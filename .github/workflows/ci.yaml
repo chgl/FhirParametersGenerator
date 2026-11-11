@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       # to store benchmark results on the gh-pages branch
       contents: write
@@ -33,7 +33,7 @@ jobs:
       - name: Install .NET
         uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
-          dotnet-version: "10.0.x"
+          dotnet-version: "11.0.x"
 
       - name: Restore
         run: dotnet restore --locked-mode
